@@ -16,6 +16,10 @@ export default defineConfig({
         replacement: path.resolve(__dirname, "src"),
       },
       {
+        find: "@api",
+        replacement: path.resolve(__dirname, "src/api"),
+      },
+      {
         find: "@assets",
         replacement: path.resolve(__dirname, "src/assets"),
       },
@@ -30,6 +34,10 @@ export default defineConfig({
       {
         find: "@pages",
         replacement: path.resolve(__dirname, "src/pages"),
+      },
+      {
+        find: "@recoil",
+        replacement: path.resolve(__dirname, "src/recoil"),
       },
       {
         find: "@styles",

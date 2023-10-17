@@ -2,9 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  font-family: GoryeongStrawberry;
+}
+
+h1 {
+  font-size: 40px;
+}
+
+/* 폰트 */
 @font-face {
   font-family: "GoryeongStrawberry";
   src: url("@assets/fonts/GoryeongStrawberry.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
 }

@@ -22,11 +22,14 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@api/*": ["src/api/*"],
-      "@assets/*": ["src/assets/*"],
-      "@components/*": ["src/components/*"],
-      "@pages/*": ["src/pages/*"],
-      "@styles/*": ["src/styles/*"]
+      "@api/*": ["/src/api/*"],
+      "@assets/*": ["/src/assets/*"],
+      "@components/*": ["/src/components/*"],
+      "@config/*": ["/src/config/*"],
+      "@pages/*": ["/src/pages/*"],
+      "@recoil/*": ["/src/recoil/*"],
+      "@styles/*": ["/src/styles/*"],
+      "@types/*": ["/src/types/*"]
     }
   },
   "include": ["src", ".eslintrc.json"],
