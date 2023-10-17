@@ -1,8 +1,19 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        cg1: "#FFC971",
+        cg2: "#FFB627",
+        cg3: "#FF9505",
+        cg4: "#E2711D",
+        cg5: "#CC5803",
+      },
+      fontFamily: {
+        ggul: ["GoryeongStrawberry"],
+      },
+    },
   },
   plugins: [],
 };
