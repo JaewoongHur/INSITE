@@ -3,15 +3,24 @@ export default {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      width: {
+        640: "640px",
+      },
       colors: {
-        cg1: "#ffc971",
-        cg2: "#ffb627",
-        cg3: "#ff9505",
-        cg4: "#e2711d",
-        cg5: "#cc5803",
+        cg: {
+          DEFAULT: "#EEE6C4",
+          1: "#FFC971",
+          2: "#FFB627",
+          3: "#FF9505",
+          4: "#E2711D",
+          5: "#CC5803",
+        },
       },
       fontFamily: {
         ggul: ["GoryeongStrawberry"],
+      },
+      backgroundImage: {
+        backgroundImg: "url('@assets/images/background.png')",
       },
     },
   },
