@@ -1,10 +1,16 @@
-function TextButton() {
+interface TextButtonProps {
+  text: string;
+  fontColor: string;
+  className: string;
+  onClick: () => void;
+}
+
+function TextButton({ text, fontColor, className, onClick }: TextButtonProps) {
+  const basicType: string = `bg-cg-${fontColor || 0} btn ${className}`;
+
   return (
-    <button
-      type="button"
-      className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-full"
-    >
-      버튼
+    <button type="button" onClick={onClick} className={basicType}>
+      {text}
     </button>
   );
 }
