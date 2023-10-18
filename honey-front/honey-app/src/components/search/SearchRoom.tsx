@@ -1,14 +1,15 @@
 // import TextButton from "@components/common/button/TextButton";
-import roomAtoms from "@recoil/roomAtoms";
+import roomState from "@recoil/atom/roomState";
 import { ImageButton } from "@components/common/button";
 import { TextInput } from "@components/common/input";
 import { useRecoilState } from "recoil";
 
 function SearchRoom() {
   const imgAddress: string = "src/assets/images/search.png";
-  const [inputSearch, setInputSearch] = useRecoilState<string>(roomAtoms);
+  const [inputSearch, setInputSearch] = useRecoilState<string>(roomState);
 
   const searchRoom = () => {
+    console.log("가져옴");
     setInputSearch("");
   };
 
