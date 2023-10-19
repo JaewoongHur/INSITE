@@ -44,8 +44,8 @@ export default defineConfig({
         replacement: path.resolve(__dirname, "src/styles"),
       },
       {
-        find: "@types",
-        replacement: path.resolve(__dirname, "src/types"),
+        find: "@customtype",
+        replacement: path.resolve(__dirname, "src/customtype"),
       },
     ],
   },

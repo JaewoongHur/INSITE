@@ -1,30 +1,42 @@
+import { RoomType } from "@customtype/dataTypes";
 import { atom } from "recoil";
-import type { RoomTypes } from "@/types/dataTypes";
 
-const initialRooms: RoomTypes[] = [
+const dummyRoom1: RoomType[] = [
   {
     roomId: 1,
-    roomName: "Room 1",
-    maker: "User 1",
+    roomName: "동이 방",
+    owner: "동현김",
     isOpen: true,
   },
   {
     roomId: 2,
-    roomName: "Room 2",
-    maker: "User 2",
+    roomName: "현이 안방",
+    owner: "김동현",
     isOpen: false,
   },
   {
     roomId: 3,
-    roomName: "Room 3",
-    maker: "User 3",
+    roomName: "현현이 옆방dddddddddddddddd",
+    owner: "현동김",
+    isOpen: true,
+  },
+  {
+    roomId: 4,
+    roomName: "현현이 옆방",
+    owner: "현동김",
+    isOpen: true,
+  },
+  {
+    roomId: 5,
+    roomName: "현현이 옆방",
+    owner: "현동김",
     isOpen: true,
   },
 ];
 
-const roomListState = atom<RoomTypes[]>({
+const roomListState = atom<RoomType[]>({
   key: "roomAtoms",
-  default: initialRooms,
+  default: dummyRoom1,
 });
 
 export default roomListState;

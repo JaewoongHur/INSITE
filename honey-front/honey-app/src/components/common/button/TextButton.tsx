@@ -6,7 +6,7 @@ interface TextButtonProps {
 }
 
 function TextButton({ text, fontColor, className, onClick }: TextButtonProps) {
-  const basicType: string = `bg-cg-${fontColor || 0} btn ${className}`;
+  const basicType: string = `bg-cg-${fontColor || 0} ${className}`;
 
   return (
     <button type="button" onClick={onClick} className={basicType}>

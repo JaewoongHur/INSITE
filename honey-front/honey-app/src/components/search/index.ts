@@ -1,3 +1,4 @@
 import SearchRoom from "./SearchRoom";
+import ShowRoom from "./ShowRoom";
 
-export default SearchRoom;
+export { SearchRoom, ShowRoom };

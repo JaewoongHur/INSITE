@@ -1,17 +1,18 @@
 // import TextButton from "@components/common/button/TextButton";
-import SearchRoom from "@components/search";
-import roomListState from "@recoil/atom/roomListState";
-import roomState from "@recoil/atom/roomState";
-import { useRecoilValue } from "recoil";
+
+import { SearchRoom, ShowRoom } from "@components/search/index";
 
 function RoomList() {
-  // 여기서 room list를 받아올 예정
-  const roomList = useRecoilValue(roomListState);
-  const temp = useRecoilValue(roomState);
+  // 여기서 room list를 받아서 출력할 예정
+
   return (
     <>
       <SearchRoom />
-      <div>{temp}</div>
+      <ShowRoom />
+      <div>
+        <button type="button">버튼 1</button>
+        <button type="button">버튼 2</button>
+      </div>
     </>
   );
 }
