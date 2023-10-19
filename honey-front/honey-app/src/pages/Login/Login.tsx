@@ -1,4 +1,5 @@
-import Help from "@assets/icons";
+import HelpIcon from "@assets/icons";
+import { KakaoLoginButton, PoohLogin } from "@assets/images";
 import Modal from "@components/common/modal";
 import { useState } from "react";
 
@@ -12,10 +13,14 @@ function Login() {
   return (
     <>
       <div className="flex h-10 mt-5 items-center justify-end px-5">
-        <img src={Help} alt="help" aria-hidden onClick={handleHelpModal} />
+        <img src={HelpIcon} alt="help" aria-hidden onClick={handleHelpModal} />
       </div>
       {helpOpen && (
-        <Modal className="w-96 h-96" overlay={false} openModal={helpOpen}>
+        <Modal
+          className="w-[360px] h-[400px] -translate-x-[180px] translate-y-[140px]"
+          overlay
+          openModal={helpOpen}
+        >
           사용하는 방법은 다음과 같습니다.
         </Modal>
       )}
@@ -24,12 +29,9 @@ function Login() {
       </h1>
       <div className="flex h-4/6 justify-center items-center">
         <div className="flex flex-col h-full items-center justify-center">
-          <img src="../src/assets/images/푸꿀1.png" alt="mainpooh" />
+          <img src={PoohLogin} alt="mainpooh" />
           <button className="rounded border border-blue-700" type="button">
-            <img
-              src="../src/assets/images/kakao_login_medium_wide.png"
-              alt="kakao Login Btn"
-            />
+            <img src={KakaoLoginButton} alt="kakao Login Btn" />
           </button>
         </div>
       </div>

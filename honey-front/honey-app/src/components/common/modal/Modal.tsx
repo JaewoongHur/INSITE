@@ -10,12 +10,14 @@ function Modal({
   openModal,
   children,
   overlay,
+
   className,
 }: PropsWithChildren<ModalType>) {
   const [visible, setVisible] = useState<boolean>(false);
+
   const modalClasses = `
-    fixed overflow-y-auto bottom-1/2 left-1/2 -translate-x-48 translate-y-24 border-0 rounded-lg bg-white shadow-lg z-[99] ${className}
-  `;
+ fixed overflow-y-auto bottom-1/2 left-1/2 border-0 rounded-lg bg-white shadow-lg z-[99] ${className}
+`;
   useEffect(() => {
     if (openModal) {
       setTimeout(() => {
