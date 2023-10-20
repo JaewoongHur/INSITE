@@ -40,7 +40,7 @@ function SearchRoom() {
   };
 
   return (
-    <div className="flex w-full h-24 items-center justify-center">
+    <div className="flex w-full h-[70px] items-center justify-center relative z-[50] top-6 ">
       <div className="flex w-[80%] justify-end">
         <TextInput
           value={inputSearch}

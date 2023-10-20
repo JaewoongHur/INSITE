@@ -28,8 +28,8 @@ const dummyRoom1: RoomType[] = [
   },
   {
     roomId: 5,
-    roomName: "현현이 옆방45",
-    owner: "현동김5",
+    roomName: "현현이 옆방44",
+    owner: "현동김3",
     password: null,
   },
 ];
