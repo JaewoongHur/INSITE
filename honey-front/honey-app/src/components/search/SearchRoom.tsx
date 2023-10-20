@@ -1,4 +1,4 @@
-// import TextButton from "@components/common/button/TextButton";
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ImageButton } from "@components/common/button";
 import { TextInput } from "@components/common/input";
 import roomListState from "@recoil/atom/roomListState";
@@ -9,26 +9,26 @@ import { useRecoilState } from "recoil";
 function SearchRoom() {
   const imgAddress: string = "src/assets/images/search.png";
   const [inputSearch, setInputSearch] = useState<string>("");
-  const [roomList, setRoomList] = useRecoilState<RoomType[]>(roomListState);
+  const [, setRoomList] = useRecoilState<RoomType[]>(roomListState);
 
   const dummyRoom: RoomType[] = [
     {
       roomId: 1,
       roomName: "동현이 방",
       owner: "동현",
-      isOpen: true,
+      password: null,
     },
     {
       roomId: 2,
       roomName: "동현이 안방",
       owner: "현동이",
-      isOpen: false,
+      password: null,
     },
     {
       roomId: 3,
       roomName: "동현이 옆방",
       owner: "홍뎐이",
-      isOpen: true,
+      password: 13579,
     },
   ];
 
@@ -40,8 +40,8 @@ function SearchRoom() {
   };
 
   return (
-    <div className="flex h-24 items-center justify-center">
-      <div className="flex w-4/5 justify-end">
+    <div className="flex w-full h-24 items-center justify-center">
+      <div className="flex w-[80%] justify-end">
         <TextInput
           value={inputSearch}
           holder="방을 검색하세요"

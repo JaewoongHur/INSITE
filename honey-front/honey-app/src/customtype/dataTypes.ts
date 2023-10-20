@@ -2,7 +2,7 @@ type RoomType = {
   roomId: number;
   roomName: string;
   owner: string;
-  isOpen: boolean;
+  password: number | null;
 };
 
 type UserType = {
