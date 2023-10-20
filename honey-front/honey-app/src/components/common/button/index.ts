@@ -1,4 +1,4 @@
 import TextButton from "./TextButton";
-import ImageButton from "./ImgaeButton";
+import ImageButton from "./ImageButton";
 
 export { TextButton, ImageButton };

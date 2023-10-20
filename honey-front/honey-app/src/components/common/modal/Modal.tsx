@@ -10,14 +10,9 @@ function Modal({
   openModal,
   children,
   overlay,
-
   className,
 }: PropsWithChildren<ModalType>) {
   const [visible, setVisible] = useState<boolean>(false);
-
-  const modalClasses = `
- fixed bottom-1/2 left-1/2 z-[99] ${className}
-`;
   useEffect(() => {
     if (openModal) {
       setVisible(true);
@@ -28,7 +23,7 @@ function Modal({
   return (
     visible && (
       <>
-        <div className={modalClasses}>{children}</div>
+        <div className={className}>{children}</div>
         {overlay ? <div className="inset-0 fixed bg-black opacity-75" /> : null}
       </>
     )
