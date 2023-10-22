@@ -29,6 +29,7 @@ export default {
       backgroundImage: {
         backgroundImg: "url('@assets/images/background.png')",
         board: "url('@assets/images/board.png')",
+        cupboard: "url(@assets/images/open_cupboard.png)",
       },
     },
   },
