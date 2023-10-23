@@ -21,6 +21,7 @@ export default {
           5: "#CC5803",
           6: "#A66127",
           7: "#521E07",
+          8: "#6F401A",
         },
       },
       fontFamily: {
