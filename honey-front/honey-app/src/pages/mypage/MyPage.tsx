@@ -1,4 +1,4 @@
-import { Cupboard } from "@components/mypage";
+import { ButtomMenu, Cupboard } from "@components/mypage";
 import MypageTitle from "@components/mypage/MypageTitle";
 import { RoomType } from "@customtype/dataTypes";
 import { myRoomListState, selectedRoomState } from "@recoil/atom";
@@ -35,6 +35,7 @@ function MyPage() {
         setRoomNum={setRoomNum}
       />
       <Cupboard />
+      <ButtomMenu />
     </>
   );
 }

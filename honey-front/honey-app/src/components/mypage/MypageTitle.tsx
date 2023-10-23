@@ -1,6 +1,8 @@
+import { ImageButton } from "@components/common/button";
 import Dropdown from "@components/common/dropdown/Dropdown";
 import TitleText from "@components/common/textbox/TitleText";
 import { RoomType } from "@customtype/dataTypes";
+import useRouter from "@hooks/useRouter";
 import { myRoomListState, selectedRoomState } from "@recoil/atom";
 import { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -15,6 +17,8 @@ function MypageTitle({ selectedRoom, roomNum, setRoomNum }: MypageTitleProps) {
   const roomList = useRecoilValue<RoomType[]>(myRoomListState);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [, setNextRoom] = useRecoilState(selectedRoomState);
+  const { routeTo } = useRouter();
+  const backArrow = "./src/assets/images/leftArrow.png";
 
   function goToRoom(roomId: number) {
     // roomId로 나중에 axios통신해서 room하나 받아와서 set해주기
@@ -37,36 +41,48 @@ function MypageTitle({ selectedRoom, roomNum, setRoomNum }: MypageTitleProps) {
     }
   }
 
+  function goToBack(): void {
+    routeTo("/");
+  }
+
   return (
     <>
-      <div className="flex flex-col justify-center items-center w-full">
-        <button
-          type="button"
-          className="w-[50%] mt-5 mb-2"
-          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-        >
-          <TitleText
-            text={selectedRoom ? selectedRoom.roomName : "방이 없습니다"}
-            className="p-1 pr-5 pl-5 rounded-xl h-[90px] bg-cg-3 overflow-x-auto"
-          />
-        </button>
-        {isDropdownOpen && (
-          <div className="flex justify-center w-[50%]">
-            <Dropdown
-              className=""
-              onClick={(roomId) => goToRoom(roomId)}
-              items={roomList.map((room) => ({
-                roomName:
-                  room.roomName.length > 10
-                    ? `${room.roomName.slice(0, 10)}...`
-                    : room.roomName,
-                roomId: room.roomId,
-                owner: room.owner,
-                password: room.password,
-              }))}
+      <div className="flex justify-center items-center w-full">
+        <ImageButton
+          image={backArrow}
+          alt="뒤로가기"
+          className="flex w-[10%] justify-center items-center"
+          onClick={() => goToBack()}
+        />
+        <div className="flex flex-col justify-center items-center w-full pr-10 ">
+          <button
+            type="button"
+            className="w-[70%] mt-5 mb-2"
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+          >
+            <TitleText
+              text={selectedRoom ? selectedRoom.roomName : "방이 없습니다"}
+              className="p-1 pr-5 pl-5 rounded-xl sm:h-[90px] h-[38px] bg-cg-9 overflow-x-auto items-start"
             />
-          </div>
-        )}
+          </button>
+          {isDropdownOpen && (
+            <div className="flex justify-center w-[50%]">
+              <Dropdown
+                className=""
+                onClick={(roomId) => goToRoom(roomId)}
+                items={roomList.map((room) => ({
+                  roomName:
+                    room.roomName.length > 10
+                      ? `${room.roomName.slice(0, 10)}...`
+                      : room.roomName,
+                  roomId: room.roomId,
+                  owner: room.owner,
+                  password: room.password,
+                }))}
+              />
+            </div>
+          )}
+        </div>
       </div>
       <div className="flex justify-center items-center">
         <button
@@ -74,7 +90,7 @@ function MypageTitle({ selectedRoom, roomNum, setRoomNum }: MypageTitleProps) {
           type="button"
           onClick={() => beforePage()}
         >
-          감소 버튼
+          이전
         </button>
         <p>
           {roomNum === null ? 1 : roomNum + 1} / {roomList.length}
@@ -84,7 +100,7 @@ function MypageTitle({ selectedRoom, roomNum, setRoomNum }: MypageTitleProps) {
           type="button"
           onClick={() => nextPage()}
         >
-          증가 버튼
+          다음
         </button>
       </div>
     </>
