@@ -9,6 +9,7 @@ import { useRecoilValue } from "recoil";
 
 function Cupboard() {
   const backArrow: string = "./src/assets/images/leftArrow.png";
+  const forwardArrow: string = "./src/assets/images/rightArrow.png";
 
   const totalPotList = useRecoilValue<PotType[]>(potListState);
   const potList = useRecoilValue<PotType[][]>(potGroupSelector);
@@ -85,7 +86,7 @@ function Cupboard() {
           </div>
           {potOpen && (
             <Modal
-              className=" w-[300px] h-[400px] -translate-x-[150px] translate-y-[150px] sm:w-[500px] sm:h-[600px] sm:-translate-x-[250px] sm:translate-y-[200px] rounded-[36px] shadow-lg flex items-center justify-center px-[15px] py-[15px] bg-cg-6"
+              className=" w-[300px] h-[400px] -translate-x-[150px] translate-y-[150px] sm:w-[500px] sm:h-[600px] sm:-translate-x-[250px] sm:translate-y-[230px] rounded-[36px] shadow-lg flex items-center justify-center px-[15px] py-[15px] bg-cg-6"
               overlay
               openModal={potOpen}
             >
@@ -105,13 +106,13 @@ function Cupboard() {
                 </div>
               </div>
               <Modal
-                className="w-[80px] h-[25px] -translate-x-[40px] translate-y-[130px] sm:w-[100px] sm:h-[35px] sm:-translate-x-[50px] sm:translate-y-[210px] rounded-[60px] bg-cg-1 flex items-center justify-center"
+                className="w-[80px] h-[25px] -translate-x-[40px] translate-y-[130px] sm:w-[100px] sm:h-[35px] sm:-translate-x-[50px] sm:translate-y-[210px] rounded-[60px] bg-cg-2 flex items-center justify-center"
                 overlay={false}
                 openModal
               >
                 <button
                   type="button"
-                  className="sm:w-[100%] sm:h-[100%] sm:text-[24px] text-[15px]"
+                  className="sm:w-[100%] sm:h-[100%] sm:text-[24px] text-[15px] hover:scale-125 hover:bg-cg-3 rounded-[60px]"
                   onClick={() => setPotOpen(false)}
                 >
                   닫기
@@ -120,9 +121,9 @@ function Cupboard() {
             </Modal>
           )}
         </div>
-        <div className="flex justify-start w-[20%] rotate-180">
+        <div className="flex justify-end w-[20%]">
           <ImageButton
-            image={backArrow}
+            image={forwardArrow}
             alt="다음 찬장"
             className=""
             onClick={() => goToNext()}
