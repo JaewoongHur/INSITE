@@ -48,7 +48,11 @@ public class Message extends BaseEntity {
     @Column(nullable = false)
     private String nickName;
 
-    public Message create(Participation to, Participation from, String content, Boolean isCheck, String honeyCaseType, String nickName){
+    public void markAsChecked() {
+        this.isCheck = true;
+    }
+
+    public static Message create(Participation to, Participation from, String content, Boolean isCheck, String honeyCaseType, String nickName){
         return Message.builder()
             .participationTo(to)
             .participationFrom(from)

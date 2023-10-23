@@ -1,5 +1,12 @@
 package com.thirty.ggulswriting.message.service;
 
+import com.thirty.ggulswriting.global.error.exception.MemberException;
+import com.thirty.ggulswriting.global.error.exception.ParticipationException;
+import com.thirty.ggulswriting.global.error.exception.RoomException;
+import com.thirty.ggulswriting.member.entity.Member;
+import com.thirty.ggulswriting.member.repository.MemberRepository;
+import com.thirty.ggulswriting.room.entity.Room;
+import com.thirty.ggulswriting.room.repository.RoomRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,12 +21,16 @@ import com.thirty.ggulswriting.participation.repository.ParticipationRepository;
 
 import lombok.AllArgsConstructor;
 
+import java.util.Optional;
+
 
 @Transactional
 @AllArgsConstructor
 @Service
 public class MessageServiceImpl implements MessageService {
 
+	private final MemberRepository memberRepository;
+	private final RoomRepository roomRepository;
 	private final MessageRepository messageRepository;
 	private final ParticipationRepository participationRepository;
 
@@ -45,34 +56,39 @@ public class MessageServiceImpl implements MessageService {
 		Member memberTo = optionalMemberTo.get();
 		Room room = optionalRoom.get();
 
-		Optional<Participation> optionalParticipationFrom = participationRepository.findParticipationByMemberAndRoom(memberFrom, room);
-		Optional<Participation> optionalParticipationTO = participationRepository.findParticipationByMemberAndRoom(memberTo, room);
+		Optional<Participation> optionalParticipationFrom = participationRepository.findParticipationByMemberAndRoomAndIsOutIsFalse(memberFrom, room);
+		if (optionalParticipationFrom.isEmpty()) {
+			throw new ParticipationException(ErrorCode.NOT_EXIST_PARTICIPATION);
+		}
+		Optional<Participation> optionalParticipationTo = participationRepository.findParticipationByMemberAndRoomAndIsOutIsFalse(memberTo, room);
+		if (optionalParticipationTo.isEmpty()) {
+			throw new ParticipationException(ErrorCode.NOT_EXIST_PARTICIPATION);
+		}
 
 		Participation participationFrom = optionalParticipationFrom.get();
 		Participation participationTo = optionalParticipationTo.get();
 
 		// 메세지 생성
-		Message message = new Message().create(participationTo, participationFrom, messageSendReqDto.getContent(), false, messageSendReqDto.getHoneyCaseType());
+		Message message = Message.create(participationTo, participationFrom, messageSendReqDto.getContent(), false, messageSendReqDto.getHoneyCaseType(), messageSendReqDto.getNickName());
 		messageRepository.save(message);
 
 		return "메세지 전송 완료";
 	}
 
 	@Override
-	public String read(int messageId, int memberId) {
+	public MessageResDto read(int messageId, int memberId) {
 		// 메세지 유효성 검사
 		Message message = messageRepository.findById(messageId)
 				.orElseThrow(() -> new MessageException(ErrorCode.NOT_EXIST_MESSAGE));
 
 		// 수신자 유효성 검사
 		if (message.getParticipationTo().getMember().getMemberId() != memberId) {
-			throw new MessageException(ErrorCode.UNAUTHORIZED_ACCESS);
+			throw new MessageException(ErrorCode.NOT_EXIST_MESSAGE);
 		}
 
 		// 메세지 수신
-		message.setIsCheck(true);
-		messageRepository.save(message);
+		message.markAsChecked();
 
-		return MessageResponseDto.from(message);
+		return MessageResDto.from(message);
 	}
 }
