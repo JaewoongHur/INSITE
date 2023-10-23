@@ -1,6 +1,6 @@
 function Cupboard() {
   return (
-    <div className="flex items-center justify-center h-[500px] bg-cupboard bg-cover">
+    <div className="flex items-center w-full justify-center sm:h-[550px] h-[350px] bg-cupboard bg-cover bg-size">
       <div>찬장</div>
       <div>찬장2</div>
     </div>
