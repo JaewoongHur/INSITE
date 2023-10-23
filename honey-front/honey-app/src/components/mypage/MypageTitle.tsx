@@ -47,7 +47,7 @@ function MypageTitle({ selectedRoom, roomNum, setRoomNum }: MypageTitleProps) {
         >
           <TitleText
             text={selectedRoom ? selectedRoom.roomName : "방이 없습니다"}
-            className="p-1 pr-5 pl-5 rounded-xl bg-cg-3"
+            className="p-1 pr-5 pl-5 rounded-xl h-[90px] bg-cg-3 overflow-x-auto"
           />
         </button>
         {isDropdownOpen && (
