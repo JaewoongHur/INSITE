@@ -34,9 +34,7 @@ function MyPage() {
         roomNum={roomNum}
         setRoomNum={setRoomNum}
       />
-      <div className="flex flex-col">
-        <Cupboard />
-      </div>
+      <Cupboard />
     </>
   );
 }
