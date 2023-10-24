@@ -4,6 +4,7 @@ import numberOrEmptyStringRegex from "@config/regex";
 import { roomListState } from "@recoil/atom";
 import { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
+import { pageButton1, pageButton2 } from "@assets/images";
 
 type PageButtonType = {
   id: number;
@@ -13,8 +14,8 @@ type PageButtonType = {
 };
 
 function PageMove() {
-  const one: string = "./src/assets/images/pagebutton1.png";
-  const two: string = "./src/assets/images/pagebutton2.png";
+  const one = pageButton1;
+  const two = pageButton2;
   const [strNum, setStrNum] = useState("");
   const [num, setNum] = useState(0);
   const totalNum = Math.max(

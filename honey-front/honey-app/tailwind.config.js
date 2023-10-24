@@ -34,6 +34,7 @@ export default {
         board: "url('@assets/images/board.png')",
         cupboard: "url(@assets/images/open_cupboard.png)",
         paper: "url(@assets/images/paper.png)",
+        writePaper: "url(@assets/images/writepaper.png)",
       },
     },
   },
