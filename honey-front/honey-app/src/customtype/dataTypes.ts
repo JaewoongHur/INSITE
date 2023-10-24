@@ -1,13 +1,14 @@
 type RoomType = {
   roomId: number;
-  roomName: string;
-  owner: string;
+  roomTitle: string;
+  showTime: string;
+  memberId: number;
   password: number | null;
 };
 
 type UserType = {
   userId: number;
-  nickName: string;
+  name: string;
 };
 
 type PotType = {

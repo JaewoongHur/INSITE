@@ -2,17 +2,26 @@ import { ButtomMenu, Cupboard } from "@components/mypage";
 import MypageTitle from "@components/mypage/MypageTitle";
 import { RoomType } from "@customtype/dataTypes";
 import { myRoomListState, selectedRoomState } from "@recoil/atom";
+import axios from "axios";
 import { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 
 function MyPage() {
-  // 내가 참여한 방 목록 중 가장 앞에 있는 방을 우선 보여준다
-  const roomList = useRecoilValue<RoomType[]>(myRoomListState);
-  const [roomNum, setRoomNum] = useState<number | null>(0);
+  const [roomList, setRoomList] = useRecoilState<RoomType[]>(myRoomListState);
+  const [roomNum, setRoomNum] = useState<number>(0);
   const [selectedRoom, setSelectedRoom] =
     useRecoilState<RoomType>(selectedRoomState);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
+    axios.get("api/v1/rooms/list").then((response) => {
+      const data = response.data;
+    });
+  }, []);
+
+  useEffect(() => {
+    setRoomList(data);
+    console.log(roomList);
     if (roomNum !== null) {
       if (roomNum >= 0 && roomNum < roomList.length) {
         setSelectedRoom(roomList[roomNum]);
@@ -24,7 +33,7 @@ function MyPage() {
     } else {
       setRoomNum(0);
     }
-  }, [roomNum, roomList, setSelectedRoom]);
+  }, [roomNum, data, roomList, setRoomList, setSelectedRoom]);
 
   return (
     <>
