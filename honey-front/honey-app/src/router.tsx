@@ -1,4 +1,4 @@
-import { Room, CreateRoom, ModifyRoom } from "@pages/room";
+import { Room, CreateRoom, ModifyRoom, ParticipateRoom } from "@pages/room";
 import { RouteObject, createBrowserRouter } from "react-router-dom";
 import Login from "@pages/login";
 import RoomList from "@pages/roomlist";
@@ -41,6 +41,11 @@ const routePaths: RouteObject[] = [
         id: "modify-room",
         path: "modify",
         element: <ModifyRoom />,
+      },
+      {
+        id: "participate-room",
+        path: "participate/:roomId",
+        element: <ParticipateRoom />,
       },
     ],
   },
