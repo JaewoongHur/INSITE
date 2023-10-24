@@ -4,7 +4,7 @@ import Login from "@pages/login";
 import RoomList from "@pages/roomlist";
 import MyPage from "@pages/mypage";
 import Send from "@pages/send";
-import ErrorNotFound from "@pages/error";
+import { ErrorNotFound } from "@pages/error";
 
 const routePaths: RouteObject[] = [
   {
