@@ -1,9 +1,12 @@
 package com.thirty.ggulswriting.room.controller;
 
+import com.thirty.ggulswriting.room.dto.response.RoomMemberResDto;
+import com.thirty.ggulswriting.room.dto.response.RoomResDto;
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,5 +42,21 @@ public class RoomController {
 		int memberId = 1;
 		roomService.out(roomId,memberId);
 		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	@GetMapping("/{roomId}/member-list")
+	public ResponseEntity<RoomMemberResDto> getMemberList(
+		@Valid @PathVariable int roomId
+	){
+		RoomMemberResDto roomMemberResDto = roomService.getMemberList(roomId);
+		return new ResponseEntity<>(roomMemberResDto, HttpStatus.OK);
+	}
+
+	@GetMapping("/list")
+	public ResponseEntity<RoomResDto> getRoomList(
+	){
+		int memberId = 1;
+		RoomResDto roomResDto = roomService.getMyRoomList(memberId);
+		return new ResponseEntity<>(roomResDto, HttpStatus.OK);
 	}
 }

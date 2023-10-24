@@ -18,7 +18,7 @@ function Login() {
       </div>
       {helpOpen && (
         <Modal
-          className="fixed w-[340px] h-[350px] bottom-[50%] left-[50%] -translate-x-[170px] translate-y-[140px] z-[20] rounded-[36px] shadow-lg flex items-center justify-center px-[15px] py-[15px] bg-cg-6"
+          className="fixed w-[340px] h-[350px] bottom-[50%] left-[50%] -translate-x-[170px] translate-y-[140px] z-[120] rounded-[36px] shadow-lg flex items-center justify-center px-[15px] py-[15px] bg-cg-6"
           overlay
           openModal={helpOpen}
         >
@@ -28,7 +28,7 @@ function Login() {
             <span>은 다음과 같습니다.</span>
           </div>
           <Modal
-            className="fixed w-[120px] h-[120px] bottom-1/2 left-1/2 -translate-x-[180px] translate-y-[190px] z-[20] bg-transparent flex items-center justify-center"
+            className="fixed w-[120px] h-[120px] bottom-1/2 left-1/2 -translate-x-[180px] translate-y-[190px] z-[120] bg-transparent flex items-center justify-center"
             overlay={false}
             openModal
           >
@@ -39,7 +39,7 @@ function Login() {
             />
           </Modal>
           <Modal
-            className="fixed w-[100px] h-[35px] bottom-1/2 left-1/2 -translate-x-[50px] translate-y-[170px] z-[20] rounded-[60px] bg-cg-1 flex items-center justify-center"
+            className="fixed w-[100px] h-[35px] bottom-1/2 left-1/2 -translate-x-[50px] translate-y-[170px] z-[120] rounded-[60px] bg-cg-1 flex items-center justify-center"
             overlay={false}
             openModal
           >

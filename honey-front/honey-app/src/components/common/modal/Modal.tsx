@@ -24,7 +24,9 @@ function Modal({
     visible && (
       <>
         <div className={className}>{children}</div>
-        {overlay ? <div className="inset-0 fixed bg-black opacity-75" /> : null}
+        {overlay ? (
+          <div className="inset-0 fixed bg-black opacity-[88%] z-[100]" />
+        ) : null}
       </>
     )
   );

@@ -1,6 +1,6 @@
 interface TextInputProps {
   holder: string;
-  value: string;
+  value: string | number;
   className: string;
   readonly: boolean;
   onChange(event: React.ChangeEvent<HTMLInputElement>): void;
