@@ -14,6 +14,7 @@ import rightArrow from "./rightArrow.png";
 import searchImg from "./search.png";
 import sendPot from "./sendpot.png";
 import writePaper from "./writepaper.png";
+import Pen from "./pen.png";
 
 export {
   Background,
@@ -32,4 +33,5 @@ export {
   searchImg,
   sendPot,
   writePaper,
+  Pen,
 };
