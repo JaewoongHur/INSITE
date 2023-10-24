@@ -78,6 +78,7 @@ function PageMove() {
               <TextInput
                 value={strNum}
                 holder=""
+                readonly={false}
                 className="w-[60%] bg-cg-2 h-[30px] sm:text-[15px] text-[10px] overflow-x-auto"
                 onChange={handleNum}
                 onKeyDown={(e) => e.key === "Enter" && goToTargetPage()}
