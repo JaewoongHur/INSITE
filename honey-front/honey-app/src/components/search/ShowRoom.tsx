@@ -8,7 +8,6 @@ function ShowRoom() {
 
   function gotoRoom(room: RoomType) {
     // 룸으로 이동
-    // eslint-disable-next-line no-console
     console.log(room.roomId);
   }
 
