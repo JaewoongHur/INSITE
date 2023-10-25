@@ -17,7 +17,6 @@ spring:
       host: ${REDIS_HOST}
       port: ${REDIS_PORT}
       password: ${REDIS_PASSWORD}
-
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
@@ -31,3 +30,6 @@ server:
     context-path: /api/v1
 room:
   salt: ${ROOM_SALT}
+
+kakao:
+  url: ${KAKAO_URL}
