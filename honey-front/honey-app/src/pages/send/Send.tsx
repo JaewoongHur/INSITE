@@ -6,10 +6,20 @@ import { Modal } from "@components/common/modal";
 // import { AccessError } from "@pages/error";
 // import { selectedMemberState } from "@recoil/atom";
 import { useState } from "react";
+import { nextArrow, prevArrow } from "@assets/images";
+import pots from "@assets/images/pots";
+import { ImageButton, TextButton } from "@components/common/button";
+import { Modal } from "@components/common/modal";
+// import { UserType } from "@customtype/dataTypes";
+// import { AccessError } from "@pages/error";
+// import { selectedMemberState } from "@recoil/atom";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+// import { useRecoilValue } from "recoil";
 // import { useRecoilValue } from "recoil";
 
 function Send() {
+  // const selectedMember = useRecoilValue<UserType>(selectedMemberState);
   // const selectedMember = useRecoilValue<UserType>(selectedMemberState);
   const navi = useNavigate();
   const basicType = "sm:text-[30px] text-[20px] rounded-xl p-1 m-2";
@@ -23,6 +33,20 @@ function Send() {
     navi(-1);
   }
 
+  // if (selectedMember === undefined) {
+  //   return <AccessError />;
+  // }
+  // {selectedMember.name}
+
+  const nextPot = () => {
+    setSelectedPotIdx((prev) => (prev + 1) % pots.length);
+  };
+
+  const prevPot = () => {
+    setSelectedPotIdx((prev) => (prev - 1 + pots.length) % pots.length);
+  };
+
+  // 랜덤 꿀단지일경우(potIdx==0)=> send할 때, if문으로 Math.random함수로 인덱스 정해주면 될 듯
   // if (selectedMember === undefined) {
   //   return <AccessError />;
   // }

@@ -12,7 +12,9 @@ function Cupboard() {
   const totalPotList = useRecoilValue<PotType[]>(potListState);
   const potList = useRecoilValue<PotType[][]>(potGroupSelector);
   const [currentPage, setCurrentPage] = useState<number>(0);
-  const [currentPotList, setCurrentPotList] = useState<PotType[]>(potList[0]);
+  const [currentPotList, setCurrentPotList] = useState<PotType[]>(
+    potList[0] || [],
+  );
   const [potOpen, setPotOpen] = useState<boolean>(false);
   const [selectedPot, setSelectedPot] = useState<PotType>();
 
