@@ -62,32 +62,33 @@ function Cupboard() {
         </div>
         <div className="flex flex-col w-[52%] mb-3 h-[80%] items-center">
           <div className="flex flex-col h-[95%] w-full justify-start">
-            {pagination.map((_, groupIndex) => (
-              <div
-                key={currentPotList[groupIndex].potId}
-                className="w-full h-[33%]"
-              >
-                <div className="flex flex-col justify-end h-[90%] w-full">
-                  <div className="flex">
-                    {currentPotList
-                      .slice(
-                        groupIndex * chunkSize,
-                        (groupIndex + 1) * chunkSize,
-                      )
-                      .map((pot) => (
-                        <Pot
-                          key={pot.potId}
-                          potNum={pot.isCheck ? pot.honeyCaseType : "0"}
-                          onClick={() => potClick(pot)}
-                        />
-                      ))}
+            {selectedPot &&
+              pagination.map((_, groupIndex) => (
+                <div
+                  key={currentPotList[groupIndex].potId}
+                  className="w-full h-[33%]"
+                >
+                  <div className="flex flex-col justify-end h-[90%] w-full">
+                    <div className="flex">
+                      {currentPotList
+                        .slice(
+                          groupIndex * chunkSize,
+                          (groupIndex + 1) * chunkSize,
+                        )
+                        .map((pot) => (
+                          <Pot
+                            key={pot.potId}
+                            potNum={pot.isCheck ? pot.honeyCaseType : "0"}
+                            onClick={() => potClick(pot)}
+                          />
+                        ))}
+                    </div>
+                    <div className="h-[10%] bg-cg-10" />
                   </div>
-                  <div className="h-[10%] bg-cg-10" />
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
-          {potOpen && (
+          {selectedPot && potOpen && (
             <PotModal
               className="fixed bottom-1/2 left-1/2 z-[99] w-[300px] h-[400px] -translate-x-[150px] translate-y-[150px] sm:w-[500px] sm:h-[600px] sm:-translate-x-[250px] sm:translate-y-[230px] rounded-[36px] shadow-lg flex items-center justify-center px-[15px] py-[15px] bg-cg-6"
               overlay
