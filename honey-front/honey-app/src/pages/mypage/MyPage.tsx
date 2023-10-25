@@ -1,27 +1,36 @@
 import { ButtomMenu, Cupboard } from "@components/mypage";
 import MypageTitle from "@components/mypage/MypageTitle";
 import { RoomType } from "@customtype/dataTypes";
-import { myRoomListState, selectedRoomState } from "@recoil/atom";
+import { myRoomListState } from "@recoil/atom";
+import { getMyRoomlistSelector } from "@recoil/selector";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 function MyPage() {
-  const [roomList, setRoomList] = useRecoilState<RoomType[]>(myRoomListState);
+  const roomList = useRecoilValue<RoomType[]>(getMyRoomlistSelector);
+  const setRoomList = useSetRecoilState<RoomType[]>(myRoomListState);
   const [roomNum, setRoomNum] = useState<number>(0);
-  const [selectedRoom, setSelectedRoom] =
-    useRecoilState<RoomType>(selectedRoomState);
-  const [data, setData] = useState([]);
+  const [selectedRoom, setSelectedRoom] = useState<RoomType>(roomList[0]);
 
   useEffect(() => {
-    axios.get("api/v1/rooms/list").then((response) => {
-      const data = response.data;
-    });
-  }, []);
+    // Axios를 사용하여 데이터 가져오기
+    axios
+      .get("/api/v1/rooms/list")
+      .then((response) => {
+        const { data } = response;
+        // Recoil 상태 업데이트
+        setRoomList(data.roomDtoList);
+        if (data.length > 0) {
+          setSelectedRoom(data[0]);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching room list:", error);
+      });
+  }, [setRoomList]);
 
   useEffect(() => {
-    setRoomList(data);
-    console.log(roomList);
     if (roomNum !== null) {
       if (roomNum >= 0 && roomNum < roomList.length) {
         setSelectedRoom(roomList[roomNum]);
@@ -33,7 +42,7 @@ function MyPage() {
     } else {
       setRoomNum(0);
     }
-  }, [roomNum, data, roomList, setRoomList, setSelectedRoom]);
+  }, [roomNum, roomList, setSelectedRoom]);
 
   return (
     <>

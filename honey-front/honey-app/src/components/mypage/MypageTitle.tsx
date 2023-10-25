@@ -2,11 +2,12 @@ import { ImageButton } from "@components/common/button";
 import Dropdown from "@components/common/dropdown/Dropdown";
 import TitleText from "@components/common/textbox/TitleText";
 import { RoomType } from "@customtype/dataTypes";
-import { myRoomListState, selectedRoomState } from "@recoil/atom";
-import { useState } from "react";
+import { selectedRoomState } from "@recoil/atom";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { leftArrow } from "@assets/images";
+import { getMyRoomlistSelector } from "@recoil/selector";
 
 interface MypageTitleProps {
   selectedRoom: RoomType;
@@ -15,16 +16,20 @@ interface MypageTitleProps {
 }
 
 function MypageTitle({ selectedRoom, roomNum, setRoomNum }: MypageTitleProps) {
-  const [roomList, setRoomList] = useRecoilState<RoomType[]>(myRoomListState);
+  // const roomList = useRecoilValue<RoomType[]>(getMyRoomlistSelector);
+  const roomList = useRecoilValue<RoomType[]>(getMyRoomlistSelector);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [, setNextRoom] = useRecoilState(selectedRoomState);
+  const [, setNextRoom] = useRecoilState<RoomType>(selectedRoomState);
   const navi = useNavigate();
 
   function goToRoom(roomId: number) {
-    // roomId로 나중에 axios통신해서 room하나 받아와서 set해주기
-    setNextRoom(roomList[roomId]);
+    setRoomNum(roomId - 1);
   }
+
+  useEffect(() => {
+    setNextRoom(roomList[roomNum]);
+  }, [roomNum, roomList, setNextRoom]);
 
   function nextPage(): void {
     if (roomNum === null) {
@@ -62,7 +67,7 @@ function MypageTitle({ selectedRoom, roomNum, setRoomNum }: MypageTitleProps) {
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           >
             <TitleText
-              text={selectedRoom ? selectedRoom.roomTitle : "방이 없습니다"}
+              text={selectedRoom ? selectedRoom.title : "방이 없습니다"}
               className="p-1 pr-5 pl-5 rounded-xl sm:h-[90px] h-[38px] bg-cg-9 overflow-x-auto items-start"
             />
           </button>
@@ -73,17 +78,15 @@ function MypageTitle({ selectedRoom, roomNum, setRoomNum }: MypageTitleProps) {
               ) : (
                 <Dropdown
                   className=""
-                  onClick={(roomId) => goToRoom(roomId)}
                   items={roomList.map((room) => ({
                     ...room,
                     roomTitle:
-                      room.roomTitle.length > 10
-                        ? `${room.roomTitle.slice(0, 10)}...`
-                        : room.roomTitle,
-                    roomId: room.roomId,
-                    owner: room.memberId,
-                    password: room.password,
+                      room.title.length > 10
+                        ? `${room.title.slice(0, 10)}...`
+                        : room.title,
+                    roomId: room.id,
                   }))}
+                  onClick={(roomId) => goToRoom(roomId)}
                 />
               )}
             </div>

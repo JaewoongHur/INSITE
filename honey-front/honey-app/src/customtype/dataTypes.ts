@@ -1,9 +1,6 @@
 type RoomType = {
-  roomId: number;
-  roomTitle: string;
-  showTime: string;
-  memberId: number;
-  password: number | null;
+  id: number;
+  title: string;
 };
 
 type UserType = {
