@@ -78,7 +78,7 @@ function ModifyRoom() {
           <input
             value={roomName}
             placeholder={roomNameFocused ? "" : "방제목을 입력해주세요."}
-            className="w-[90%] h-[15%] min-h-[50px] text-[24px] bg-cg-2 rounded-2xl"
+            className="w-[90%] h-[15%] min-h-[50px] text-[20px] bg-cg-2 rounded-2xl"
             onChange={handleRoomName}
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}
@@ -123,8 +123,8 @@ function ModifyRoom() {
             }
             className={
               boxChecked
-                ? "w-[90%] h-[15%] min-h-[50px] text-[24px] bg-cg-2 rounded-2xl"
-                : "w-[90%] h-[15%] min-h-[50px] text-[24px] bg-transparent text-transparent"
+                ? "w-[90%] h-[15%] min-h-[50px] text-[20px] bg-cg-2 rounded-2xl"
+                : "w-[90%] h-[15%] min-h-[50px] text-[20px] bg-transparent text-transparent"
             }
             disabled={!boxChecked}
             onFocus={handleRoomPasswordFocus}

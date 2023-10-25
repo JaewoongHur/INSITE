@@ -53,7 +53,19 @@ function CreateRoom() {
     setBoxChecked(!boxChecked);
     setRoomPasswordFocused(false);
   };
+  function parseKoreanDateString(dateString: string): Date {
+    const matches = dateString.match(/(\d+)년 (\d+)월 (\d+)일/);
 
+    if (!matches) {
+      throw new Error("Invalid date string format.");
+    }
+
+    const year = parseInt(matches[1], 10);
+    const month = parseInt(matches[2], 10) - 1; // JavaScript의 month는 0부터 시작
+    const day = parseInt(matches[3], 10);
+
+    return new Date(year, month, day);
+  }
   const compareDate = (value: Value): boolean => {
     const nextDate = moment().add(1, "days").startOf("day");
     if (!(value instanceof Date) || value === null) {
@@ -76,11 +88,12 @@ function CreateRoom() {
     } else {
       const eventTarget = event.target as HTMLElement;
       const aria = eventTarget.getAttribute("aria-label");
-      if (aria === null) {
+      if (aria !== null) {
+        setReleaseDate(aria);
+        setToday(parseKoreanDateString(aria));
+      } else {
         setReleaseDate("날짜 설정");
-        return;
       }
-      setReleaseDate(aria);
     }
   };
   const handleCalendar = () => {
