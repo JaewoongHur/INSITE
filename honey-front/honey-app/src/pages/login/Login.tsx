@@ -9,24 +9,26 @@ import { useLocation } from "react-router-dom";
 
 function Login() {
   const [helpOpen, setHelpOpen] = useState<boolean>(false);
-
+  const { VITE_KAKAO_CLIENT_ID, VITE_KAKAO_REDIRECT_URI } = import.meta.env;
   const { routeTo } = useRouter();
   const location = useLocation();
 
   const authenticateUser = (code: string) => {
     axios
-      .post("http://k9a701a.p.ssafy.io:8080/auth/login", { code })
+      // .post(`${AXIOS_URL}/members/login`, { code })
+      .post(`/api/v1/members/login`, { code })
       .then((response) => {
         console.log(response.data);
         const authToken = response.headers.authorization;
-        const refreshToken = response.headers.authorization;
+        // const refreshToken = response.headers.authorization;
         if (authToken) {
           sessionStorage.setItem("Authorization", authToken);
-          sessionStorage.setItem("RefreshToken", refreshToken);
+          // sessionStorage.setItem("RefreshToken", refreshToken);
         }
         routeTo("/");
       })
       .catch((error) => {
+        // console.log(data);
         console.log("Error:", error);
       });
   };
@@ -45,8 +47,7 @@ function Login() {
 
   const handleLoginClick = () => {
     const KAKAO_BASE_URL = "https://kauth.kakao.com/oauth/authorize";
-    window.location.href = `${KAKAO_BASE_URL}?client_id=367be5f2a1031bc9fb556dd456869c88&redirect_uri=http://localhost:3000/login&response_type=code`;
-    // `?client_id=${VITE_KAKAO_CLIENT_ID}&redirect_uri=${VITE_KAKAO_REDIRECT_URI}&response_type=code`;
+    window.location.href = `${KAKAO_BASE_URL}?client_id=${VITE_KAKAO_CLIENT_ID}&redirect_uri=${VITE_KAKAO_REDIRECT_URI}&response_type=code`;
   };
   return (
     <>

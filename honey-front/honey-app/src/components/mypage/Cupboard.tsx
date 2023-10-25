@@ -16,7 +16,7 @@ function Cupboard() {
     potList[0] || [],
   );
   const [potOpen, setPotOpen] = useState<boolean>(false);
-  const [selectedPot, setSelectedPot] = useState<PotType>();
+  const [selectedPot, setSelectedPot] = useState<PotType | undefined>();
 
   const totalPotCnt: number = totalPotList.length;
   const chunkSize: number = 3;
@@ -24,6 +24,9 @@ function Cupboard() {
   const pagination: PotType[] = [
     ...Array(Math.ceil(currentPotList.length / chunkSize)),
   ];
+  console.log(totalPotList);
+  console.log(potList);
+  console.log(currentPotList);
 
   function potClick(pot: PotType) {
     setSelectedPot(pot);
@@ -62,31 +65,31 @@ function Cupboard() {
         </div>
         <div className="flex flex-col w-[52%] mb-3 h-[80%] items-center">
           <div className="flex flex-col h-[95%] w-full justify-start">
-            {selectedPot &&
-              pagination.map((_, groupIndex) => (
-                <div
-                  key={currentPotList[groupIndex].potId}
-                  className="w-full h-[33%]"
-                >
-                  <div className="flex flex-col justify-end h-[90%] w-full">
-                    <div className="flex">
-                      {currentPotList
-                        .slice(
-                          groupIndex * chunkSize,
-                          (groupIndex + 1) * chunkSize,
-                        )
-                        .map((pot) => (
-                          <Pot
-                            key={pot.potId}
-                            potNum={pot.isCheck ? pot.honeyCaseType : "0"}
-                            onClick={() => potClick(pot)}
-                          />
-                        ))}
-                    </div>
-                    <div className="h-[10%] bg-cg-10" />
+            {pagination.map((_, groupIndex) => (
+              <div
+                key={currentPotList[groupIndex].potId}
+                className="w-full h-[33%]"
+              >
+                <div className="flex flex-col justify-end h-[90%] w-full">
+                  <div className="flex">
+                    {currentPotList
+                      .slice(
+                        groupIndex * chunkSize,
+                        (groupIndex + 1) * chunkSize,
+                      )
+                      .filter((pot) => pot)
+                      .map((pot) => (
+                        <Pot
+                          key={pot.potId}
+                          potNum={pot.isCheck ? pot.honeyCaseType || "0" : "0"}
+                          onClick={() => potClick(pot)}
+                        />
+                      ))}
                   </div>
+                  <div className="h-[10%] bg-cg-10" />
                 </div>
-              ))}
+              </div>
+            ))}
           </div>
           {selectedPot && potOpen && (
             <PotModal
