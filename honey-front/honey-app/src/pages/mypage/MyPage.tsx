@@ -2,65 +2,45 @@ import { ButtomMenu, Cupboard } from "@components/mypage";
 import MypageTitle from "@components/mypage/MypageTitle";
 import { RoomType } from "@customtype/dataTypes";
 import { myRoomListState } from "@recoil/atom";
-// import axios from "axios";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 
-const dummyList: RoomType[] = [
-  {
-    id: 1,
-    title: "1번",
-    password: "1234",
-    owner: "누구",
-  },
-  {
-    id: 2,
-    title: "2번",
-    password: "1234",
-    owner: "ㅎㅇ",
-  },
-  {
-    id: 3,
-    title: "3번",
-    password: "1234",
-    owner: "ㅂㅇ",
-  },
-  {
-    id: 4,
-    title: "4번",
-    password: "1234",
-    owner: "놉",
-  },
-];
-
 function MyPage() {
   const [roomList, setRoomList] = useRecoilState<RoomType[]>(myRoomListState);
-  console.log("1번", roomList);
   const [roomNum, setRoomNum] = useState<number>(0);
-  console.log("2번", roomNum);
   const [selectedRoom, setSelectedRoom] = useState<RoomType | null>(null);
-  console.log("3번", selectedRoom);
+  const { VITE_API_URL } = import.meta.env;
+  const token = sessionStorage.getItem("Authorization");
 
   useEffect(() => {
     // Axios를 사용하여 데이터 가져오기
-    // axios
-    //   .get("http://k9a701a.p.ssafy.io:8080/api/v1/rooms/list")
-    //   .then((response) => {
-    //     const { data } = response;
-    //     console.log(response.data);
-    //     // Recoil 상태 업데이트
-    //     if (data.length > 0) {
-    //       setSelectedRoom(data[0]);
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error fetching room list:", error);
-    //   });
-    setRoomList(dummyList);
-  }, [setRoomList]);
+    const config = {
+      headers: {
+        Authorization: token,
+      },
+    };
+
+    axios
+      .get(`http://localhost:8080/api/v1/rooms/list`, config)
+      .then((response) => {
+        const { data } = response;
+        const getList = data.roomDtoList;
+        console.log(getList);
+        // Recoil 상태 업데이트
+        if (getList.length > 0) {
+          setRoomList(() => [...data.roomDtoList]);
+          setRoomNum(0);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching room list:", error);
+      });
+  }, [setRoomList, token]);
 
   useEffect(() => {
     if (roomNum !== null) {
+      console.log("선택된 방: ", selectedRoom);
       if (roomNum >= 0 && roomNum < roomList.length) {
         setSelectedRoom(roomList[roomNum]);
       } else if (roomNum >= roomList.length) {
@@ -71,13 +51,14 @@ function MyPage() {
     } else {
       setRoomNum(0);
     }
-  }, [roomNum, roomList, setSelectedRoom]);
+  }, [roomNum, roomList, setSelectedRoom, selectedRoom]);
 
   return (
     <>
       <MypageTitle
         selectedRoom={selectedRoom}
         roomNum={roomNum}
+        y
         setRoomNum={setRoomNum}
       />
       <Cupboard />

@@ -17,13 +17,14 @@ function ButtomMenu() {
   const sendPotImg = sendPot;
   const buttonStyle: string =
     "flex rounded-xl sm:h-[17%] h-[15%] m-2 p-3 sm:w-[50%] w-[60%] sm:text-[20px] text-[13px] justify-center items-center";
-
+  const [selectedRoom] = useRecoilState<RoomType>(selectedRoomState);
   const [memberOpen, setMemberOpen] = useState<boolean>(false);
   const [memberList] = useRecoilState<UserType[]>(memberListState);
   const [, setSelectedMember] = useRecoilState<UserType>(selectedMemberState);
   const nowRoom: RoomType = useRecoilValue<RoomType>(selectedRoomState);
 
   function showMemberList(): void {
+    console.log(selectedRoom.id);
     setMemberOpen(true);
   }
 

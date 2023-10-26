@@ -10,21 +10,22 @@ import { leftArrow } from "@assets/images";
 import { getMyRoomlistSelector } from "@recoil/selector";
 
 interface MypageTitleProps {
-  selectedRoom: RoomType | null;
   roomNum: number;
   setRoomNum: React.Dispatch<React.SetStateAction<number>>;
 }
 
-function MypageTitle({ selectedRoom, roomNum, setRoomNum }: MypageTitleProps) {
+function MypageTitle({ roomNum, setRoomNum }: MypageTitleProps) {
   // const roomList = useRecoilValue<RoomType[]>(getMyRoomlistSelector);
   const roomList = useRecoilValue<RoomType[]>(getMyRoomlistSelector);
-
+  const [selectedRoom, SetselectedRoom] =
+    useRecoilState<RoomType>(selectedRoomState);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [, setNextRoom] = useRecoilState<RoomType>(selectedRoomState);
   const navi = useNavigate();
 
-  function goToRoom(roomId: number) {
-    setRoomNum(roomId - 1);
+  function goToRoom(room: RoomType) {
+    console.log(room.id);
+    setRoomNum(room);
+    setRoomNum(room.id - 1);
   }
 
   useEffect(() => {
@@ -86,7 +87,7 @@ function MypageTitle({ selectedRoom, roomNum, setRoomNum }: MypageTitleProps) {
                         : room.title,
                     roomId: room.id,
                   }))}
-                  onClick={(roomId) => goToRoom(roomId)}
+                  onClick={(room) => goToRoom(room)}
                 />
               )}
             </div>
