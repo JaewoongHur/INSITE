@@ -4,7 +4,7 @@ type RoomType = {
 };
 
 type UserType = {
-  userId: number;
+  id: number;
   name: string;
 };
 

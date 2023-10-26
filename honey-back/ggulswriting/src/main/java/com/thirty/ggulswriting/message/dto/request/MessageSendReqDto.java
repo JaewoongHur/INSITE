@@ -18,9 +18,6 @@ import lombok.NoArgsConstructor;
 @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class MessageSendReqDto {
 	@NotNull
-	private int memberIdFrom;
-
-	@NotNull
 	private int memberIdTo;
 
 	@NotNull

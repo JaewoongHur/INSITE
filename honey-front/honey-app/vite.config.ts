@@ -10,7 +10,7 @@ export default defineConfig({
     port: 3000,
     // proxy: {
     //   "/api/v1": {
-    //     target: "http://k9a701a.p.ssafy.io:8080",
+    //     target: "http://localhost:8080",
     //   },
     // },
   },

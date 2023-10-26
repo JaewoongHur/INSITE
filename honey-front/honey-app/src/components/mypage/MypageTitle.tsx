@@ -9,42 +9,57 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { leftArrow } from "@assets/images";
 import { getMyRoomlistSelector } from "@recoil/selector";
 
-interface MypageTitleProps {
-  roomNum: number;
-  setRoomNum: React.Dispatch<React.SetStateAction<number>>;
-}
-
-function MypageTitle({ roomNum, setRoomNum }: MypageTitleProps) {
+function MypageTitle() {
   // const roomList = useRecoilValue<RoomType[]>(getMyRoomlistSelector);
   const roomList = useRecoilValue<RoomType[]>(getMyRoomlistSelector);
-  const [selectedRoom, SetselectedRoom] =
+  // const [selectedNum, setSelectedNum] = useRecoilState<number>(roomNumState);
+  const [title, setTitle] = useState<string>("방이 없습니다.");
+
+  const [selectedRoom, setSelectedRoom] =
     useRecoilState<RoomType>(selectedRoomState);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const navi = useNavigate();
+  const [currentIndex, setCurrentIndex] = useState(0); // 현재 선택된 방의 인덱스
+
+  // console.log("마이페이지타이틀 : ", selectedRoom);
 
   function goToRoom(room: RoomType) {
-    console.log(room.id);
-    setRoomNum(room);
-    setRoomNum(room.id - 1);
+    // console.log(room.id);
+    setSelectedRoom(room);
   }
 
   useEffect(() => {
-    setNextRoom(roomList[roomNum]);
-  }, [roomNum, roomList, setNextRoom]);
-
-  function nextPage(): void {
-    if (roomNum === null) {
-      setRoomNum(0);
+    // selectedRoom이 변경될 때 title 업데이트
+    if (selectedRoom !== undefined) {
+      setTitle(selectedRoom.title);
+    } else if (roomList.length > 0) {
+      setTitle(roomList[0].title);
+      setSelectedRoom(roomList[0]);
     } else {
-      setRoomNum(roomNum + 1);
+      setTitle("방을 선택하세요");
+    }
+  }, [selectedRoom, roomList, setSelectedRoom]);
+
+  // useEffect(() => {
+  //   setNextRoom(roomList[roomNum]);
+  // }, [roomNum, roomList, setNextRoom]);
+  function beforePage(): void {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+      setSelectedRoom(roomList[currentIndex - 1]);
+    } else {
+      setCurrentIndex(roomList.length - 1);
+      setSelectedRoom(roomList[roomList.length - 1]);
     }
   }
 
-  function beforePage(): void {
-    if (roomNum === null) {
-      setRoomNum(0);
+  function nextPage(): void {
+    if (currentIndex < roomList.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+      setSelectedRoom(roomList[currentIndex + 1]);
     } else {
-      setRoomNum(roomNum - 1);
+      setCurrentIndex(0);
+      setSelectedRoom(roomList[0]);
     }
   }
 
@@ -68,7 +83,7 @@ function MypageTitle({ roomNum, setRoomNum }: MypageTitleProps) {
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           >
             <TitleText
-              text={selectedRoom ? selectedRoom.title : "방이 없습니다"}
+              text={title}
               className="p-1 pr-5 pl-5 rounded-xl sm:h-[90px] h-[38px] bg-cg-9 overflow-x-auto items-start"
             />
           </button>
@@ -79,14 +94,15 @@ function MypageTitle({ roomNum, setRoomNum }: MypageTitleProps) {
               ) : (
                 <Dropdown
                   className=""
-                  items={roomList.map((room) => ({
-                    ...room,
-                    roomTitle:
-                      room.title.length > 10
-                        ? `${room.title.slice(0, 10)}...`
-                        : room.title,
-                    roomId: room.id,
-                  }))}
+                  // items={roomList.map((room) => ({
+                  //   ...room,
+                  //   roomTitle:
+                  //     room.title.length > 10
+                  //       ? `${room.title.slice(0, 10)}...`
+                  //       : room.title,
+                  //   roomId: room.id,
+                  // }))}
+                  items={roomList}
                   onClick={(room) => goToRoom(room)}
                 />
               )}
@@ -103,7 +119,8 @@ function MypageTitle({ roomNum, setRoomNum }: MypageTitleProps) {
           이전
         </button>
         <p>
-          {roomNum === null ? 1 : roomNum + 1} / {roomList.length}
+          {" "}
+          {currentIndex + 1} / {roomList.length}
         </p>
         <button
           className="bg-cg-3 rounded-xl p-2 m-2"

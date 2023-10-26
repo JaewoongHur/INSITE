@@ -1,6 +1,5 @@
 import HelpIcon from "@assets/icons";
 import { KakaoLoginButton, PoohHelpModal, PoohLogin } from "@assets/images";
-import { ImageButton } from "@components/common/button";
 import { Modal } from "@components/common/modal";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -9,7 +8,6 @@ import { useLocation } from "react-router-dom";
 
 function Login() {
   const [helpOpen, setHelpOpen] = useState<boolean>(false);
-  // todo 나중에 그거 env파일로 만들어서 올리기
   const VITE_KAKAO_CLIENT_ID = "367be5f2a1031bc9fb556dd456869c88";
   const VITE_KAKAO_REDIRECT_URI = "http://localhost:3000/login";
   const { routeTo } = useRouter();
@@ -19,12 +17,12 @@ function Login() {
     axios
       .post("http://localhost:8080/api/v1/members/login", { code })
       .then((response) => {
-        console.log(response.headers);
+        console.log(response.data);
         const authToken = response.headers.authorization;
-        const refreshToken = response.headers.authorization;
+        // const refreshToken = response.headers.authorization;
         if (authToken) {
           sessionStorage.setItem("Authorization", authToken);
-          sessionStorage.setItem("RefreshToken", refreshToken);
+          // sessionStorage.setItem("RefreshToken", refreshToken);
         }
         routeTo("/");
       })
@@ -104,14 +102,8 @@ function Login() {
       <div className="flex h-4/6 justify-center items-center">
         <div className="flex flex-col h-full items-center justify-center">
           <img src={PoohLogin} alt="mainpooh" />
-          <ImageButton
-            image={KakaoLoginButton}
-            alt="kakao Login Btn"
-            className="rounded border border-blue-700"
-            onClick={handleLoginClick}
-          />
           <button type="button" onClick={handleLoginClick}>
-            버튼
+            <img src={KakaoLoginButton} alt="kakao Login Btn" />
           </button>
         </div>
       </div>
