@@ -23,7 +23,7 @@ function Send() {
   const selectedRoom = useRecoilValue<RoomType>(selectedRoomState);
 
   const messageSendReqDto = {
-    member_id_to: selectedMember.id,
+    member_id_to: 659,
     room_id: selectedRoom.id,
     nick_name: nickName,
     content,
@@ -45,7 +45,12 @@ function Send() {
         console.log("response : ", response);
       })
       .catch((error) => {
-        console.error("Error Send:", error);
+        if (error.response.data.errorCode === "000") {
+          console.error("Error Send:", error.response.data.errorCode);
+          // 000에러를 받았을 때 JWT에서 리프래쉬토큰을 다시 호출하는 axios를 작성
+          // 그런데 여기서 no를 반환받으면 다시 로그인을 시켜야 한다
+        }
+        console.error("Error Send:", error.response.data.errorCode);
       });
   }
 
