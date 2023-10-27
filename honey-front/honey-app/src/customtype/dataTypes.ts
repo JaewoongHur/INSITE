@@ -1,6 +1,9 @@
 type RoomType = {
+  masterName: string;
+  roomTitle: string;
+  isOpen: boolean;
+  memberCount: number;
   id: number;
-  title: string;
 };
 
 type UserType = {

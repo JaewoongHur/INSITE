@@ -230,19 +230,19 @@ function CreateRoom() {
               암호 사용
             </div>
             <div className="flex items-center pt-[20px] pb-[10px]">
-              <input
-                type="checkbox"
-                checked={boxChecked}
-                onChange={handleCheckboxToggle}
-                className="w-0 h-0 opacity-0 absolute"
-                id="passwordCheckbox"
-              />
               <label
                 htmlFor="passwordCheckbox"
                 className={`w-[35px] h-[35px] border-[5px] border-white relative rounded-sm cursor-pointer ${
                   boxChecked ? "bg-white" : "bg-cg-7"
                 }`}
               >
+                <input
+                  type="checkbox"
+                  checked={boxChecked}
+                  onChange={handleCheckboxToggle}
+                  className="w-0 h-0 opacity-0 absolute"
+                  id="passwordCheckbox"
+                />
                 <span
                   className={`block w-[24px] h-[14px] border-t-[5px] border-r-[5px] transform rotate-[135deg] absolute top-[40%] left-[53%] -translate-x-[50%] -translate-y-[50%] ${
                     boxChecked ? "border-cg-7" : "border-transparent"
