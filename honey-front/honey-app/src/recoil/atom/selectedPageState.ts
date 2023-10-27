@@ -1,8 +1,15 @@
+import { PageType } from "@customtype/dataTypes";
 import { atom } from "recoil";
 
-const selectedPageState = atom<number>({
+const defaultPage: PageType = {
+  currentPage: 0,
+  hasNext: true,
+  totalPages: 1,
+};
+
+const selectedPageState = atom<PageType>({
   key: "selectedPageAtom",
-  default: 0,
+  default: defaultPage,
 });
 
 export default selectedPageState;

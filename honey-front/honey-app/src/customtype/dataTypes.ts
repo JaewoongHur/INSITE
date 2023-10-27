@@ -19,4 +19,10 @@ type PotType = {
   isCheck: boolean;
 };
 
-export type { RoomType, UserType, PotType };
+type PageType = {
+  currentPage: number;
+  hasNext: boolean;
+  totalPages: number;
+};
+
+export type { RoomType, UserType, PotType, PageType };

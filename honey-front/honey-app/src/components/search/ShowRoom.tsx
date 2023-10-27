@@ -39,7 +39,9 @@ function ShowRoom() {
             </div>
           ))
         ) : (
-          <div>방이 없습니다</div>
+          <div className="flex h-full w-full text-center justify-center items-center text-white sm:text-[30px]">
+            방이 없습니다
+          </div>
         )}
       </div>
     </div>
