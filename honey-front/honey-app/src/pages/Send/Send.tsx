@@ -23,7 +23,7 @@ function Send() {
   const selectedRoom = useRecoilValue<RoomType>(selectedRoomState);
 
   const messageSendReqDto = {
-    member_id_to: 659,
+    member_id_to: selectedMember.id,
     room_id: selectedRoom.id,
     nick_name: nickName,
     content,
