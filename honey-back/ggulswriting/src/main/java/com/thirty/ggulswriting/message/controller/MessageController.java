@@ -27,12 +27,13 @@ public class MessageController {
 
 	private final MessageService messageService;
 
-	@PostMapping("/")
+	@PostMapping
 	public ResponseEntity<String> send(
 			@Valid @RequestBody MessageSendReqDto messageSendReqDto,
 			@AuthenticationPrincipal LoginUser loginUser
 
 	) {
+		System.out.println(messageSendReqDto.toString());
 		String result = messageService.send(messageSendReqDto, loginUser.getMember().getMemberId());
 		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}

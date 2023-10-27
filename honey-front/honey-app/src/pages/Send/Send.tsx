@@ -19,24 +19,24 @@ function Send() {
   const [selectedPotIdx, setSelectedPotIdx] = useState<number>(1);
   const token = sessionStorage.getItem("Authorization");
   const [content, setContent] = useState("");
-  const [nickName, setNickname] = useState("");
+  const [nickName, setNickName] = useState("");
   const selectedRoom = useRecoilValue<RoomType>(selectedRoomState);
 
   const messageSendReqDto = {
-    memberIdTo: selectedMember.id,
-    roomId: selectedRoom.id,
-    nickName,
+    member_id_to: selectedMember.id,
+    room_id: selectedRoom.id,
+    nick_name: nickName,
     content,
-    honeyCaseType: String(selectedPotIdx),
+    honey_case_type: String(selectedPotIdx),
   };
+  console.log(selectedRoom.id);
+  console.log(nickName);
 
   function send() {
     // 전송 api요청
-    console.log(messageSendReqDto);
     const config = {
-      headers: {
-        Authorization: token,
-      },
+      "Content-Type": "application/json",
+      headers: { Authorization: token },
     };
 
     axios
@@ -88,7 +88,7 @@ function Send() {
                 value={nickName}
                 className="bg-cg-9"
                 readonly={false}
-                onChange={(e) => setNickname(e.target.value)}
+                onChange={(e) => setNickName(e.target.value)}
               />
             </div>
             <div className="h-[10%] w-[40%] flex justify-between items-center">

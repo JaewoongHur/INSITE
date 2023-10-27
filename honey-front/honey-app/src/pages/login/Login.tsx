@@ -17,12 +17,16 @@ function Login() {
     axios
       .post("http://localhost:8080/api/v1/members/login", { code })
       .then((response) => {
-        console.log(response.data);
+        console.log(response);
         const authToken = response.headers.authorization;
+        const refreshToken = response.headers.refreshtoken;
+        console.log("헤더 auth", authToken);
+        console.log("헤더 ref", refreshToken);
+
         // const refreshToken = response.headers.authorization;
         if (authToken) {
           sessionStorage.setItem("Authorization", authToken);
-          // sessionStorage.setItem("RefreshToken", refreshToken);
+          sessionStorage.setItem("RefreshToken", refreshToken);
         }
         routeTo("/");
       })
