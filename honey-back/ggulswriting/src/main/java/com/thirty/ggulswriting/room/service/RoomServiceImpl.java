@@ -292,6 +292,7 @@ public class RoomServiceImpl implements RoomService {
 	public RoomCreateResDto createRoom(RoomCreateReqDto roomCreateReqDto, int memberId) {
 		// 탈퇴한 회원인지 검증
 		Optional<Member> optionalMember = memberRepository.findMemberByMemberIdAndGoodbyeTimeIsNull(memberId);
+			log.info("들어오냐 ->{}", roomCreateReqDto.getPassword());
 
 		if(optionalMember.isEmpty()){
 			throw new MemberException(ErrorCode.NOT_EXIST_MEMBER);

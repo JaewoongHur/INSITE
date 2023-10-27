@@ -11,13 +11,13 @@ function Login() {
   const [helpOpen, setHelpOpen] = useState<boolean>(false);
   // todo 나중에 그거 env파일로 만들어서 올리기
   const VITE_KAKAO_CLIENT_ID = "367be5f2a1031bc9fb556dd456869c88";
-  const VITE_KAKAO_REDIRECT_URI = "http://k9a701a.p.ssafy.io:3000/login";
+  const VITE_KAKAO_REDIRECT_URI = "http://localhost:3000/login";
   const { routeTo } = useRouter();
   const location = useLocation();
 
   const authenticateUser = (code: string) => {
     axios
-      .post("http://k9a701a.p.ssafy.io:8080/api/v1/members/login", { code })
+      .post("http://localhost:8080/api/v1/members/login", { code })
       .then((response) => {
         console.log(response.data);
         const authToken = response.headers.authorization;
@@ -110,9 +110,6 @@ function Login() {
             className="rounded border border-blue-700"
             onClick={handleLoginClick}
           />
-          <button type="button" onClick={handleLoginClick}>
-            버튼
-          </button>
         </div>
       </div>
     </>
