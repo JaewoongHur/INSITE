@@ -4,6 +4,8 @@ import useRouter from "@hooks/useRouter";
 import CustomCalendar from "@components/common/calendar";
 import moment from "moment";
 import axios, { AxiosError } from "axios";
+import { useSetRecoilState } from "recoil";
+import successCreateRoomState from "@recoil/atom/successCreateRoomState";
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
@@ -18,6 +20,10 @@ function CreateRoom() {
   const [roomPassword, setRoomPassword] = useState<string>("");
   const [roomPasswordFocused, setRoomPasswordFocused] =
     useState<boolean>(false);
+
+  const setSuccessCreateRoom = useSetRecoilState<boolean>(
+    successCreateRoomState,
+  );
 
   useEffect(() => {
     setToday(new Date());
@@ -136,7 +142,7 @@ function CreateRoom() {
         config,
       );
       console.log(response.data);
-
+      setSuccessCreateRoom(true);
       routeTo("/");
     } catch (error: unknown) {
       if ((error as AxiosError).response) {
@@ -185,6 +191,7 @@ function CreateRoom() {
         alert(
           "8자 이상 16자 이하의 영문 대소문자, 숫자, 특수문자를 입력해야 합니다.",
         );
+        return;
       }
     }
 
@@ -289,7 +296,7 @@ function CreateRoom() {
       </div>
       {openCalendar && (
         <Modal
-          className="fixed w-[280px] h-[280px] bottom-[50%] left-[50%] -translate-x-[140px] translate-y-[70px] z-[150]"
+          className="fixed w-[320px] h-[320px] bottom-[50%] left-[50%] -translate-x-[160px] translate-y-[100px] z-[150]"
           overlay
           openModal={openCalendar}
         >
