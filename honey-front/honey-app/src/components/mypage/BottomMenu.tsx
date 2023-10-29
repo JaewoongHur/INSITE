@@ -8,7 +8,7 @@ import {
   selectedRoomState,
 } from "@recoil/atom";
 import { useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { greedyPooh, sendPot } from "@assets/images";
 
 function ButtomMenu() {
@@ -21,7 +21,6 @@ function ButtomMenu() {
   const [memberOpen, setMemberOpen] = useState<boolean>(false);
   const [memberList] = useRecoilState<UserType[]>(memberListState);
   const [, setSelectedMember] = useRecoilState<UserType>(selectedMemberState);
-  const nowRoom: RoomType = useRecoilValue<RoomType>(selectedRoomState);
 
   function showMemberList(): void {
     console.log(selectedRoom.id);
@@ -33,7 +32,10 @@ function ButtomMenu() {
   }
 
   function roomPaste(): void {
-    console.log(nowRoom);
+    const link = `http://localhost:3000/room/participate/${selectedRoom.id}`;
+    console.log(link);
+    navigator.clipboard.writeText(link);
+    alert("링크가 클립보드에 복사되었습니다.");
   }
 
   function exitRoom(): void {
