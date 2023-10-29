@@ -15,12 +15,10 @@ function ParticipateRoom() {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
 
-  console.log(isOpen);
-
   function enterRoom() {
     const roomParticipateReqDto = {
       room_id: roomId,
-      password: roomPassword,
+      password: isOpen ? null : roomPassword,
     };
 
     const config = {
@@ -28,6 +26,7 @@ function ParticipateRoom() {
         Authorization: token,
       },
     };
+    console.log(roomPassword);
 
     axios
       .post(
