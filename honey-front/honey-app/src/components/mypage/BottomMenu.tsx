@@ -10,6 +10,7 @@ import {
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { greedyPooh, sendPot } from "@assets/images";
+import axios from "axios";
 
 function ButtomMenu() {
   const { routeTo } = useRouter();
@@ -21,6 +22,7 @@ function ButtomMenu() {
   const [memberOpen, setMemberOpen] = useState<boolean>(false);
   const [memberList] = useRecoilState<UserType[]>(memberListState);
   const [, setSelectedMember] = useRecoilState<UserType>(selectedMemberState);
+  const token = sessionStorage.getItem("Authorization");
 
   function showMemberList(): void {
     console.log(selectedRoom.id);
@@ -39,7 +41,26 @@ function ButtomMenu() {
   }
 
   function exitRoom(): void {
-    console.log("방을 나갔습니다.");
+    const config = {
+      "Content-Type": "application/json",
+      headers: { Authorization: token },
+    };
+
+    console.log("delete 선택 방: ", selectedRoom.id);
+
+    axios
+      .patch(
+        `http://localhost:8080/api/v1/rooms/${selectedRoom.id}/out`,
+        null,
+        config,
+      )
+      .then(() => {
+        console.log("방 나가기");
+      })
+      .catch((error) => {
+        console.error("Error Delete:", error.response.data.errorCode);
+      });
+
     routeTo("/");
   }
 
