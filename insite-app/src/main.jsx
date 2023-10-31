@@ -4,6 +4,7 @@ import "./index.css";
 import store from "./store";
 import { persistStore } from "redux-persist";
 import "@config/axios.config";
+import { Provider } from "react-redux";
 
 export const persistor = persistStore(store);
 
