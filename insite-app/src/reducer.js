@@ -1,13 +1,13 @@
-import { combineReducers } from "redux";
-import persistReducer from "redux-persist/es/persistReducer";
+// import { combineReducers } from "redux";
+// import persistReducer from "redux-persist/es/persistReducer";
 
-const persistConfig = {
-  key: "root",
-  storage: storageSession,
-};
+// const persistConfig = {
+//   key: "root",
+//   storage: storageSession,
+// };
 
-const rootReducer = combineReducers({});
+// const rootReducer = combineReducers({});
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+// const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export default persistedReducer;
+// export default persistedReducer;
