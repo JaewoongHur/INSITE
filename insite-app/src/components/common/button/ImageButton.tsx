@@ -25,11 +25,13 @@ const ImageButtonStyle = styled.button<ImageButtonProps>`
   border-radius: ${(props) => props.borderRadius};
   border: none;
   padding: 0;
+  overflow: hidden;
 `;
 
 const ImageStyle = styled.img<ImageProps2>`
   width: 100%;
   height: 100%;
+  border-radius: inherit;
 `;
 
 function ImageButton({
