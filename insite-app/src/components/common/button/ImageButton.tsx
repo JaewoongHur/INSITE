@@ -4,6 +4,7 @@ interface ImageButtonProps {
   width: string;
   height: string;
   onClick: () => void;
+  borderRadius: string;
 }
 
 interface ImageProps extends ImageButtonProps {
@@ -21,6 +22,7 @@ const ImageButtonStyle = styled.button<ImageButtonProps>`
   height: ${(props) => props.height};
   cursor: pointer;
   background: transparent;
+  border-radius: ${(props) => props.borderRadius};
   border: none;
   padding: 0;
 `;
@@ -30,9 +32,21 @@ const ImageStyle = styled.img<ImageProps2>`
   height: 100%;
 `;
 
-function ImageButton({ width, height, onClick, src, alt }: ImageProps) {
+function ImageButton({
+  width,
+  height,
+  onClick,
+  borderRadius,
+  src,
+  alt,
+}: ImageProps) {
   return (
-    <ImageButtonStyle width={width} height={height} onClick={() => onClick()}>
+    <ImageButtonStyle
+      width={width}
+      height={height}
+      borderRadius={borderRadius}
+      onClick={() => onClick()}
+    >
       <ImageStyle src={src} alt={alt} />
     </ImageButtonStyle>
   );
