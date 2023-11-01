@@ -1,11 +1,15 @@
 // import React from "react";
 import ReactDOM from "react-dom/client";
-import "@config/axios.config";
-import { RouterProvider } from "react-router-dom";
 import router from "@router";
+import { RouterProvider } from "react-router-dom";
+import GlobalStyles from "@assets/styles/globalStyles";
+import { ThemeProvider } from "styled-components";
+import theme from "@assets/styles/colors";
+import "@config/axios.config";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  // <React.StrictMode>
-  <RouterProvider router={router} />,
-  // </React.StrictMode>,
+  <ThemeProvider theme={theme}>
+    <GlobalStyles />
+    <RouterProvider router={router} />
+  </ThemeProvider>,
 );

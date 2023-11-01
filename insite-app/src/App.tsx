@@ -1,5 +1,13 @@
+import Header from "@components/common/header/Header";
+import { Outlet } from "react-router-dom";
+
 function App() {
-  return <div>App</div>;
+  return (
+    <>
+      <Header />
+      <Outlet />
+    </>
+  );
 }
 
 export default App;

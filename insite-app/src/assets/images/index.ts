@@ -1,3 +1,3 @@
-import kakaoLoginButton from "@assets/images/kakaoLoginButton.png";
+import kakaoLoginButton from "./kakaoLoginButton.png";
 
 export default kakaoLoginButton;
