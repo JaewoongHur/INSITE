@@ -1,3 +1,6 @@
+import kakaoLoginButton from "@assets/images";
+import BackgroundDiv from "@components/common/BackgroundDiv";
+import DefaultBox from "@components/common/DefaultBox";
 import axios from "axios";
 import { useEffect } from "react";
 
@@ -36,9 +39,21 @@ function LoginPage() {
   };
 
   return (
-    <button type="button" onClick={handleLoginClick}>
-      <img src={KakaoLoginButton} alt="kakao Login Btn" />
-    </button>
+    <BackgroundDiv>
+      <DefaultBox width="500px" height="400px">
+        <button
+          type="button"
+          style={{ width: "200px", height: "50px" }}
+          onClick={handleLoginClick}
+        >
+          <img
+            src={kakaoLoginButton}
+            style={{ width: "100%", height: "100%" }}
+            alt="kakao Login Btn"
+          />
+        </button>
+      </DefaultBox>
+    </BackgroundDiv>
   );
 }
 

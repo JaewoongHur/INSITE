@@ -1,3 +1,4 @@
+import LoginPage from "@pages/login/LoginPage";
 import MainPage from "@pages/main/MainPage";
 import UserPage from "@pages/user/UserPage";
 import { RouteObject, createBrowserRouter } from "react-router-dom";
@@ -10,8 +11,8 @@ const routePath: RouteObject[] = [
   },
   {
     id: "muser-page",
-    path: "/user",
-    element: <UserPage />,
+    path: "/login",
+    element: <LoginPage />,
   },
 ];
 
