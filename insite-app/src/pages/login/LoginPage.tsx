@@ -1,17 +1,20 @@
 import kakaoLoginButton from "@assets/images";
-import BackgroundDiv from "@components/common/BackgroundDiv";
+import BackgroudDiv from "@components/common/BackgroudDiv";
 import DefaultBox from "@components/common/DefaultBox";
+import ImageButton from "@components/common/button/ImageButton";
 import axios from "axios";
 import { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function LoginPage() {
-  const { VITE_KAKAO_CLIENT_ID } = import.meta.env;
-  const { VITE_KAKAO_REDIRECT_URI } = import.meta.env;
-  const { VITE_API_URL } = import.meta.env;
+  const { VITE_KAKAO_REDIRECT_URI, VITE_LOGIN_API_URI, VITE_KAKAO_CLIENT_ID } =
+    import.meta.env;
+  const location = useLocation();
+  const navi = useNavigate();
 
-  const authenticateUser = (code) => {
+  const authenticateUser = (code: string) => {
     axios
-      .post(`${VITE_API_URL}/api/v1/members/login`, { code })
+      .post(`${VITE_LOGIN_API_URI}/api/v1/members/login`, { code })
       .then((response) => {
         const authToken = response.headers.authorization;
         const refreshToken = response.headers.refreshtoken;
@@ -20,6 +23,7 @@ function LoginPage() {
           sessionStorage.setItem("Authorization", authToken);
           sessionStorage.setItem("RefreshToken", refreshToken);
         }
+        navi("/");
       });
   };
 
@@ -39,11 +43,11 @@ function LoginPage() {
   };
 
   return (
-    <BackgroundDiv>
-      <DefaultBox width="500px" height="400px">
-        <button
+    <BackgroudDiv>
+      <DefaultBox width="500px" height="500px">
+        {/* <button
+          style={{ width: "80%", height: "15%", borderRadius: "50px" }}
           type="button"
-          style={{ width: "200px", height: "50px" }}
           onClick={handleLoginClick}
         >
           <img
@@ -51,9 +55,16 @@ function LoginPage() {
             style={{ width: "100%", height: "100%" }}
             alt="kakao Login Btn"
           />
-        </button>
+        </button> */}
+        <ImageButton
+          width="80%"
+          height="15%"
+          onClick={handleLoginClick}
+          src={kakaoLoginButton}
+          alt="kakao Login Btn"
+        />
       </DefaultBox>
-    </BackgroundDiv>
+    </BackgroudDiv>
   );
 }
 

@@ -5,6 +5,7 @@ import { RouterProvider } from "react-router-dom";
 import GlobalStyles from "@assets/styles/globalStyles";
 import { ThemeProvider } from "styled-components";
 import theme from "@assets/styles/colors";
+import "@config/axios.config";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <ThemeProvider theme={theme}>

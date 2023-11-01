@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import BackgroundDiv from "@components/common/BackgroudDiv";
 
 const HeaderContainer = styled.div`
   position: fixed;
@@ -15,9 +16,11 @@ const HeaderContainer = styled.div`
 
 function Header() {
   return (
-    <HeaderContainer>
-      <div>헤더</div>
-    </HeaderContainer>
+    <BackgroundDiv>
+      <HeaderContainer>
+        <div>헤더</div>
+      </HeaderContainer>
+    </BackgroundDiv>
   );
 }
 
