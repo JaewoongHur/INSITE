@@ -1,12 +1,14 @@
 import kakaoLoginButton from "@assets/images";
+import DefaultBox from "@components/DefaultBox";
 import axios from "axios";
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function LoginPage() {
   const { VITE_KAKAO_REDIRECT_URI, VITE_LOGIN_API_URI, VITE_KAKAO_CLIENT_ID } =
     import.meta.env;
   const location = useLocation();
+  const navi = useNavigate();
 
   const authenticateUser = (code: string) => {
     axios
@@ -19,6 +21,7 @@ function LoginPage() {
           sessionStorage.setItem("Authorization", authToken);
           sessionStorage.setItem("RefreshToken", refreshToken);
         }
+        navi("/");
       });
   };
 
@@ -38,9 +41,11 @@ function LoginPage() {
   };
 
   return (
-    <button type="button" onClick={handleLoginClick}>
-      <img src={kakaoLoginButton} alt="kakao Login Btn" />
-    </button>
+    <DefaultBox>
+      <button type="button" onClick={handleLoginClick}>
+        <img src={kakaoLoginButton} alt="kakao Login Btn" />
+      </button>
+    </DefaultBox>
   );
 }
 
