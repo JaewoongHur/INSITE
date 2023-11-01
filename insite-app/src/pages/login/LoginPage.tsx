@@ -1,4 +1,4 @@
-import kakaoLoginButton from "@assets/images";
+import { kakaoLoginButton } from "@assets/images";
 import BackgroudDiv from "@components/common/BackgroudDiv";
 import DefaultBox from "@components/common/DefaultBox";
 import ImageButton from "@components/common/button/ImageButton";
@@ -45,17 +45,6 @@ function LoginPage() {
   return (
     <BackgroudDiv>
       <DefaultBox width="500px" height="500px">
-        {/* <button
-          style={{ width: "80%", height: "15%", borderRadius: "50px" }}
-          type="button"
-          onClick={handleLoginClick}
-        >
-          <img
-            src={kakaoLoginButton}
-            style={{ width: "100%", height: "100%" }}
-            alt="kakao Login Btn"
-          />
-        </button> */}
         <ImageButton
           width="80%"
           height="15%"

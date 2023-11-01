@@ -1,3 +1,4 @@
 import kakaoLoginButton from "./kakaoLoginButton.png";
+import insitepanda from "./insitepanda.png";
 
-export default kakaoLoginButton;
+export { kakaoLoginButton, insitepanda };
