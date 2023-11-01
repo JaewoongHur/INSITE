@@ -1,8 +1,11 @@
-import React from "react";
+// import React from "react";
 import ReactDOM from "react-dom/client";
+import "@config/axios.config";
+import { RouterProvider } from "react-router-dom";
+import router from "@router";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <div>안녕하세요</div>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <RouterProvider router={router} />,
+  // </React.StrictMode>,
 );
