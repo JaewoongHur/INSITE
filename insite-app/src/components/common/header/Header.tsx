@@ -1,4 +1,4 @@
-import DefaultBox from "@components/DefaultBox";
+import DefaultBox from "@components/common/BackgroudDiv";
 // import styled from "styled-components";
 
 // const HeaderContainer = styled.div`

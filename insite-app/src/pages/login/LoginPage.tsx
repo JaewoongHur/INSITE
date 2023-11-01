@@ -1,5 +1,7 @@
 import kakaoLoginButton from "@assets/images";
-import DefaultBox from "@components/DefaultBox";
+import BackgroudDiv from "@components/common/BackgroudDiv";
+import DefaultBox from "@components/common/DefaultBox";
+import ImageButton from "@components/common/button/ImageButton";
 import axios from "axios";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -41,11 +43,28 @@ function LoginPage() {
   };
 
   return (
-    <DefaultBox>
-      <button type="button" onClick={handleLoginClick}>
-        <img src={kakaoLoginButton} alt="kakao Login Btn" />
-      </button>
-    </DefaultBox>
+    <BackgroudDiv>
+      <DefaultBox width="500px" height="500px">
+        {/* <button
+          style={{ width: "80%", height: "15%", borderRadius: "50px" }}
+          type="button"
+          onClick={handleLoginClick}
+        >
+          <img
+            src={kakaoLoginButton}
+            style={{ width: "100%", height: "100%" }}
+            alt="kakao Login Btn"
+          />
+        </button> */}
+        <ImageButton
+          width="80%"
+          height="15%"
+          onClick={handleLoginClick}
+          src={kakaoLoginButton}
+          alt="kakao Login Btn"
+        />
+      </DefaultBox>
+    </BackgroudDiv>
   );
 }
 
