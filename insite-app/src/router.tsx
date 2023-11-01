@@ -1,8 +1,8 @@
 import MainPage from "@pages/main/MainPage";
 import UserPage from "@pages/user/UserPage";
-import { createBrowserRouter } from "react-router-dom";
+import { RouteObject, createBrowserRouter } from "react-router-dom";
 
-const routePath = [
+const routePath: RouteObject[] = [
   {
     id: "main-page",
     path: "",
