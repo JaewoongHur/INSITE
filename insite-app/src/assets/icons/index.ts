@@ -1,3 +1,4 @@
 import profile from "./profile.png";
+import testProfile from "./testProfile.png";
 
-export default profile;
+export { profile, testProfile };

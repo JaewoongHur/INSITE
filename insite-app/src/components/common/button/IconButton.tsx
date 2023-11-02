@@ -12,7 +12,6 @@ const IconButtonStyle = styled.button<IconButtonProps>`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   background-color: ${(props) => props.color};
-  /* background-color: blueviolet; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,7 +39,6 @@ function IconButton({
       color={color}
       onClick={() => onClick()}
     >
-      {/* <ImageStyle src={src} alt={alt} /> */}
       {children}
     </IconButtonStyle>
   );
