@@ -1,5 +1,6 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useState } from "react";
+import { dropdownArrow } from "@assets/icons";
 
 interface ComponentProps {
   width: string;
@@ -77,18 +78,41 @@ const Option = styled.button`
     cursor: pointer;
   }
 `;
+interface ArrowProps {
+  dropdown: boolean;
+}
+
+const Arrow = styled.div<ArrowProps>`
+  width: 3rem;
+  height: 3rem;
+  background-image: url(${dropdownArrow});
+  background-size: contain; // 이미지 크기 설정
+  background-repeat: no-repeat; // 이미지 반복 설정
+  background-color: transparent;
+
+  ${(props) =>
+    props.dropdown
+      ? css`
+          transform: translate(0, -10%) rotate(180deg);
+          transition: transform 0.5s ease;
+        `
+      : css`
+          transform: translate(0, 10%) rotate(0deg);
+          transition: transform 0.5s ease;
+        `}
+`;
 
 /** 데이터, 너비, 높이(rem) */
 function DropDown({ items, width, height }: DropDownProps) {
   const [isDropdown, setIsDropDown] = useState(false);
-  const [selectedTheme, setSelectedTheme] = useState("");
+  const [selectedItem, setSelectedItem] = useState("");
 
   const onClickOption = (e: React.MouseEvent<HTMLButtonElement>) => {
     setIsDropDown(false);
     const themeValue = e.currentTarget.value;
     const selectedThemeObj = items.find((item) => item.value === themeValue);
     if (selectedThemeObj) {
-      setSelectedTheme(selectedThemeObj.name);
+      setSelectedItem(selectedThemeObj.name);
     }
   };
 
@@ -99,9 +123,10 @@ function DropDown({ items, width, height }: DropDownProps) {
   return (
     <Component width={width}>
       <SelectButton height={height} type="button" onClick={onClickSelect}>
-        <Select isThemeSelected={selectedTheme !== ""}>
-          {selectedTheme === "" ? "테마를 선택해주세요" : selectedTheme}
+        <Select isThemeSelected={selectedItem !== ""}>
+          {selectedItem === "" ? "테마를 선택해주세요" : selectedItem}
         </Select>
+        <Arrow dropdown={isDropdown} />
       </SelectButton>
       {isDropdown && (
         <DropDownStyle>
