@@ -82,9 +82,9 @@ function LoginPage() {
           </TitleContainer>
           <ImageButton
             width="50%"
-            height="10%"
+            height="8%"
             onClick={handleLoginClick}
-            borderRadius="30px"
+            borderRadius="0px"
             src={kakaoLoginButton}
             alt="kakao Login Btn"
           />
