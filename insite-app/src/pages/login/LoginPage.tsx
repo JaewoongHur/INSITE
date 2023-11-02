@@ -1,10 +1,40 @@
-import { kakaoLoginButton } from "@assets/images";
+import { insiteText, insitepanda, kakaoLoginButton } from "@assets/images";
 import BackgroudDiv from "@components/common/BackgroudDiv";
 import DefaultBox from "@components/common/DefaultBox";
 import ImageButton from "@components/common/button/ImageButton";
 import axios from "axios";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import styled from "styled-components";
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+`;
+
+const ImagePanda = styled.img`
+  width: 45%;
+  height: 70%;
+`;
+
+const ImageName = styled.img`
+  width: 50%;
+  height: 30%;
+`;
+
+const TitleContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70%;
+  width: 100%;
+  margin-bottom: 5%;
+`;
 
 function LoginPage() {
   const { VITE_KAKAO_REDIRECT_URI, VITE_LOGIN_API_URI, VITE_KAKAO_CLIENT_ID } =
@@ -45,14 +75,19 @@ function LoginPage() {
   return (
     <BackgroudDiv>
       <DefaultBox width="500px" height="500px">
-        <ImageButton
-          width="80%"
-          height="15%"
-          onClick={handleLoginClick}
-          borderRadius="10px"
-          src={kakaoLoginButton}
-          alt="kakao Login Btn"
-        />
+        <Container>
+          <TitleContainer>
+            <ImagePanda src={insitepanda} alt="인사이트 판다" />
+            <ImageName src={insiteText} alt="인사이트 이름" />
+          </TitleContainer>
+          <ImageButton
+            width="50%"
+            height="10%"
+            onClick={handleLoginClick}
+            src={kakaoLoginButton}
+            alt="kakao Login Btn"
+          />
+        </Container>
       </DefaultBox>
     </BackgroudDiv>
   );
