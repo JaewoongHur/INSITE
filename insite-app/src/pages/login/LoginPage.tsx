@@ -84,6 +84,7 @@ function LoginPage() {
             width="50%"
             height="10%"
             onClick={handleLoginClick}
+            borderRadius="30px"
             src={kakaoLoginButton}
             alt="kakao Login Btn"
           />
