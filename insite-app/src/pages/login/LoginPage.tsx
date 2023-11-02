@@ -1,7 +1,7 @@
 import { insiteText, insitePanda, kakaoLoginButton } from "@assets/images";
 import BackgroundDiv from "@components/common/BackgroundDiv";
 import DefaultBox from "@components/common/DefaultBox";
-import ImageButton from "@components/common/button/ImageButton";
+import { ImageButton } from "@components/common/button";
 import axios from "axios";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";

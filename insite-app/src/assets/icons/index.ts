@@ -1,3 +1,6 @@
+import profile from "./profile.png";
+import testProfile from "./testProfile.png";
+import dropdownArrow from "./dropdownArrow.png";
 import IconApi from "./icon_api.svg";
 import IconButton from "./icon_button.svg";
 import IconFacebook from "./icon_facebook.svg";
@@ -28,4 +31,7 @@ export {
   IconUser,
   IconUser2,
   IconCalendar,
+  profile,
+  testProfile,
+  dropdownArrow,
 };
