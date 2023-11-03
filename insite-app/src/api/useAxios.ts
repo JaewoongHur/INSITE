@@ -13,7 +13,6 @@ const useAxios = (initialConfig: AxiosRequestConfig) => {
   const [error, setError] = useState<AxiosError | undefined>();
   const [loading, setLoading] = useState(true);
   const token = sessionStorage.getItem("Authorization");
-
   const fetchData = useCallback(
     async (params: AxiosRequestConfig) => {
       try {
