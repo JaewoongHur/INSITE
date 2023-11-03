@@ -40,7 +40,8 @@ const useAxios = (initialConfig: AxiosRequestConfig) => {
 
   useEffect(() => {
     fetchData(initialConfig);
-  }, [initialConfig, fetchData]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return { response, error, loading, fetchData: sendData };
 };
