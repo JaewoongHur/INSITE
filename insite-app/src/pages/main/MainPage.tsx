@@ -1,4 +1,4 @@
-import useHealthcheckApi from "@api/healthcheckApi";
+import useHealthcheckApi from "@api/useHealthCheckApi";
 import Header from "@components/common/header/Header";
 
 function MainPage() {
