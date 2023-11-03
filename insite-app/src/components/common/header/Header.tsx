@@ -3,10 +3,10 @@ import styled from "styled-components";
 const HeaderContainer = styled.div`
   position: fixed;
   width: 82%;
-  height: 20%;
+  height: 10%;
   top: 0;
   right: 0;
-  background-color: ${(props) => props.theme.colors.b1};
+  background-color: ${(props) => props.theme.colors.b2};
 `;
 
 const HeaderWrapper = styled.div`

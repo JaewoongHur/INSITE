@@ -1,4 +1,4 @@
-import profile from "./profile.png";
+import profile from "./profile.svg";
 import testProfile from "./testProfile.png";
 import dropdownArrow from "./dropdownArrow.png";
 import IconApi from "./icon_api.svg";
@@ -15,6 +15,7 @@ import IconTime from "./icon_time.svg";
 import IconUser from "./icon_user.svg";
 import IconUser2 from "./icon_user2.svg";
 import IconCalendar from "./icon_calendar.svg";
+import myprofile from "./myprofile.svg";
 
 export {
   IconApi,
@@ -34,4 +35,5 @@ export {
   profile,
   testProfile,
   dropdownArrow,
+  myprofile,
 };
