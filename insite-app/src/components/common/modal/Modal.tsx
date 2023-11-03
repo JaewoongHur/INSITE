@@ -45,6 +45,7 @@ function Modal({
   close,
 }: PropsWithChildren<ModalType>) {
   const modalRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     const handleModal = (event: MouseEvent) => {
       if (

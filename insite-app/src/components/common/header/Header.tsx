@@ -27,7 +27,7 @@ const HeaderWrapper = styled.div`
 const ProfileWrapper = styled.div`
   display: flex;
   align-items: center;
-  position: relative; // ProfileWrapper에 relative 포지션을 설정합니다.
+  position: relative;
 `;
 const ProfileImg = styled.img`
   display: flex;
@@ -40,18 +40,47 @@ const ProfileImg = styled.img`
   margin-left: 15px;
   cursor: pointer;
 `;
+const Option = styled.button`
+  width: 100%;
+  color: white;
+  background-color: ${(props) => props.theme.colors.b3};
+  font-size: 1rem;
+  height: 2.5rem;
+  margin-top: 0.5rem;
+  &:hover {
+    border-radius: 0.6rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+  }
+`;
 
 function Header() {
   const [openProfile, setOpenProfile] = useState<boolean>(false);
+  const [openDropdown, setOpenDropdown] = useState<boolean>(false);
+  const reduxStateValue: string | null = "moduo.kr";
   const sites: ItemTypes[] = [
-    { id: 1, name: "moduo.kr" },
-    { id: 2, name: "ssafybank.kr" },
+    { id: 0, name: "moduo.kr" },
+    { id: 1, name: "naver.com" },
+    { id: 2, name: "google.com" },
+    { id: 3, name: "moduo.kr" },
+    { id: 4, name: "moduo.kr" },
+    { id: 5, name: "moduo.kr" },
+    { id: 6, name: "moduo.kr" },
+    { id: 7, name: "moduo.kr" },
+    { id: 8, name: "moduo.kr" },
+    { id: 9, name: "moduo.kr" },
   ];
+
   const handleProfileClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     setOpenProfile(!openProfile);
+    setOpenDropdown(false);
   };
-  const reduxStateValue: string | null = "moduo.kr";
+
+  const handleDropdownClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setOpenProfile(false);
+  };
 
   return (
     <HeaderContainer>
@@ -62,6 +91,9 @@ function Header() {
           height="1rem"
           placeholder="사이트를 설정해주세요."
           initialValue={reduxStateValue}
+          openDropdown={openDropdown}
+          setOpenDropdown={setOpenDropdown}
+          onClickProfile={handleDropdownClick}
         />
         <ProfileWrapper>
           <ProfileImg
@@ -72,13 +104,14 @@ function Header() {
           {openProfile && (
             <Modal
               width="15rem"
-              height="6rem"
+              height="6.5rem"
               posX="-50%"
               posY="80%"
               close={() => setOpenProfile(false)}
               position="absolute" // absolute 포지션을 설정합니다.
             >
-              asdf
+              <Option>로그인 / 로그아웃</Option>
+              <Option>메인으로 가기</Option>
             </Modal>
           )}
         </ProfileWrapper>

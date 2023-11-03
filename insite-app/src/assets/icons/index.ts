@@ -16,6 +16,9 @@ import IconUser from "./icon_user.svg";
 import IconUser2 from "./icon_user2.svg";
 import IconCalendar from "./icon_calendar.svg";
 import myprofile from "./myprofile.svg";
+import moduoLogo from "./moduoLogo.svg";
+import naverLogo from "./naverLogo.svg";
+import googleLogo from "./googleLogo.svg";
 
 export {
   IconApi,
@@ -36,4 +39,7 @@ export {
   testProfile,
   dropdownArrow,
   myprofile,
+  moduoLogo,
+  naverLogo,
+  googleLogo,
 };
