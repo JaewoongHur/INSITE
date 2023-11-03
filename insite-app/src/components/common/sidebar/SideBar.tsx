@@ -132,7 +132,10 @@ function SideBar() {
           <MenuContainer key={item.id}>
             <MenuWrapper
               isActive={item.id === selectedMenuId}
-              onClick={() => setSelectedMenuId(item.id)}
+              onClick={() => {
+                setSelectedMenuId(item.id);
+                navi(item.route);
+              }}
             >
               <MenuItem>
                 <img src={icons[item.image]} alt={item.menu} />
