@@ -1,6 +1,6 @@
 import useAxios from "./useAxios";
 
-function useHealthcheckApi() {
+function healthcheckApi() {
   const response = useAxios({
     method: "get",
     url: "health/check",
@@ -9,4 +9,4 @@ function useHealthcheckApi() {
   return response;
 }
 
-export default useHealthcheckApi;
+export default healthcheckApi;
