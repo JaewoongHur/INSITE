@@ -9,4 +9,9 @@ type IconsType = {
   [key: string]: string;
 };
 
-export type { SideBarMenuType, IconsType };
+type ItemTypes = {
+  id: number;
+  name: string;
+};
+
+export type { SideBarMenuType, IconsType, ItemTypes };

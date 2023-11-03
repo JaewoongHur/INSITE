@@ -1,13 +1,13 @@
-import { PropsWithChildren, useEffect, useState } from "react";
+import { PropsWithChildren, useEffect, useRef } from "react";
 import styled from "styled-components";
 
 interface ModalType {
   width: string;
   height: string;
-  openModal: boolean;
   posX: string;
   posY: string;
-  position: "absolute" | "fixed";
+  position: "absolute" | "fixed" | "relative";
+  close: () => void;
 }
 
 // ----------------------------------------------------------------------------------------------------
@@ -16,6 +16,8 @@ interface ModalType {
 const ModalContent = styled.div<ModalType>`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
+  bottom: 50%;
+  left: 50%;
   transform: translate(-50%, 50%)
     ${(props) => (props.posX ? `translateX(${props.posX})` : "")}${(props) => (props.posY ? `translateY(${props.posY})` : "")};
   display: flex;
@@ -23,8 +25,9 @@ const ModalContent = styled.div<ModalType>`
   align-items: center;
   position: ${(props) => props.position};
   border: none;
-  border-radius: 20px;
-  background-color: white;
+  background-color: ${(props) => props.theme.colors.b3};
+  color: white;
+  border-radius: 0.6rem;
   box-shadow: 0 0 30px rgba(30, 30, 30, 0.185);
   box-sizing: border-box;
   z-index: 10000;
@@ -33,38 +36,42 @@ const ModalContent = styled.div<ModalType>`
 // ----------------------------------------------------------------------------------------------------
 
 function Modal({
-  openModal,
   children,
   width,
   height,
   posX,
   posY,
   position,
+  close,
 }: PropsWithChildren<ModalType>) {
-  const [visible, setVisible] = useState<boolean>(false);
-
+  const modalRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
-    if (openModal) {
-      setTimeout(() => {
-        setVisible(true);
-      }, 115);
-    } else {
-      setVisible(false);
-    }
-  }, [openModal]);
+    const handleModal = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
+        close();
+      }
+    };
+    document.addEventListener("click", handleModal);
+    return () => {
+      document.removeEventListener("click", handleModal);
+    };
+  });
+
   return (
-    visible && (
-      <ModalContent
-        width={width}
-        height={height}
-        openModal={openModal}
-        posX={posX}
-        posY={posY}
-        position={position}
-      >
-        {children}
-      </ModalContent>
-    )
+    <ModalContent
+      width={width}
+      height={height}
+      posX={posX}
+      posY={posY}
+      position={position}
+      close={close}
+      ref={modalRef}
+    >
+      {children}
+    </ModalContent>
   );
 }
 // ----------------------------------------------------------------------------------------------------

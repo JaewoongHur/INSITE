@@ -1,11 +1,8 @@
 import styled, { css } from "styled-components";
 import { useState } from "react";
 import { dropdownArrow } from "@assets/icons";
+import { ItemTypes } from "@customtypes/dataTypes";
 
-type ItemTypes = {
-  id: number;
-  name: string;
-};
 interface ComponentProps {
   width: string;
 }
@@ -17,26 +14,27 @@ interface ButtonProps {
 interface DropDownProps extends ComponentProps, ButtonProps {
   // todo type 추후에 지정해주기
   items: ItemTypes[];
+  placeholder: string;
+  initialValue: string | null;
 }
 
 const Component = styled.div<ComponentProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 2.9rem;
   width: ${(props) => props.width};
   position: relative;
 `;
 
 const SelectButton = styled.button<ButtonProps>`
-  width: 70%;
+  width: 100%;
   display: flex;
   align-items: center;
   height: ${(props) => props.height};
   margin-top: 0.25rem;
   background-color: ${(props) => props.theme.colors.b3};
   border-radius: 0.6rem;
-  padding: 1.3rem 1.6rem;
+  padding: 1.4rem 1.6rem;
   cursor: pointer;
 `;
 
@@ -45,26 +43,29 @@ const Select = styled.div<{ isThemeSelected: boolean }>`
   outline: none;
   border: none;
   color: ${(props) => (props.isThemeSelected ? "#f9fafb" : "gray")};
-  font-size: 1.5rem;
+  font-size: 1rem;
   text-align: left;
 `;
 
 const DropDownStyle = styled.div`
   position: absolute;
-  width: 70%;
+  width: 100%;
   background-color: ${(props) => props.theme.colors.b3};
   border-radius: 0.6rem;
-  top: 6rem;
-  height: 15rem;
+  top: 3.5rem;
+  height: auto;
+  max-height: 10rem;
   overflow-y: auto;
   @keyframes dropdown {
     0% {
-      transform: translateY(-5%);
+      transform: translateY(-15%);
       height: 0;
+      overflow-y: hidden;
     }
     100% {
       transform: translateY(0);
-      height: 15rem;
+      height: auto;
+      overflow-y: auto;
     }
   }
   animation: dropdown 0.4s ease;
@@ -74,21 +75,22 @@ const Option = styled.button`
   width: 100%;
   color: white;
   background-color: ${(props) => props.theme.colors.b3};
-  font-size: 1.5rem;
-  height: 4.9rem;
+  font-size: 1rem;
+  height: 2.5rem;
   &:hover {
     border-radius: 0.6rem;
     background-color: rgba(255, 255, 255, 0.1);
     cursor: pointer;
   }
 `;
+
 interface ArrowProps {
   dropdown: boolean;
 }
 
 const Arrow = styled.div<ArrowProps>`
-  width: 3rem;
-  height: 3rem;
+  width: 1rem;
+  height: 1rem;
   background-image: url(${dropdownArrow});
   background-size: contain; // 이미지 크기 설정
   background-repeat: no-repeat; // 이미지 반복 설정
@@ -107,13 +109,19 @@ const Arrow = styled.div<ArrowProps>`
 `;
 
 /** 데이터, 너비, 높이(rem) */
-function DropDown({ items, width, height }: DropDownProps) {
+function DropDown({
+  items,
+  width,
+  height,
+  placeholder,
+  initialValue,
+}: DropDownProps) {
   const [isDropdown, setIsDropDown] = useState(false);
-  const [selectedItem, setSelectedItem] = useState("");
+  const [selectedItem, setSelectedItem] = useState(initialValue);
 
   const onClickOption = (e: React.MouseEvent<HTMLButtonElement>) => {
     setIsDropDown(false);
-    const themeValue = e.currentTarget.value;
+    const themeValue = e.currentTarget.textContent;
     const selectedThemeObj = items.find((item) => item.name === themeValue);
     if (selectedThemeObj) {
       setSelectedItem(selectedThemeObj.name);
@@ -128,7 +136,7 @@ function DropDown({ items, width, height }: DropDownProps) {
     <Component width={width}>
       <SelectButton height={height} type="button" onClick={onClickSelect}>
         <Select isThemeSelected={selectedItem !== ""}>
-          {selectedItem === "" ? "테마를 선택해주세요" : selectedItem}
+          {selectedItem === null ? placeholder : selectedItem}
         </Select>
         <Arrow dropdown={isDropdown} />
       </SelectButton>
