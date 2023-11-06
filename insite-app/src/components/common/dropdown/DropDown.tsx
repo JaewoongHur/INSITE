@@ -1,5 +1,8 @@
 import styled, { css } from "styled-components";
 import React, { useEffect, useRef, useState } from "react";
+import { setOpenDropdown } from "@reducer/HeaderModalStateInfo";
+import { RootState } from "@reducer";
+import { useDispatch, useSelector } from "react-redux";
 import { dropdownArrow } from "@assets/icons";
 import { ItemTypes } from "@customtypes/dataTypes";
 import siteLogos from "../header/SiteLogo";
@@ -13,10 +16,8 @@ interface ButtonProps {
 }
 
 interface DropDownProps extends ComponentProps, ButtonProps {
-  // todo type 추후에 지정해주기
   items: ItemTypes[];
   placeholder: string;
-  initialValue: string | null;
 }
 
 const Component = styled.div<ComponentProps>`
@@ -56,6 +57,7 @@ const DropDownStyle = styled.div`
   top: 3.5rem;
   height: auto;
   max-height: 10rem;
+  z-index: 9999;
   overflow-y: auto;
   @keyframes dropdown {
     0% {
@@ -119,23 +121,26 @@ const SiteLogo = styled.img`
 `;
 
 /** 데이터, 너비, 높이(rem) */
-function DropDown({
-  items,
-  width,
-  height,
-  placeholder,
-  initialValue,
-  openDropdown,
-  setOpenDropdown,
-  onClickProfile,
-}: DropDownProps & {
-  openDropdown: boolean;
-  setOpenDropdown: (openDropdown: boolean) => void;
-  onClickProfile: (e: React.MouseEvent) => void;
-}) {
-  const [selectedItem, setSelectedItem] = useState(initialValue);
-  // const reduxStateValue: string | null = "naver.com";
+function DropDown({ items, width, height, placeholder }: DropDownProps) {
+  const dispatch = useDispatch();
+  const openProfile = useSelector(
+    (state: RootState) => state.HeaderModalStateInfo.openProfile,
+  );
+  const selectedSite = useSelector(
+    (state: RootState) => state.SelectedSiteInfo.selectedSite,
+  );
+  const [isDropdown, setIsDropdown] = useState<boolean>(false);
+
+  const [selectedItem, setSelectedItem] = useState<string>(selectedSite);
+
   const selectedSiteLogo = siteLogos[selectedItem || ""];
+
+  useEffect(() => {
+    if (openProfile) {
+      setIsDropdown(false);
+      dispatch(setOpenDropdown(false));
+    }
+  }, [openProfile, dispatch, setIsDropdown]);
 
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
@@ -144,7 +149,8 @@ function DropDown({
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target as Node)
       ) {
-        setOpenDropdown(false);
+        setIsDropdown(false);
+        dispatch(setOpenDropdown(false));
       }
     };
     document.addEventListener("click", handleModal);
@@ -153,19 +159,21 @@ function DropDown({
     };
   });
 
-  const onClickOption = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setOpenDropdown(false);
+  const onClickOption = (e: React.MouseEvent) => {
     const themeValue = e.currentTarget.textContent;
     const selectedThemeObj = items.find((item) => item.name === themeValue);
     if (selectedThemeObj) {
       setSelectedItem(selectedThemeObj.name);
     }
+    setIsDropdown(false);
+    dispatch(setOpenDropdown(false));
   };
 
   const onClickSelect = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setOpenDropdown(!openDropdown);
-    onClickProfile(e);
+    const newIsDropdown = !isDropdown;
+    setIsDropdown(newIsDropdown);
+    dispatch(setOpenDropdown(newIsDropdown));
   };
 
   return (
@@ -177,9 +185,9 @@ function DropDown({
         <Select isThemeSelected={selectedItem !== ""}>
           {selectedItem === null ? placeholder : selectedItem}
         </Select>
-        <Arrow dropdown={openDropdown} />
+        <Arrow dropdown={isDropdown} />
       </SelectButton>
-      {openDropdown && (
+      {isDropdown && (
         <DropDownStyle>
           {items.map((item) => (
             <Option value={item.id} key={item.id} onClick={onClickOption}>

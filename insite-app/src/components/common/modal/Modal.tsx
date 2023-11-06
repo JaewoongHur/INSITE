@@ -1,19 +1,22 @@
 import { PropsWithChildren, useEffect, useRef } from "react";
 import styled from "styled-components";
 
-interface ModalType {
+interface ModalContentType {
   width: string;
   height: string;
   posX: string;
   posY: string;
   position: "absolute" | "fixed" | "relative";
+}
+
+interface ModalType extends ModalContentType {
   close: () => void;
 }
 
 // ----------------------------------------------------------------------------------------------------
 
 /* Style */
-const ModalContent = styled.div<ModalType>`
+const ModalContent = styled.div<ModalContentType>`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   bottom: 50%;
@@ -59,7 +62,7 @@ function Modal({
     return () => {
       document.removeEventListener("click", handleModal);
     };
-  });
+  }, [close]);
 
   return (
     <ModalContent
@@ -68,7 +71,6 @@ function Modal({
       posX={posX}
       posY={posY}
       position={position}
-      close={close}
       ref={modalRef}
     >
       {children}
