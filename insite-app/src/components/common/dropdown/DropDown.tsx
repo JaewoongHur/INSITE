@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { setOpenDropdown } from "@reducer/HeaderModalStateInfo";
 import { RootState } from "@reducer";
 import { useDispatch, useSelector } from "react-redux";
+import { setSelectedSite } from "@reducer/SelectedSiteInfo";
 import { dropdownArrow } from "@assets/icons";
 import { ItemTypes } from "@customtypes/dataTypes";
 import siteLogos from "../header/SiteLogo";
@@ -40,11 +41,11 @@ const SelectButton = styled.button<ButtonProps>`
   cursor: pointer;
 `;
 
-const Select = styled.div<{ isThemeSelected: boolean }>`
+const Select = styled.div<{ $isThemeSelected: boolean }>`
   width: 95%;
   outline: none;
   border: none;
-  color: ${(props) => (props.isThemeSelected ? "#f9fafb" : "gray")};
+  color: ${(props) => (props.$isThemeSelected ? "#f9fafb" : "gray")};
   font-size: 1rem;
   text-align: left;
 `;
@@ -88,7 +89,7 @@ const Option = styled.button`
 `;
 
 interface ArrowProps {
-  dropdown: boolean;
+  $dropdown: boolean;
 }
 
 const Arrow = styled.div<ArrowProps>`
@@ -100,7 +101,7 @@ const Arrow = styled.div<ArrowProps>`
   background-color: transparent;
 
   ${(props) =>
-    props.dropdown
+    props.$dropdown
       ? css`
           transform: translate(0, -10%) rotate(180deg);
           transition: transform 0.5s ease;
@@ -164,6 +165,7 @@ function DropDown({ items, width, height, placeholder }: DropDownProps) {
     const selectedThemeObj = items.find((item) => item.name === themeValue);
     if (selectedThemeObj) {
       setSelectedItem(selectedThemeObj.name);
+      setSelectedSite(selectedThemeObj.name);
     }
     setIsDropdown(false);
     dispatch(setOpenDropdown(false));
@@ -182,10 +184,10 @@ function DropDown({ items, width, height, placeholder }: DropDownProps) {
         {selectedSiteLogo && (
           <SiteLogo src={selectedSiteLogo} alt="site logo" />
         )}
-        <Select isThemeSelected={selectedItem !== ""}>
+        <Select $isThemeSelected={selectedItem !== ""}>
           {selectedItem === null ? placeholder : selectedItem}
         </Select>
-        <Arrow dropdown={isDropdown} />
+        <Arrow $dropdown={isDropdown} />
       </SelectButton>
       {isDropdown && (
         <DropDownStyle>

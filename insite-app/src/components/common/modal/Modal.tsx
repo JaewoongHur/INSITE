@@ -4,8 +4,8 @@ import styled from "styled-components";
 interface ModalContentType {
   width: string;
   height: string;
-  posX: string;
-  posY: string;
+  $posX: string;
+  $posY: string;
   position: "absolute" | "fixed" | "relative";
 }
 
@@ -22,7 +22,7 @@ const ModalContent = styled.div<ModalContentType>`
   bottom: 50%;
   left: 50%;
   transform: translate(-50%, 50%)
-    ${(props) => (props.posX ? `translateX(${props.posX})` : "")}${(props) => (props.posY ? `translateY(${props.posY})` : "")};
+    ${(props) => (props.$posX ? `translateX(${props.$posX})` : "")}${(props) => (props.$posY ? `translateY(${props.$posY})` : "")};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,8 +42,8 @@ function Modal({
   children,
   width,
   height,
-  posX,
-  posY,
+  $posX,
+  $posY,
   position,
   close,
 }: PropsWithChildren<ModalType>) {
@@ -68,8 +68,8 @@ function Modal({
     <ModalContent
       width={width}
       height={height}
-      posX={posX}
-      posY={posY}
+      $posX={$posX}
+      $posY={$posY}
       position={position}
       ref={modalRef}
     >

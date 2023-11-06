@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { RootState } from "@reducer";
 import { useDispatch, useSelector } from "react-redux";
 import { setOpenProfile } from "@reducer/HeaderModalStateInfo";
@@ -60,17 +60,22 @@ const Option = styled.button`
 function Header() {
   const navi = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
   const openDropdown = useSelector(
     (state: RootState) => state.HeaderModalStateInfo.openDropdown,
   );
   const [isProfile, setIsProfile] = useState<boolean>(false);
-
+  const [currentPathname, setCurrentPathname] = useState<string>("");
   useEffect(() => {
     if (openDropdown) {
       setIsProfile(false);
       dispatch(setOpenProfile(false));
     }
   }, [openDropdown, dispatch, setIsProfile]);
+
+  useEffect(() => {
+    setCurrentPathname(location.pathname);
+  }, [location]);
 
   const handleOpenProfile = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -98,8 +103,8 @@ function Header() {
             <Modal
               width="15rem"
               height="6.5rem"
-              posX="-50%"
-              posY="80%"
+              $posX="-50%"
+              $posY="80%"
               close={() => setIsProfile(false)}
               position="absolute"
             >
@@ -113,11 +118,18 @@ function Header() {
               </Option>
               <Option
                 onClick={() => {
-                  navi("/main");
+                  if (currentPathname !== "/main") {
+                    navi("/main");
+                  } else {
+                    navi("/mysite");
+                  }
+
                   setIsProfile(false);
                 }}
               >
-                메인으로 가기
+                {currentPathname === "/main"
+                  ? "사이트 선택하러 가기"
+                  : "메인으로 가기"}
               </Option>
             </Modal>
           )}

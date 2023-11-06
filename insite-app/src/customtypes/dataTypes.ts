@@ -18,4 +18,15 @@ type ItemTypes = {
   name: string;
 };
 
-export type { SideBarMenuType, IconsType, LogosType, ItemTypes };
+type DateSelectionType = {
+  start: string;
+  end: string;
+};
+
+export type {
+  SideBarMenuType,
+  IconsType,
+  LogosType,
+  ItemTypes,
+  DateSelectionType,
+};
