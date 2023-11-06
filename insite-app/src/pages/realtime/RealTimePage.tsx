@@ -3,12 +3,15 @@ import styled from "styled-components";
 import { DefaultBox } from "@components/common";
 import TextBox from "@components/common/TextBox";
 import TitleBox from "@components/common/TitleBox";
-import PageUsageStatistics from "@components/realtime/PageUsageStatistics";
-import TrafficAttack from "@components/realtime/TrafficAttack";
 import { RootState } from "@reducer";
 import { useSelector } from "react-redux";
 import { CalendarButton } from "@components/common/button";
-import UrlFlowStatstics from "@components/realtime/UrlFlowStatistics";
+import {
+  ButtonStatistics,
+  PageUsageStatistics,
+  TrafficAttack,
+  UrlFlowStatstics,
+} from "@components/realtime";
 
 const FirstCol = styled.div`
   display: flex;
@@ -108,6 +111,9 @@ function RealTimePage() {
           <TitleBox width="" height="10%" fontSize="30px">
             버튼 통계
           </TitleBox>
+          <TextBox width="90%" height="80%">
+            <ButtonStatistics />
+          </TextBox>
         </DefaultBox>
         <DefaultBox width="30rem" height="25rem">
           <TitleBox width="" height="10%" fontSize="30px">
