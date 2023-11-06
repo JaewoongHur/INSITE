@@ -9,7 +9,6 @@ import { RootState } from "@reducer";
 import { useSelector } from "react-redux";
 import { CalendarButton } from "@components/common/button";
 
-
 const FirstCol = styled.div`
   display: flex;
   width: 100%;
@@ -55,7 +54,7 @@ function RealTimePage() {
     (state: RootState) => state.DateSelectionInfo.realtimeDate.start,
   );
 
-    const formatDateString = (dateString: string): string => {
+  const formatDateString = (dateString: string): string => {
     const parts = dateString.split("-");
     const year = parseInt(parts[0], 10);
     const month = parseInt(parts[1], 10);
@@ -66,16 +65,16 @@ function RealTimePage() {
   const formattedDate = formatDateString(realtimeStartDate);
   return (
     <>
-    <CalendarContainer>
-      <CalendarWrapper>
-        <CalendarButton
-          width="100%"
-          height="100%"
-          startDate={formattedDate}
-          endDate={formattedDate}
-        />
-      </CalendarWrapper>
-    </CalendarContainer>
+      <CalendarContainer>
+        <CalendarWrapper>
+          <CalendarButton
+            width="100%"
+            height="100%"
+            startDate={formattedDate}
+            endDate={formattedDate}
+          />
+        </CalendarWrapper>
+      </CalendarContainer>
       <FirstCol>
         <DefaultBox width="30rem" height="25rem">
           <TitleBox width="" height="10%" fontSize="30px">
