@@ -5,8 +5,9 @@ const Border = styled.div`
   display: flex;
   overflow: auto;
   justify-content: center;
+  align-items: start;
   width: 80%;
-  height: 80%;
+  height: 90%;
 `;
 
 const StyledTable = styled.table`
@@ -24,9 +25,9 @@ const TableHeader = styled.thead`
 `;
 
 const TableRow = styled.tr`
-  /* &:nth-child(even) {
-    background-color: #f2f2f2;
-  /* } */
+  &:nth-child(even) {
+    color: coral;
+  }
 `;
 
 const TableCell = styled.td`
@@ -39,7 +40,7 @@ const TableBody = styled.tbody`
 `;
 
 function PageUsageStatistics() {
-  const [data, setData] = useState([
+  const [data] = useState([
     { rank: 1, url: "example.com", user: "User1", renderTime: "2.5s" },
     { rank: 2, url: "another.com", user: "User2", renderTime: "3.2s" },
     { rank: 3, url: "example.org", user: "User3", renderTime: "1.8s" },

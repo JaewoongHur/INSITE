@@ -1,5 +1,5 @@
 // import API from "@api/Api";
-import getAbnormality from "@api/realtimeApi";
+import { getAbnormality } from "@api/realtimeApi";
 import { goodpanda, badpanda } from "@assets/images";
 import { ImageBox } from "@components/common";
 import { useState, useEffect } from "react";

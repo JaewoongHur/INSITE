@@ -18,7 +18,6 @@ type ItemTypes = {
   name: string;
 };
 
-
 type DateSelectionType = {
   start: string;
   end: string;
@@ -45,6 +44,13 @@ type ChartDto = {
   };
 };
 
+type UserRefDto = {
+  beforeUrl: string;
+  rank: number;
+  count: number;
+  percentage: number;
+};
+
 export type {
   SideBarMenuType,
   IconsType,
@@ -54,4 +60,5 @@ export type {
   UserCountDto,
   ChartDto,
   Style,
+  UserRefDto,
 };
