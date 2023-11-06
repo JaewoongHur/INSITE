@@ -18,9 +18,31 @@ type ItemTypes = {
   name: string;
 };
 
+
 type DateSelectionType = {
   start: string;
   end: string;
+};
+
+type UserCountDto = {
+  count: number;
+  percentage: number;
+  currentPage: string;
+};
+
+type Style = {
+  fontSize: string;
+};
+
+type ChartDto = {
+  name: string;
+  y: number;
+  dataLables: {
+    enabled: boolean;
+    format: string;
+    style?: Style;
+    textOutline?: string;
+  };
 };
 
 export type {
@@ -29,4 +51,7 @@ export type {
   LogosType,
   ItemTypes,
   DateSelectionType,
+  UserCountDto,
+  ChartDto,
+  Style,
 };
