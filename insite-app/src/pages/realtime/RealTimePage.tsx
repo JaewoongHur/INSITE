@@ -63,9 +63,7 @@ function RealTimePage() {
     return `${year}년 ${month}월 ${day}일`;
   };
 
-  // 사용 예시:
   const formattedDate = formatDateString(realtimeStartDate);
-  console.log(formattedDate);
   return (
     <>
     <CalendarContainer>
