@@ -4,6 +4,7 @@ import { RootState } from "@reducer";
 import { useDispatch, useSelector } from "react-redux";
 import { setOpenProfile } from "@reducer/HeaderModalStateInfo";
 import { myprofile } from "@assets/icons";
+import { CalendarButton } from "@components/common/calendar";
 import styled from "styled-components";
 import Modal from "../modal/Modal";
 import DropDown from "../dropdown/DropDown";
@@ -57,6 +58,20 @@ const Option = styled.button`
   }
 `;
 
+const CalendarContainer = styled.div`
+  top: 0;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: flex-end;
+`;
+const CalendarWrapper = styled.div`
+  width: 30%;
+  height: 10%;
+  margin-right: 20px;
+  cursor: pointer;
+`;
+
 function Header() {
   const navi = useNavigate();
   const dispatch = useDispatch();
@@ -64,6 +79,11 @@ function Header() {
   const openDropdown = useSelector(
     (state: RootState) => state.HeaderModalStateInfo.openDropdown,
   );
+
+  const startDate = useSelector(
+    (state: RootState) => state.DateSelectionInfo.start,
+  );
+
   const [isProfile, setIsProfile] = useState<boolean>(false);
   const [currentPathname, setCurrentPathname] = useState<string>("");
   useEffect(() => {
@@ -84,9 +104,29 @@ function Header() {
     dispatch(setOpenProfile(newIsProfile));
   };
 
+  const formatDateString = (dateString: string): string => {
+    const parts = dateString.split("-");
+    const year = parseInt(parts[0], 10);
+    const month = parseInt(parts[1], 10);
+    const day = parseInt(parts[2], 10);
+    return `${year}년 ${month}월 ${day}일`;
+  };
+
+  const formattedDate = formatDateString(startDate);
+
   return (
     <HeaderContainer>
       <HeaderWrapper>
+        <CalendarContainer>
+          <CalendarWrapper>
+            <CalendarButton
+              width="100%"
+              height="100%"
+              startDate={formattedDate}
+              endDate={formattedDate}
+            />
+          </CalendarWrapper>
+        </CalendarContainer>
         <DropDown
           items={SiteList}
           width="15rem"

@@ -18,7 +18,6 @@ type ItemTypes = {
   name: string;
 };
 
-
 type DateSelectionType = {
   start: string;
   end: string;

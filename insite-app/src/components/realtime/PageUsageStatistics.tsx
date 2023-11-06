@@ -39,7 +39,7 @@ const TableBody = styled.tbody`
 `;
 
 function PageUsageStatistics() {
-  const [data, setData] = useState([
+  const [data] = useState([
     { rank: 1, url: "example.com", user: "User1", renderTime: "2.5s" },
     { rank: 2, url: "another.com", user: "User2", renderTime: "3.2s" },
     { rank: 3, url: "example.org", user: "User3", renderTime: "1.8s" },
