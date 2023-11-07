@@ -4,11 +4,17 @@ import { RootState } from "@reducer";
 import { useDispatch, useSelector } from "react-redux";
 import { setOpenProfile } from "@reducer/HeaderModalStateInfo";
 import { myprofile } from "@assets/icons";
-import { CalendarButton } from "@components/common/calendar";
+import {
+  CalendarButton,
+  StartDateSelect,
+  EndDateSelect,
+} from "@components/common/calendar";
 import styled from "styled-components";
+import { setLatestDate } from "@reducer/DateSelectionInfo";
+import ParsingDate from "@components/ParsingDate";
+import SiteList from "@components/common/dropdown/SiteList";
+import DropDown from "@components/common/dropdown/DropDown";
 import Modal from "../modal/Modal";
-import DropDown from "../dropdown/DropDown";
-import SiteList from "../dropdown/SiteList";
 
 const HeaderContainer = styled.div`
   width: 100%;
@@ -20,13 +26,14 @@ const HeaderContainer = styled.div`
 
 const HeaderWrapper = styled.div`
   width: 100%;
-  height: 50%;
+  height: 70%;
   margin-top: 15px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
   font-weight: 900;
+  color: white;
 `;
 const ProfileWrapper = styled.div`
   display: flex;
@@ -59,17 +66,57 @@ const Option = styled.button`
 `;
 
 const CalendarContainer = styled.div`
-  top: 0;
   display: flex;
   width: 100%;
   height: 100%;
   justify-content: flex-end;
 `;
 const CalendarWrapper = styled.div`
-  width: 30%;
-  height: 10%;
+  width: 38%;
+  height: 100%;
   margin-right: 20px;
   cursor: pointer;
+`;
+
+const DateSelectContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+`;
+
+const DateHeader = styled.div`
+  margin-top: 1rem;
+  font-size: 1.5rem;
+`;
+
+const DateText = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 50%;
+  margin-left: 70px;
+  font-size: 18px;
+`;
+
+const SettingDate = styled.button`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 8rem;
+  height: 14rem;
+  cursor: pointer;
+  background-color: ${(props) => props.theme.colors.a1};
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  color: black;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
 `;
 
 function Header() {
@@ -83,9 +130,30 @@ function Header() {
   const startDate = useSelector(
     (state: RootState) => state.DateSelectionInfo.start,
   );
+  const endDate = useSelector(
+    (state: RootState) => state.DateSelectionInfo.end,
+  );
+
+  const selectedSite = useSelector(
+    (state: RootState) => state.SelectedSiteInfo.selectedSite,
+  );
 
   const [isProfile, setIsProfile] = useState<boolean>(false);
   const [currentPathname, setCurrentPathname] = useState<string>("");
+  const [dateModal, setDateModal] = useState<boolean>(false);
+
+  useEffect(() => {
+    // 서비스 시작 날짜(처음) 오늘로 갱신
+    dispatch(setLatestDate("2022년 1월 31일"));
+  });
+
+  useEffect(() => {
+    // 최신 날짜 오늘로 갱신
+    const todayDate = new Date();
+    const today: string = ParsingDate(todayDate);
+    dispatch(setLatestDate(today));
+  });
+
   useEffect(() => {
     if (openDropdown) {
       setIsProfile(false);
@@ -112,26 +180,57 @@ function Header() {
     return `${year}년 ${month}월 ${day}일`;
   };
 
-  const formattedDate = formatDateString(startDate);
+  const parseStartDate = formatDateString(startDate);
+  const parseEndDate = formatDateString(endDate);
 
   return (
     <HeaderContainer>
       <HeaderWrapper>
-        <CalendarContainer>
-          <CalendarWrapper>
-            <CalendarButton
-              width="100%"
-              height="100%"
-              startDate={formattedDate}
-              endDate={formattedDate}
-            />
-          </CalendarWrapper>
-        </CalendarContainer>
+        {(currentPathname === "/track" ||
+          currentPathname === "/user" ||
+          currentPathname === "/active" ||
+          currentPathname === "/button") && (
+          <CalendarContainer>
+            <CalendarWrapper
+              onClick={(e: React.MouseEvent) => {
+                e.stopPropagation();
+                setDateModal(true);
+              }}
+            >
+              <CalendarButton
+                width="100%"
+                height="100%"
+                startDate={parseStartDate}
+                endDate={parseEndDate}
+              />
+            </CalendarWrapper>
+          </CalendarContainer>
+        )}
+        {dateModal && (
+          <Modal
+            width="24rem"
+            height="22rem"
+            $posX="75%"
+            $posY="-30%"
+            position="absolute"
+            close={() => setDateModal(false)}
+          >
+            <DateSelectContainer>
+              <DateHeader>기간 선택</DateHeader>
+              <DateText>시작 날짜</DateText>
+              <StartDateSelect />
+              <DateText>종료 날짜</DateText>
+              <EndDateSelect />
+              <SettingDate>설정</SettingDate>
+            </DateSelectContainer>
+          </Modal>
+        )}
         <DropDown
           items={SiteList}
           width="15rem"
-          height="1rem"
+          height="3rem"
           placeholder="사이트를 설정해주세요."
+          initialValue={selectedSite}
         />
         <ProfileWrapper>
           <ProfileImg

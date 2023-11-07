@@ -21,6 +21,8 @@ type ItemTypes = {
 type DateSelectionType = {
   start: string;
   end: string;
+  past: string;
+  latest: string;
 };
 
 type UserCountDto = {

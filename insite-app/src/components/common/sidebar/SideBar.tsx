@@ -133,6 +133,10 @@ function SideBar() {
             <MenuWrapper
               $isActive={item.id === selectedMenuId}
               onClick={() => {
+                if (item.id === 7) {
+                  window.open("http://rollinghoney.com", "_blank");
+                  return;
+                }
                 setSelectedMenuId(item.id);
                 navi(item.route);
               }}

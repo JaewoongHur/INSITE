@@ -1,4 +1,5 @@
 import CalendarButton from "./CalendarButton";
-import CalendarSelection from "./CalendarSelection";
+import StartDateSelect from "./StartDateSelect";
+import EndDateSelect from "./EndDateSelect";
 
-export { CalendarButton, CalendarSelection };
+export { CalendarButton, StartDateSelect, EndDateSelect };

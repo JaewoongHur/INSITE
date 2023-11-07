@@ -5,7 +5,7 @@ interface SelectedSite {
 }
 
 const initialState: SelectedSite = {
-  selectedSite: "moduo.kr",
+  selectedSite: "www.moduo.kr",
 };
 
 const SelectedSiteInfoSlice = createSlice({

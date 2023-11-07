@@ -6,18 +6,32 @@ const todayDate = new Date();
 
 const today: string = ParsingDate(todayDate);
 
-const initialState: DateSelectionType = { start: today, end: today };
+const initialState: DateSelectionType = {
+  start: "2000-01-01",
+  end: today,
+  past: "2000-01-01",
+  latest: today,
+};
 
 const DateSelectionInfoSlice = createSlice({
   name: "DateSelectionInfo",
   initialState,
   reducers: {
-    setDate: (state, action: PayloadAction<string>) => {
+    setStartDate: (state, action: PayloadAction<string>) => {
       state.start = action.payload;
+    },
+    setEndDate: (state, action: PayloadAction<string>) => {
       state.end = action.payload;
+    },
+    setPastDate: (state, action: PayloadAction<string>) => {
+      state.past = action.payload;
+    },
+    setLatestDate: (state, action: PayloadAction<string>) => {
+      state.latest = action.payload;
     },
   },
 });
 
-export const { setDate } = DateSelectionInfoSlice.actions;
+export const { setStartDate, setEndDate, setPastDate, setLatestDate } =
+  DateSelectionInfoSlice.actions;
 export default DateSelectionInfoSlice.reducer;
