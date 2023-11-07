@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { UserCountDtoType } from "@customtypes/dataTypes";
+import { getUserCount } from "@api/realtimeApi";
 
 const Border = styled.div`
   display: flex;
@@ -40,43 +42,51 @@ const TableBody = styled.tbody`
 `;
 
 function PageUsageStatistics() {
-  const [data] = useState([
-    { rank: 1, url: "example.com", user: "User1", renderTime: "2.5s" },
-    { rank: 2, url: "another.com", user: "User2", renderTime: "3.2s" },
-    { rank: 3, url: "example.org", user: "User3", renderTime: "1.8s" },
-    { rank: 4, url: "example.org", user: "User3", renderTime: "1.8s" },
-    { rank: 5, url: "example.org", user: "User3", renderTime: "1.8s" },
-    { rank: 6, url: "example.org", user: "User3", renderTime: "1.8s" },
-    { rank: 7, url: "example.org", user: "User3", renderTime: "1.8s" },
-    { rank: 8, url: "example.org", user: "User3", renderTime: "1.8s" },
-    { rank: 9, url: "example.org", user: "User3", renderTime: "1.8s" },
-    { rank: 10, url: "example.org", user: "User3", renderTime: "1.8s" },
-    { rank: 11, url: "example.org", user: "User3", renderTime: "1.8s" },
-  ]);
+  const [data, setData] = useState<UserCountDtoType[]>([]);
 
-  return (
+  useEffect(() => {
+    console.log("데이터");
+    const fetchData = async () => {
+      try {
+        const response = await getUserCount();
+        const userCountDto = response.userCountDtoList;
+        setData(userCountDto);
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(error); // 에러 처리
+      }
+    };
+
+    fetchData();
+    const intervalId = setInterval(fetchData, 5000);
+    return () => clearInterval(intervalId);
+  }, []);
+
+  return data.length > 0 ? (
     <Border>
       <StyledTable>
         <TableHeader>
           <TableRow>
             <th>순위</th>
             <th>URL</th>
-            <th>사용자</th>
+            <th>사용자 수</th>
             <th>랜더링 시간</th>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data.map((item) => (
-            <TableRow key={item.rank}>
-              <TableCell>{item.rank}</TableCell>
-              <TableCell>{item.url}</TableCell>
-              <TableCell>{item.user}</TableCell>
-              <TableCell>{item.renderTime}s</TableCell>
+          {data.map((item, index) => (
+            <TableRow key={item.id}>
+              <TableCell>{index + 1}</TableCell>
+              <TableCell>{item.currentPage}</TableCell>
+              <TableCell>{item.count}</TableCell>
+              <TableCell>{item.responseTime}s</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </StyledTable>
     </Border>
+  ) : (
+    <div>데이터가 없습니다.</div>
   );
 }
 

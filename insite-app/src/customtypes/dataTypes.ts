@@ -24,9 +24,11 @@ type DateSelectionType = {
 };
 
 type UserCountDtoType = {
+  id: number;
   count: number;
   percentage: number;
   currentPage: string;
+  responseTime: string;
 };
 
 type StyleType = {
@@ -45,6 +47,7 @@ type ChartDtoType = {
 };
 
 type UserRefDtoType = {
+  id: number;
   beforeUrl: string;
   rank: number;
   count: number;
@@ -52,9 +55,19 @@ type UserRefDtoType = {
 };
 
 type ButtonCountDtoType = {
+  id: number;
   name: string;
   count: number;
   countPerUser: number;
+};
+
+type AbnormalType = {
+  id: number;
+  cookieId: string;
+  time: string;
+  currentUrl: string;
+  language: string;
+  osId: string;
 };
 
 export type {
@@ -68,4 +81,5 @@ export type {
   StyleType,
   UserRefDtoType,
   ButtonCountDtoType,
+  AbnormalType,
 };

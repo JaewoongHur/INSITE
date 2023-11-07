@@ -1,5 +1,4 @@
-// import useGetRealTimeData from "@api/useGetRealTimeData";
-import API from "@api/Api";
+import { getUserCount } from "@api/realtimeApi";
 import { ChartDtoType, UserCountDtoType } from "@customtypes/dataTypes";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
@@ -11,10 +10,8 @@ function RealTimeUserDonutChart() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await API.post("/realtime-data/user-counts", {
-          token: "a951dd18-d5b5-4c15-a3ba-062198c45807",
-        });
-        const userCountDto = response.data.userCountDtoList;
+        const response = await getUserCount();
+        const userCountDto = response.userCountDtoList;
         const seriesData = userCountDto.map((item: UserCountDtoType) => ({
           name: item.currentPage,
           y: Math.round(item.percentage * 100),
@@ -36,6 +33,8 @@ function RealTimeUserDonutChart() {
     };
 
     fetchData();
+    const intervalId = setInterval(fetchData, 5000);
+    return () => clearInterval(intervalId);
   }, []);
 
   const options = {
@@ -74,10 +73,10 @@ function RealTimeUserDonutChart() {
     ],
   };
 
-  return (
-    data.length > 0 && (
-      <HighchartsReact highcharts={Highcharts} options={options} />
-    )
+  return data.length > 0 ? (
+    <HighchartsReact highcharts={Highcharts} options={options} />
+  ) : (
+    <div>데이터가 없습니다.</div>
   );
 }
 

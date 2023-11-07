@@ -56,9 +56,11 @@ function ButtonStatistics() {
     };
 
     fetchData();
+    const intervalId = setInterval(fetchData, 5000);
+    return () => clearInterval(intervalId);
   }, []);
 
-  return (
+  return data.length > 0 ? (
     <Border>
       <StyledTable>
         <TableHeader>
@@ -70,7 +72,7 @@ function ButtonStatistics() {
         </TableHeader>
         <TableBody>
           {data.map((item) => (
-            <TableRow key={item.name}>
+            <TableRow key={item.id}>
               <TableCell>{item.name}</TableCell>
               <TableCell>{item.count}</TableCell>
               <TableCell>{item.countPerUser}</TableCell>
@@ -79,6 +81,8 @@ function ButtonStatistics() {
         </TableBody>
       </StyledTable>
     </Border>
+  ) : (
+    <div>데이터가 없습니다.</div>
   );
 }
 

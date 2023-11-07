@@ -56,9 +56,11 @@ function UrlFlowStatstics() {
     };
 
     fetchData();
+    const intervalId = setInterval(fetchData, 5000);
+    return () => clearInterval(intervalId);
   }, []);
 
-  return (
+  return data.length > 0 ? (
     <Border>
       <StyledTable>
         <TableHeader>
@@ -70,9 +72,9 @@ function UrlFlowStatstics() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data.map((item) => (
-            <TableRow key={item.beforeUrl}>
-              <TableCell>1</TableCell>
+          {data.map((item, index) => (
+            <TableRow key={item.id}>
+              <TableCell>{index + 1}</TableCell>
               <TableCell>{item.beforeUrl}</TableCell>
               <TableCell>{item.count}</TableCell>
               <TableCell>{Math.round(item.percentage * 100)}</TableCell>
@@ -81,6 +83,8 @@ function UrlFlowStatstics() {
         </TableBody>
       </StyledTable>
     </Border>
+  ) : (
+    <div>데이터가 없습니다.</div>
   );
 }
 

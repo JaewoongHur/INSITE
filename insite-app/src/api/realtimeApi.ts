@@ -1,5 +1,19 @@
 import API from "./Api";
 
+const getUserCount = async () => {
+  try {
+    const response = await API.post("/realtime-data/user-counts", {
+      token: "a951dd18-d5b5-4c15-a3ba-062198c45807",
+    });
+    return response.data;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error); // 에러 처리
+  }
+
+  return null;
+};
+
 const getAbnormality = async () => {
   try {
     const response = await API.post("/realtime-data/abnormality", {
@@ -42,4 +56,4 @@ const getButtonCount = async () => {
   return null;
 };
 
-export { getAbnormality, getRefData, getButtonCount };
+export { getAbnormality, getRefData, getButtonCount, getUserCount };
