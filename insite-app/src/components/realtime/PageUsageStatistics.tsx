@@ -45,7 +45,6 @@ function PageUsageStatistics() {
   const [data, setData] = useState<UserCountDtoType[]>([]);
 
   useEffect(() => {
-    console.log("데이터");
     const fetchData = async () => {
       try {
         const response = await getUserCount();
