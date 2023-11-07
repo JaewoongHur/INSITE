@@ -1,8 +1,8 @@
-import API from "./Api";
+import { realTimeAPI } from "./Api";
 
 const getUserCount = async () => {
   try {
-    const response = await API.post("/realtime-data/user-counts", {
+    const response = await realTimeAPI.post("/realtime-data/user-counts", {
       token: "a951dd18-d5b5-4c15-a3ba-062198c45807",
     });
     return response.data;
@@ -16,7 +16,7 @@ const getUserCount = async () => {
 
 const getAbnormality = async () => {
   try {
-    const response = await API.post("/realtime-data/abnormality", {
+    const response = await realTimeAPI.post("/realtime-data/abnormality", {
       token: "a951dd18-d5b5-4c15-a3ba-062198c45807",
     });
     return response.data;
@@ -30,7 +30,7 @@ const getAbnormality = async () => {
 
 const getRefData = async () => {
   try {
-    const response = await API.post("/realtime-data/referrer", {
+    const response = await realTimeAPI.post("/realtime-data/referrer", {
       token: "a951dd18-d5b5-4c15-a3ba-062198c45807",
     });
     return response.data;
@@ -44,9 +44,12 @@ const getRefData = async () => {
 
 const getButtonCount = async () => {
   try {
-    const response = await API.post("/realtime-buttons/click-counts-per-user", {
-      token: "a951dd18-d5b5-4c15-a3ba-062198c45807",
-    });
+    const response = await realTimeAPI.post(
+      "/realtime-buttons/click-counts-per-user",
+      {
+        token: "a951dd18-d5b5-4c15-a3ba-062198c45807",
+      },
+    );
     return response.data;
   } catch (error) {
     // eslint-disable-next-line no-console

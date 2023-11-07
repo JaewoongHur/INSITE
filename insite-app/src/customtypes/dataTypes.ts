@@ -48,7 +48,7 @@ type ChartDtoType = {
 
 type UserRefDtoType = {
   id: number;
-  beforeUrl: string;
+  referrer: string;
   rank: number;
   count: number;
   percentage: number;
