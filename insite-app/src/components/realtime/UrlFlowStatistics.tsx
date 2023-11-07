@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import { UserRefDto } from "@customtypes/dataTypes";
+import { UserRefDtoType } from "@customtypes/dataTypes";
 import { getRefData } from "@api/realtimeApi";
 
 const Border = styled.div`
@@ -42,7 +42,7 @@ const TableBody = styled.tbody`
 `;
 
 function UrlFlowStatstics() {
-  const [data, setData] = useState<UserRefDto[]>([]);
+  const [data, setData] = useState<UserRefDtoType[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -75,7 +75,7 @@ function UrlFlowStatstics() {
               <TableCell>1</TableCell>
               <TableCell>{item.beforeUrl}</TableCell>
               <TableCell>{item.count}</TableCell>
-              <TableCell>{Math.round(item.percentage * 100)}%</TableCell>
+              <TableCell>{Math.round(item.percentage * 100)}</TableCell>
             </TableRow>
           ))}
         </TableBody>

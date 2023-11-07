@@ -13,7 +13,7 @@ type LogosType = {
   [key: string]: string;
 };
 
-type ItemTypes = {
+type ItemType = {
   id: number;
   name: string;
 };
@@ -23,42 +23,49 @@ type DateSelectionType = {
   end: string;
 };
 
-type UserCountDto = {
+type UserCountDtoType = {
   count: number;
   percentage: number;
   currentPage: string;
 };
 
-type Style = {
+type StyleType = {
   fontSize: string;
 };
 
-type ChartDto = {
+type ChartDtoType = {
   name: string;
   y: number;
   dataLables: {
     enabled: boolean;
     format: string;
-    style?: Style;
+    style?: StyleType;
     textOutline?: string;
   };
 };
 
-type UserRefDto = {
+type UserRefDtoType = {
   beforeUrl: string;
   rank: number;
   count: number;
   percentage: number;
 };
 
+type ButtonCountDtoType = {
+  name: string;
+  count: number;
+  countPerUser: number;
+};
+
 export type {
   SideBarMenuType,
   IconsType,
   LogosType,
-  ItemTypes,
+  ItemType,
   DateSelectionType,
-  UserCountDto,
-  ChartDto,
-  Style,
-  UserRefDto,
+  UserCountDtoType,
+  ChartDtoType,
+  StyleType,
+  UserRefDtoType,
+  ButtonCountDtoType,
 };

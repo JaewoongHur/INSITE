@@ -6,8 +6,8 @@ const Border = styled.div`
   overflow: auto;
   justify-content: center;
   align-items: start;
-  width: 80%;
-  height: 90%;
+  width: 90%;
+  height: 80%;
 `;
 
 const StyledTable = styled.table`
@@ -18,7 +18,7 @@ const StyledTable = styled.table`
 `;
 
 const TableHeader = styled.thead`
-  font-size: 20px;
+  font-size: 15px;
   margin-bottom: 15px;
   color: ${(props) => props.theme.colors.a1};
   font-weight: bold;
@@ -71,7 +71,7 @@ function PageUsageStatistics() {
               <TableCell>{item.rank}</TableCell>
               <TableCell>{item.url}</TableCell>
               <TableCell>{item.user}</TableCell>
-              <TableCell>{item.renderTime}</TableCell>
+              <TableCell>{item.renderTime}s</TableCell>
             </TableRow>
           ))}
         </TableBody>

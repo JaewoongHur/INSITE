@@ -1,12 +1,12 @@
 // import useGetRealTimeData from "@api/useGetRealTimeData";
 import API from "@api/Api";
-import { ChartDto, UserCountDto } from "@customtypes/dataTypes";
+import { ChartDtoType, UserCountDtoType } from "@customtypes/dataTypes";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { useEffect, useState } from "react";
 
 function RealTimeUserDonutChart() {
-  const [data, setData] = useState<ChartDto[]>([]);
+  const [data, setData] = useState<ChartDtoType[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,7 +15,7 @@ function RealTimeUserDonutChart() {
           token: "a951dd18-d5b5-4c15-a3ba-062198c45807",
         });
         const userCountDto = response.data.userCountDtoList;
-        const seriesData = userCountDto.map((item: UserCountDto) => ({
+        const seriesData = userCountDto.map((item: UserCountDtoType) => ({
           name: item.currentPage,
           y: Math.round(item.percentage * 100),
           dataLabels: {

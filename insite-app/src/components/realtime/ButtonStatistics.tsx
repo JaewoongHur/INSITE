@@ -1,13 +1,15 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getButtonCount } from "@api/realtimeApi";
+import { ButtonCountDtoType } from "@customtypes/dataTypes";
 
 const Border = styled.div`
   display: flex;
   overflow: auto;
   justify-content: center;
   align-items: start;
-  width: 80%;
-  height: 90%;
+  width: 90%;
+  height: 80%;
 `;
 
 const StyledTable = styled.table`
@@ -18,7 +20,7 @@ const StyledTable = styled.table`
 `;
 
 const TableHeader = styled.thead`
-  font-size: 20px;
+  font-size: 15px;
   margin-bottom: 15px;
   color: ${(props) => props.theme.colors.a1};
   font-weight: bold;
@@ -31,7 +33,7 @@ const TableRow = styled.tr`
 `;
 
 const TableCell = styled.td`
-  padding: 8px;
+  padding: 4px;
 `;
 
 const TableBody = styled.tbody`
@@ -40,38 +42,38 @@ const TableBody = styled.tbody`
 `;
 
 function ButtonStatistics() {
-  const [data] = useState([
-    { rank: 1, url: "example.com", user: "User1", renderTime: "2.5s" },
-    { rank: 2, url: "another.com", user: "User2", renderTime: "3.2s" },
-    { rank: 3, url: "example.org", user: "User3", renderTime: "1.8s" },
-    { rank: 4, url: "example.org", user: "User3", renderTime: "1.8s" },
-    { rank: 5, url: "example.org", user: "User3", renderTime: "1.8s" },
-    { rank: 6, url: "example.org", user: "User3", renderTime: "1.8s" },
-    { rank: 7, url: "example.org", user: "User3", renderTime: "1.8s" },
-    { rank: 8, url: "example.org", user: "User3", renderTime: "1.8s" },
-    { rank: 9, url: "example.org", user: "User3", renderTime: "1.8s" },
-    { rank: 10, url: "example.org", user: "User3", renderTime: "1.8s" },
-    { rank: 11, url: "example.org", user: "User3", renderTime: "1.8s" },
-  ]);
+  const [data, setData] = useState<ButtonCountDtoType[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await getButtonCount(); // await를 사용하여 Promise를 기다립니다.
+        setData(response.countPerUserDtoList);
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(error); // 에러 처리
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <Border>
       <StyledTable>
         <TableHeader>
           <TableRow>
-            <th>순위</th>
-            <th>URL</th>
-            <th>사용자</th>
-            <th>랜더링 시간</th>
+            <th>버튼</th>
+            <th>누른 횟수</th>
+            <th>차지 비율</th>
           </TableRow>
         </TableHeader>
         <TableBody>
           {data.map((item) => (
-            <TableRow key={item.rank}>
-              <TableCell>{item.rank}</TableCell>
-              <TableCell>{item.url}</TableCell>
-              <TableCell>{item.user}</TableCell>
-              <TableCell>{item.renderTime}</TableCell>
+            <TableRow key={item.name}>
+              <TableCell>{item.name}</TableCell>
+              <TableCell>{item.count}</TableCell>
+              <TableCell>{item.countPerUser}</TableCell>
             </TableRow>
           ))}
         </TableBody>

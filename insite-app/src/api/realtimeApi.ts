@@ -28,9 +28,9 @@ const getRefData = async () => {
   return null;
 };
 
-const getButtonData = async () => {
+const getButtonCount = async () => {
   try {
-    const response = await API.post("/realtime-data/referrer", {
+    const response = await API.post("/realtime-buttons/click-counts-per-user", {
       token: "a951dd18-d5b5-4c15-a3ba-062198c45807",
     });
     return response.data;
@@ -42,4 +42,4 @@ const getButtonData = async () => {
   return null;
 };
 
-export { getAbnormality, getRefData, getButtonData };
+export { getAbnormality, getRefData, getButtonCount };

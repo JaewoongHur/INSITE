@@ -28,7 +28,7 @@ function TrafficAttack() {
     </>
   ) : (
     <>
-      <ImageBox width="70%" height="70%" src={badpanda} alt="굿판다" />
+      <ImageBox width="70%" height="70%" src={badpanda} alt="배드판다" />
       <div>공격 받는 중</div>
     </>
   );
