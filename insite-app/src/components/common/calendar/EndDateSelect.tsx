@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@reducer";
-import { ItemTypes } from "@customtypes/dataTypes";
+import { ItemType } from "@customtypes/dataTypes";
 import DropDown from "../dropdown/DropDown";
 
 interface EndDateSelectProps {
@@ -113,23 +113,23 @@ function EndDateSelect({ onChange }: EndDateSelectProps) {
   const monthArray = getMonthsInRange(startDateObj, latestDateObj);
   const dayArray = getDaysInRange(startDateObj, latestDateObj);
 
-  const yearOptions: ItemTypes[] = yearArray.map((year, index) => {
+  const yearOptions: ItemType[] = yearArray.map((year, index) => {
     return { id: index, name: year };
   });
-  const monthOptions: ItemTypes[] = monthArray.map((month, index) => {
+  const monthOptions: ItemType[] = monthArray.map((month, index) => {
     return { id: index, name: month };
   });
-  const dayOptions: ItemTypes[] = dayArray.map((day, index) => {
+  const dayOptions: ItemType[] = dayArray.map((day, index) => {
     return { id: index, name: day };
   });
 
-  const handleEndYear = (item: ItemTypes) => {
+  const handleEndYear = (item: ItemType) => {
     setEndYear(item.name);
   };
-  const handleEndMonth = (item: ItemTypes) => {
+  const handleEndMonth = (item: ItemType) => {
     setEndMonth(item.name);
   };
-  const handleEndDay = (item: ItemTypes) => {
+  const handleEndDay = (item: ItemType) => {
     setEndDay(item.name);
   };
 
@@ -144,7 +144,6 @@ function EndDateSelect({ onChange }: EndDateSelectProps) {
         items={yearOptions}
         width="20%"
         height="3rem"
-        placeholder=""
         initialValue={parseString(endDate)[0]}
         onChange={handleEndYear}
       />
@@ -153,7 +152,6 @@ function EndDateSelect({ onChange }: EndDateSelectProps) {
         items={monthOptions}
         width="20%"
         height="3rem"
-        placeholder=""
         initialValue={parseString(endDate)[1]}
         onChange={handleEndMonth}
       />
@@ -162,7 +160,6 @@ function EndDateSelect({ onChange }: EndDateSelectProps) {
         items={dayOptions}
         width="20%"
         height="3rem"
-        placeholder=""
         initialValue={parseString(endDate)[2]}
         onChange={handleEndDay}
       />

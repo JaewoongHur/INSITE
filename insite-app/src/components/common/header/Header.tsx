@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { RootState } from "@reducer";
 import { useDispatch, useSelector } from "react-redux";
-import { setOpenProfile } from "@reducer/HeaderModalStateInfo";
 import { myprofile } from "@assets/icons";
 import {
   CalendarButton,
@@ -24,7 +23,7 @@ import { Modal } from "@components/common/modal";
 
 const HeaderContainer = styled.div`
   width: 100%;
-  height: 5%;
+  height: 10%;
   top: 0;
   right: 0;
   margin-bottom: 1%;
@@ -33,13 +32,13 @@ const HeaderContainer = styled.div`
 
 const HeaderWrapper = styled.div`
   width: 100%;
-  height: 70%;
+  height: 75%;
   margin-top: 15px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
-  font-weight: 900;
+  font-weight: 500;
   color: white;
 `;
 const ProfileWrapper = styled.div`
@@ -130,9 +129,10 @@ function Header() {
   const navi = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
-  const openDropdown = useSelector(
-    (state: RootState) => state.HeaderModalStateInfo.openDropdown,
-  );
+
+  const [openSite, setOpenSite] = useState<boolean>(false);
+  const [openProfile, setOpenProfile] = useState<boolean>(false);
+  const [openDate, setOpenDate] = useState<boolean>(false);
 
   const startDate = useSelector(
     (state: RootState) => state.DateSelectionInfo.start,
@@ -151,13 +151,26 @@ function Header() {
     (state: RootState) => state.SelectedItemInfo.selectedSite,
   );
 
-  const [isProfile, setIsProfile] = useState<boolean>(false);
   const [currentPathname, setCurrentPathname] = useState<string>(
     location.pathname,
   );
-  const [dateModal, setDateModal] = useState<boolean>(false);
   const [newStartDate, setNewStartDate] = useState<string>(startDate);
   const [newEndDate, setNewEndDate] = useState<string>(endDate);
+
+  useEffect(() => {
+    if (openSite) {
+      setOpenProfile(false);
+      setOpenDate(false);
+    }
+    if (openProfile) {
+      setOpenSite(false);
+      setOpenDate(false);
+    }
+    if (openDate) {
+      setOpenProfile(false);
+      setOpenSite(false);
+    }
+  }, [openSite, openProfile, openDate]);
 
   useEffect(() => {
     if (location.pathname !== currentPathname) {
@@ -177,18 +190,11 @@ function Header() {
     dispatch(setLatestDate(today));
   });
 
-  useEffect(() => {
-    if (openDropdown) {
-      setIsProfile(false);
-      dispatch(setOpenProfile(false));
-    }
-  }, [openDropdown, dispatch, setIsProfile]);
-
-  const handleOpenProfile = (e: React.MouseEvent) => {
+  const handleToggleProfile = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const newIsProfile = !isProfile;
-    setIsProfile(newIsProfile);
-    dispatch(setOpenProfile(newIsProfile));
+    setOpenProfile(false);
+    setOpenDate(false);
+    setOpenProfile((p) => !p);
   };
 
   const handleSelectedSite = (item: ItemType) => {
@@ -231,7 +237,7 @@ function Header() {
             <CalendarWrapper
               onClick={(e: React.MouseEvent) => {
                 e.stopPropagation();
-                setDateModal(!dateModal);
+                setOpenDate((p) => !p);
               }}
             >
               <CalendarButton
@@ -243,14 +249,14 @@ function Header() {
             </CalendarWrapper>
           </CalendarContainer>
         )}
-        {dateModal && (
+        {openDate && (
           <Modal
             width="24rem"
             height="22rem"
             $posX="75%"
             $posY="-30%"
             $position="absolute"
-            close={() => setDateModal(false)}
+            close={() => setOpenDate(false)}
           >
             <DateSelectContainer>
               <DateHeader>기간 선택</DateHeader>
@@ -266,29 +272,37 @@ function Header() {
           items={SiteList}
           width="15rem"
           height="3rem"
-          placeholder="사이트를 설정해주세요."
           initialValue={selectedSite}
           onChange={handleSelectedSite}
+          openDropdown={openSite}
+          close={() => {
+            setOpenSite(false);
+          }}
+          toggle={() => {
+            setOpenProfile(false);
+            setOpenDate(false);
+            setOpenSite((p) => !p);
+          }}
         />
         <ProfileWrapper>
           <ProfileImg
             src={myprofile}
             alt="my profile"
-            onClick={handleOpenProfile}
+            onClick={handleToggleProfile}
           />
-          {isProfile && (
+          {openProfile && (
             <Modal
               width="15rem"
               height="6.5rem"
               $posX="-50%"
               $posY="80%"
-              close={() => setIsProfile(false)}
+              close={() => setOpenProfile(false)}
               $position="absolute"
             >
               <Option
                 onClick={() => {
                   navi("/login");
-                  setIsProfile(false);
+                  setOpenProfile(false);
                 }}
               >
                 로그인 / 로그아웃
@@ -301,7 +315,7 @@ function Header() {
                     navi("/mysite");
                   }
 
-                  setIsProfile(false);
+                  setOpenProfile(false);
                 }}
               >
                 {currentPathname === "/main"

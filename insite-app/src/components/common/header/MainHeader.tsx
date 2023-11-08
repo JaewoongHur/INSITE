@@ -1,16 +1,13 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { RootState } from "@reducer";
 import { useDispatch, useSelector } from "react-redux";
 import { setOpenProfile } from "@reducer/HeaderModalStateInfo";
 import { myprofile } from "@assets/icons";
 import styled from "styled-components";
-import Modal from "../modal/Modal";
-import DropDown from "../dropdown/DropDown";
-import SiteList from "../dropdown/SiteList";
-import ImageButton from "../button/ImageButton";
 import { homeLogo } from "@assets/images";
-
+import Modal from "../modal/Modal";
+import ImageButton from "../button/ImageButton";
 
 const HeaderContainer = styled.div`
   width: 100%;
@@ -50,7 +47,7 @@ const ProfileWrapper = styled.div`
 const ProfileImg = styled.img`
   display: flex;
   align-items: center;
-//   justify-content: center;
+  //   justify-content: center;
   width: 3rem;
   height: 3rem;
   margin-top: 10px;
@@ -63,7 +60,7 @@ const LogoContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-//   justify-content: center;
+  //   justify-content: center;
   width: 100%;
   height: 10%;
   margin-top: 20px;
@@ -73,50 +70,45 @@ const LogoContainer = styled.div`
 const LogoImgWrapper = styled.div`
   display: flex;
   align-items: center;
-//   justify-content: center;
+  //   justify-content: center;
 `;
 
+function MainHeader() {
+  const navi = useNavigate();
+  const dispatch = useDispatch();
 
-function MainHeader(){
-    const navi = useNavigate();
-    const dispatch = useDispatch();
-    const location = useLocation();
-    const openDropdown = useSelector(
-      (state: RootState) => state.HeaderModalStateInfo.openDropdown,
-    );
-    const [isProfile, setIsProfile] = useState<boolean>(false);
-    const [currentPathname, setCurrentPathname] = useState<string>("");
-    useEffect(() => {
-      if (openDropdown) {
-        setIsProfile(false);
-        dispatch(setOpenProfile(false));
-      }
-    }, [openDropdown, dispatch, setIsProfile]);
-  
-    useEffect(() => {
-      setCurrentPathname(location.pathname);
-    }, [location]);
-  
-    const handleOpenProfile = (e: React.MouseEvent) => {
-      e.stopPropagation();
-      const newIsProfile = !isProfile;
-      setIsProfile(newIsProfile);
-      dispatch(setOpenProfile(newIsProfile));
-    };
-    return (
-        <HeaderContainer>
-            <HeaderWrapper>
-                <LogoContainer>
-                    <LogoImgWrapper>
-                    <ImageButton
-                        width="100%"
-                        height="100%"
-                        src={homeLogo}
-                        alt="insite Home Logo"
-                        onClick={() => navi("/main")}
-                    />
-                    </LogoImgWrapper>
-                </LogoContainer>
+  const openSite = useSelector(
+    (state: RootState) => state.HeaderModalStateInfo.openSite,
+  );
+  const [isProfile, setIsProfile] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (openSite) {
+      setIsProfile(false);
+      dispatch(setOpenProfile(false));
+    }
+  }, [openSite, dispatch, setIsProfile]);
+
+  const handleOpenProfile = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const newIsProfile = !isProfile;
+    setIsProfile(newIsProfile);
+    dispatch(setOpenProfile(newIsProfile));
+  };
+  return (
+    <HeaderContainer>
+      <HeaderWrapper>
+        <LogoContainer>
+          <LogoImgWrapper>
+            <ImageButton
+              width="100%"
+              height="100%"
+              src={homeLogo}
+              alt="insite Home Logo"
+              onClick={() => navi("/main")}
+            />
+          </LogoImgWrapper>
+        </LogoContainer>
         <ProfileWrapper>
           <ProfileImg
             src={myprofile}
@@ -130,7 +122,7 @@ function MainHeader(){
               $posX="-50%"
               $posY="80%"
               close={() => setIsProfile(false)}
-              position="absolute"
+              $position="absolute"
             >
               {/* <Option
                 onClick={() => {
@@ -158,8 +150,8 @@ function MainHeader(){
             </Modal>
           )}
         </ProfileWrapper>
-            </HeaderWrapper>
-        </HeaderContainer>
-    );
+      </HeaderWrapper>
+    </HeaderContainer>
+  );
 }
 export default MainHeader;
