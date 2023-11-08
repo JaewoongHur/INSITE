@@ -3,7 +3,7 @@ import { persistReducer } from "redux-persist";
 import storageSession from "redux-persist/lib/storage/session";
 import HeaderModalStateInfoReducer from "@reducer/HeaderModalStateInfo";
 import SelectedItemInfoReducer from "@reducer/SelectedItemInfo";
-// import SelectedSidebarMenuInfoReducer from "@reducer/SelectedSidebarMenuInfo";
+import SelectedSidebarMenuInfoReducer from "@reducer/SelectedSidebarMenuInfo";
 import DateSelectionInfoReducer from "@reducer/DateSelectionInfo";
 
 const persistConfig = {
@@ -21,7 +21,7 @@ const rootReducer = combineReducers({
   HeaderModalStateInfo: HeaderModalStateInfoReducer,
   SelectedItemInfo: SelectedItemInfoReducer,
   DateSelectionInfo: DateSelectionInfoReducer,
-  // SelectedSidebarMenuInfo: SelectedSidebarMenuInfoReducer,
+  SelectedSidebarMenuInfo: SelectedSidebarMenuInfoReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
