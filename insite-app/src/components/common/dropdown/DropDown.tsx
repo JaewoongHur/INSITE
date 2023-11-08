@@ -5,7 +5,7 @@ import { RootState } from "@reducer";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedSite } from "@reducer/SelectedItemInfo";
 import { dropdownArrow } from "@assets/icons";
-import { ItemTypes } from "@customtypes/dataTypes";
+import { ItemType } from "@customtypes/dataTypes";
 import siteLogos from "../header/SiteLogo";
 
 interface ComponentProps {
@@ -17,10 +17,10 @@ interface ButtonProps {
 }
 
 interface DropDownProps extends ComponentProps, ButtonProps {
-  items: ItemTypes[];
+  items: ItemType[];
   placeholder: string;
   initialValue: string;
-  onChange: (selectedItem: ItemTypes) => void;
+  onChange: (selectedItem: ItemType) => void;
 }
 
 const Component = styled.div<ComponentProps>`
