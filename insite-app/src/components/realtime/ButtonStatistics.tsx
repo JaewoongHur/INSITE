@@ -20,10 +20,14 @@ const StyledTable = styled.table`
 `;
 
 const TableHeader = styled.thead`
+  position: sticky;
+  top: 0;
   font-size: 15px;
   margin-bottom: 15px;
   color: ${(props) => props.theme.colors.a1};
   font-weight: bold;
+  background-color: ${(props) => props.theme.colors.b3}; /* 배경색 설정 */
+  z-index: 1; /* 다른 내용 위에 나타나도록 설정 */
 `;
 
 const TableRow = styled.tr`
@@ -64,11 +68,9 @@ function ButtonStatistics() {
     <Border>
       <StyledTable>
         <TableHeader>
-          <TableRow>
-            <th>버튼</th>
-            <th>누른 횟수</th>
-            <th>차지 비율</th>
-          </TableRow>
+          <th>버튼</th>
+          <th>누른 횟수</th>
+          <th>차지 비율</th>
         </TableHeader>
         <TableBody>
           {data.map((item) => (

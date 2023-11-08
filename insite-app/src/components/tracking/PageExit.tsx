@@ -1,7 +1,4 @@
 import styled from "styled-components";
-import { useState, useEffect } from "react";
-import { UserRefDtoType } from "@customtypes/dataTypes";
-import { getRefData } from "@api/accumulApi";
 
 const Border = styled.div`
   display: flex;
@@ -45,7 +42,7 @@ const TableBody = styled.tbody`
   max-height: 200px;
 `;
 
-function UrlFlowStatstics() {
+function PageExit() {
   // todo 임시데이터 넣기
   // const [data, setData] = useState<UserRefDtoType[]>([]);
 
@@ -66,8 +63,9 @@ function UrlFlowStatstics() {
   const data = [
     {
       id: 1,
-      referrer: "네이버",
-      count: Math.floor(Math.random() * 100) + 1,
+      currentUrl: "네이버",
+      excitCount: Math.floor(Math.random() * 100) + 1,
+      ratio: 17,
     },
     {
       id: 2,
@@ -121,8 +119,9 @@ function UrlFlowStatstics() {
       <StyledTable>
         <TableHeader>
           <th>순위</th>
-          <th>URL</th>
-          <th>명</th>
+          <th>Url</th>
+          <th>나간 횟수</th>
+          <th>비율</th>
         </TableHeader>
         <TableBody>
           {data.map((item, index) => (
@@ -140,4 +139,4 @@ function UrlFlowStatstics() {
   );
 }
 
-export default UrlFlowStatstics;
+export default PageExit;

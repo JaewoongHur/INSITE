@@ -1,3 +1,4 @@
 import UrlFlowStatstics from "./UrlFlowStatstics";
+import PageExit from "./PageExit";
 
-export default UrlFlowStatstics;
+export { UrlFlowStatstics, PageExit };

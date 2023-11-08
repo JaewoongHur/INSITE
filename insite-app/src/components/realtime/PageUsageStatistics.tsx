@@ -20,10 +20,14 @@ const StyledTable = styled.table`
 `;
 
 const TableHeader = styled.thead`
+  position: sticky;
+  top: 0;
   font-size: 15px;
   margin-bottom: 15px;
   color: ${(props) => props.theme.colors.a1};
   font-weight: bold;
+  background-color: ${(props) => props.theme.colors.b3}; /* 배경색 설정 */
+  z-index: 1; /* 다른 내용 위에 나타나도록 설정 */
 `;
 
 const TableRow = styled.tr`
@@ -64,12 +68,10 @@ function PageUsageStatistics() {
     <Border>
       <StyledTable>
         <TableHeader>
-          <TableRow>
-            <th>순위</th>
-            <th>URL</th>
-            <th>사용자 수</th>
-            <th>랜더링 시간</th>
-          </TableRow>
+          <th>순위</th>
+          <th>URL</th>
+          <th>사용자 수</th>
+          <th>랜더링 시간</th>
         </TableHeader>
         <TableBody>
           {data.map((item, index) => (
