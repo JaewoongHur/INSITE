@@ -147,7 +147,7 @@ function Header() {
   );
 
   const selectedSite = useSelector(
-    (state: RootState) => state.SelectedSiteInfo.selectedSite,
+    (state: RootState) => state.SelectedItemInfo.selectedSite,
   );
 
   const [isProfile, setIsProfile] = useState<boolean>(false);
