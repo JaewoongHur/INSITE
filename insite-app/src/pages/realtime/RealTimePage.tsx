@@ -3,8 +3,12 @@ import styled from "styled-components";
 import { DefaultBox } from "@components/common";
 import TextBox from "@components/common/TextBox";
 import TitleBox from "@components/common/TitleBox";
-import PageUsageStatistics from "@components/realtime/PageUsageStatistics";
-import TrafficAttack from "@components/realtime/TrafficAttack";
+import {
+  ButtonStatistics,
+  PageUsageStatistics,
+  TrafficAttack,
+  UrlFlowStatstics,
+} from "@components/realtime";
 
 const FirstCol = styled.div`
   display: flex;
@@ -48,7 +52,7 @@ function RealTimePage() {
           <TitleBox width="" height="10%" fontSize="30px">
             페이지 이용 통계
           </TitleBox>
-          <TextBox width="90%" height="70%">
+          <TextBox width="90%" height="80%">
             <PageUsageStatistics />
           </TextBox>
         </DefaultBox>
@@ -58,11 +62,17 @@ function RealTimePage() {
           <TitleBox width="" height="10%" fontSize="30px">
             유입 경로 통계
           </TitleBox>
+          <TextBox width="90%" height="80%">
+            <UrlFlowStatstics />
+          </TextBox>
         </DefaultBox>
         <DefaultBox width="30rem" height="25rem">
           <TitleBox width="" height="10%" fontSize="30px">
             버튼 통계
           </TitleBox>
+          <TextBox width="90%" height="80%">
+            <ButtonStatistics />
+          </TextBox>
         </DefaultBox>
         <DefaultBox width="30rem" height="25rem">
           <TitleBox width="" height="10%" fontSize="30px">

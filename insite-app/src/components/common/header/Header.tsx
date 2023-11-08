@@ -18,15 +18,16 @@ import {
 import ParsingDate from "@components/ParsingDate";
 import SiteList from "@components/common/dropdown/SiteList";
 import DropDown from "@components/common/dropdown/DropDown";
-import { ItemTypes } from "@customtypes/dataTypes";
+import { ItemType } from "@customtypes/dataTypes";
 import { setSelectedSite } from "@reducer/SelectedItemInfo";
 import { Modal } from "@components/common/modal";
 
 const HeaderContainer = styled.div`
   width: 100%;
-  height: 10%;
+  height: 5%;
   top: 0;
   right: 0;
+  margin-bottom: 1%;
   background-color: ${(props) => props.theme.colors.b2};
 `;
 
@@ -190,7 +191,7 @@ function Header() {
     dispatch(setOpenProfile(newIsProfile));
   };
 
-  const handleSelectedSite = (item: ItemTypes) => {
+  const handleSelectedSite = (item: ItemType) => {
     dispatch(setSelectedSite(item.name));
   };
   const handlenewStartDate = (item: string) => {
