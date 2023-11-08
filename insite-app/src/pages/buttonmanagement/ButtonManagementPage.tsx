@@ -1,10 +1,14 @@
-import theme from "@assets/styles/colors";
 import ClickCount from "@components/button";
 import { DefaultBox } from "@components/common";
 import TextBox from "@components/common/TextBox";
 import TitleBox from "@components/common/TitleBox";
-import { TextButton } from "@components/common/button";
+import { ButtonType } from "@customtypes/dataTypes";
 import styled from "styled-components";
+import { useState, useEffect } from "react";
+import getButtonList from "@api/memberApi";
+import DropDown from "@components/common/dropdown/DropDown";
+import { useSelector } from "react-redux";
+import { RootState } from "@reducer";
 
 const FirstCol = styled.div`
   display: flex;
@@ -31,36 +35,41 @@ const SecondCol = styled.div`
   background-color: ${(props) => props.theme.colors.b2};
 `;
 
-const Title = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 70px;
-`;
-
 function ButtonManagementPage() {
-  const buttonClick = () => {
-    console.log("버튼 선택 클릭");
-    return null;
-  };
+  const [buttonList, setButtonList] = useState<ButtonType[]>([]);
+  const selectedButton = useSelector((state: RootState) => {
+    state.SelectedItemInfo.selectedButton;
+  });
+  console.log(selectedButton);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await getButtonList();
+        setButtonList(response.buttonDtoList);
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(error); // 에러 처리
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>
       <FirstCol>
         <DefaultBox width="30rem" height="25rem">
-          <Title>
-            <TextButton
-              width="4rem"
-              height="2rem"
-              onClick={() => buttonClick()}
-              color={theme.colors.a2}
-            >
-              버튼 선택
-            </TextButton>
-            <TitleBox width="" height="10%" fontSize="30px">
-              버튼 누른 횟수
-            </TitleBox>
-          </Title>
+          <TitleBox width="" height="10%" fontSize="30px">
+            버튼 누른 횟수
+          </TitleBox>
+          <DropDown
+            items={buttonList}
+            width="15rem"
+            height="2rem"
+            placeholder="버튼선택"
+            initialValue={selectedButton}
+          />
           <ContentDiv>
             <ClickCount />
           </ContentDiv>

@@ -3,9 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { setOpenDropdown } from "@reducer/HeaderModalStateInfo";
 import { RootState } from "@reducer";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedSite } from "@reducer/SelectedSiteInfo";
 import { dropdownArrow } from "@assets/icons";
-import { ItemTypes } from "@customtypes/dataTypes";
+import { ItemType } from "@customtypes/dataTypes";
 import siteLogos from "../header/SiteLogo";
 
 interface ComponentProps {
@@ -17,8 +16,9 @@ interface ButtonProps {
 }
 
 interface DropDownProps extends ComponentProps, ButtonProps {
-  items: ItemTypes[];
+  items: ItemType[];
   placeholder: string;
+  initialValue: string;
 }
 
 const Component = styled.div<ComponentProps>`
@@ -122,17 +122,23 @@ const SiteLogo = styled.img`
 `;
 
 /** 데이터, 너비, 높이(rem) */
-function DropDown({ items, width, height, placeholder }: DropDownProps) {
+function DropDown({
+  items,
+  width,
+  height,
+  placeholder,
+  initialValue,
+}: DropDownProps) {
   const dispatch = useDispatch();
   const openProfile = useSelector(
     (state: RootState) => state.HeaderModalStateInfo.openProfile,
   );
   const selectedSite = useSelector(
-    (state: RootState) => state.SelectedSiteInfo.selectedSite,
+    (state: RootState) => state.SelectedItemInfo.selectedSite,
   );
   const [isDropdown, setIsDropdown] = useState<boolean>(false);
 
-  const [selectedItem, setSelectedItem] = useState<string>(selectedSite);
+  const [selectedItem, setSelectedItem] = useState<string>(initialValue);
 
   const selectedSiteLogo = siteLogos[selectedItem || ""];
 
@@ -144,6 +150,7 @@ function DropDown({ items, width, height, placeholder }: DropDownProps) {
   }, [openProfile, dispatch, setIsDropdown]);
 
   const dropdownRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     const handleModal = (event: MouseEvent) => {
       if (
@@ -165,7 +172,7 @@ function DropDown({ items, width, height, placeholder }: DropDownProps) {
     const selectedThemeObj = items.find((item) => item.name === themeValue);
     if (selectedThemeObj) {
       setSelectedItem(selectedThemeObj.name);
-      setSelectedSite(selectedThemeObj.name);
+      // setSelectedSite(selectedThemeObj.name);
     }
     setIsDropdown(false);
     dispatch(setOpenDropdown(false));

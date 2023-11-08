@@ -44,6 +44,7 @@ const ProfileImg = styled.img`
   margin-left: 15px;
   cursor: pointer;
 `;
+
 const Option = styled.button`
   width: 100%;
   color: white;

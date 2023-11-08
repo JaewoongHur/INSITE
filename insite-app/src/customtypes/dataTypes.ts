@@ -54,6 +54,11 @@ type UserRefDtoType = {
   percentage: number;
 };
 
+type ButtonType = {
+  id: number;
+  name: string;
+};
+
 type ButtonCountDtoType = {
   id: number;
   name: string;
@@ -82,4 +87,5 @@ export type {
   UserRefDtoType,
   ButtonCountDtoType,
   AbnormalType,
+  ButtonType,
 };
