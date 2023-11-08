@@ -75,7 +75,7 @@ function UrlFlowStatstics() {
           {data.map((item, index) => (
             <TableRow key={item.id}>
               <TableCell>{index + 1}</TableCell>
-              <TableCell>{item.beforeUrl}</TableCell>
+              <TableCell>{item.referrer}</TableCell>
               <TableCell>{item.count}</TableCell>
               <TableCell>{Math.round(item.percentage * 100)}</TableCell>
             </TableRow>
