@@ -11,6 +11,7 @@ function ClickCount() {
     (state: RootState) => state.SelectedItemInfo.selectedButton,
   );
   const [data, setData] = useState<ButtonType[]>([]);
+  // const [seriesData, setSeriesData] = useState<[number, number][]>();
 
   useEffect(() => {
     const getDetailData = async () => {
@@ -53,7 +54,7 @@ function ClickCount() {
     yAxis: {
       title: "",
       min: 0,
-      tickInterval: 10, // 레이블 간격 설정
+      tickInterval: 30, // 레이블 간격 설정
       labels: {
         style: {
           color: "white",
@@ -66,7 +67,7 @@ function ClickCount() {
       borderRadius: 15,
       title: "",
       backgroundColor: "black",
-      width: 350,
+      width: 1100,
       height: 290,
     },
     title: {

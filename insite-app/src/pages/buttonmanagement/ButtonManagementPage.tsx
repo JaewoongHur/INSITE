@@ -68,19 +68,9 @@ function ButtonManagementPage() {
       <FirstCol>
         <DefaultBox width="30rem" height="25rem">
           <TitleBox width="" height="10%" fontSize="30px">
-            버튼 누른 횟수
+            버튼 통계
           </TitleBox>
-          <DropDown
-            items={buttonList}
-            width="15rem"
-            height="2rem"
-            placeholder="버튼선택"
-            initialValue={selectedButton}
-            onChange={handleSelectedButton}
-          />
-          <ContentDiv>
-            <ClickCount />
-          </ContentDiv>
+          <ContentDiv>{/* <ClickCount /> */}</ContentDiv>
         </DefaultBox>
         <DefaultBox width="62rem" height="25rem">
           <TitleBox width="" height="10%" fontSize="30px">
@@ -94,9 +84,19 @@ function ButtonManagementPage() {
       <SecondCol>
         <DefaultBox width="102rem" height="25rem">
           <TitleBox width="" height="10%" fontSize="30px">
-            버튼 통계
+            버튼 누른 횟수
           </TitleBox>
-          <ContentDiv>표</ContentDiv>
+          <DropDown
+            items={buttonList}
+            width="15rem"
+            height="2rem"
+            placeholder="버튼선택"
+            initialValue={selectedButton}
+            onChange={handleSelectedButton}
+          />
+          <ContentDiv>
+            <ClickCount />
+          </ContentDiv>
         </DefaultBox>
       </SecondCol>
     </>
