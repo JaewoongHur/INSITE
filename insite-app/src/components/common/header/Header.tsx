@@ -10,11 +10,17 @@ import {
   EndDateSelect,
 } from "@components/common/calendar";
 import styled from "styled-components";
-import { setLatestDate } from "@reducer/DateSelectionInfo";
+import {
+  setEndDate,
+  setLatestDate,
+  setStartDate,
+} from "@reducer/DateSelectionInfo";
 import ParsingDate from "@components/ParsingDate";
 import SiteList from "@components/common/dropdown/SiteList";
 import DropDown from "@components/common/dropdown/DropDown";
-import Modal from "../modal/Modal";
+import { ItemTypes } from "@customtypes/dataTypes";
+import { setSelectedSite } from "@reducer/SelectedItemInfo";
+import { Modal } from "@components/common/modal";
 
 const HeaderContainer = styled.div`
   width: 100%;
@@ -133,19 +139,35 @@ function Header() {
   const endDate = useSelector(
     (state: RootState) => state.DateSelectionInfo.end,
   );
+  const pastDate = useSelector(
+    (state: RootState) => state.DateSelectionInfo.past,
+  );
+  const latestDate = useSelector(
+    (state: RootState) => state.DateSelectionInfo.latest,
+  );
 
   const selectedSite = useSelector(
     (state: RootState) => state.SelectedSiteInfo.selectedSite,
   );
 
   const [isProfile, setIsProfile] = useState<boolean>(false);
-  const [currentPathname, setCurrentPathname] = useState<string>("");
+  const [currentPathname, setCurrentPathname] = useState<string>(
+    location.pathname,
+  );
   const [dateModal, setDateModal] = useState<boolean>(false);
+  const [newStartDate, setNewStartDate] = useState<string>(startDate);
+  const [newEndDate, setNewEndDate] = useState<string>(endDate);
 
   useEffect(() => {
-    // 서비스 시작 날짜(처음) 오늘로 갱신
-    dispatch(setLatestDate("2022년 1월 31일"));
-  });
+    if (location.pathname !== currentPathname) {
+      dispatch(setStartDate(pastDate));
+      dispatch(setEndDate(latestDate));
+      setCurrentPathname(location.pathname);
+      console.log(currentPathname);
+      console.log(location.pathname);
+    }
+    setCurrentPathname(location.pathname);
+  }, [location.pathname, currentPathname, dispatch, pastDate, latestDate]);
 
   useEffect(() => {
     // 최신 날짜 오늘로 갱신
@@ -161,15 +183,29 @@ function Header() {
     }
   }, [openDropdown, dispatch, setIsProfile]);
 
-  useEffect(() => {
-    setCurrentPathname(location.pathname);
-  }, [location]);
-
   const handleOpenProfile = (e: React.MouseEvent) => {
     e.stopPropagation();
     const newIsProfile = !isProfile;
     setIsProfile(newIsProfile);
     dispatch(setOpenProfile(newIsProfile));
+  };
+
+  const handleSelectedSite = (item: ItemTypes) => {
+    dispatch(setSelectedSite(item.name));
+  };
+  const handlenewStartDate = (item: string) => {
+    setNewStartDate(item);
+  };
+
+  const handlenewEndDate = (item: string) => {
+    setNewEndDate(item);
+  };
+
+  const setDateRange = () => {
+    dispatch(setStartDate(newStartDate));
+    dispatch(setEndDate(newEndDate));
+    console.log(newStartDate);
+    console.log(newEndDate);
   };
 
   const formatDateString = (dateString: string): string => {
@@ -194,7 +230,7 @@ function Header() {
             <CalendarWrapper
               onClick={(e: React.MouseEvent) => {
                 e.stopPropagation();
-                setDateModal(true);
+                setDateModal(!dateModal);
               }}
             >
               <CalendarButton
@@ -212,16 +248,16 @@ function Header() {
             height="22rem"
             $posX="75%"
             $posY="-30%"
-            position="absolute"
+            $position="absolute"
             close={() => setDateModal(false)}
           >
             <DateSelectContainer>
               <DateHeader>기간 선택</DateHeader>
               <DateText>시작 날짜</DateText>
-              <StartDateSelect />
+              <StartDateSelect onChange={handlenewStartDate} />
               <DateText>종료 날짜</DateText>
-              <EndDateSelect />
-              <SettingDate>설정</SettingDate>
+              <EndDateSelect onChange={handlenewEndDate} />
+              <SettingDate onClick={setDateRange}>설정</SettingDate>
             </DateSelectContainer>
           </Modal>
         )}
@@ -231,6 +267,7 @@ function Header() {
           height="3rem"
           placeholder="사이트를 설정해주세요."
           initialValue={selectedSite}
+          onChange={handleSelectedSite}
         />
         <ProfileWrapper>
           <ProfileImg
@@ -245,7 +282,7 @@ function Header() {
               $posX="-50%"
               $posY="80%"
               close={() => setIsProfile(false)}
-              position="absolute"
+              $position="absolute"
             >
               <Option
                 onClick={() => {

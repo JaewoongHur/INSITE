@@ -1,5 +1,6 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@reducer";
 import { ItemTypes } from "@customtypes/dataTypes";
 import DropDown from "../dropdown/DropDown";
@@ -13,7 +14,13 @@ const StartDateSelectContainer = styled.div`
   height: 100%;
   font-size: 1.2rem;
 `;
-function StartDateSelect() {
+
+interface StartDateSelectProps {
+  onChange: (item: string) => void;
+}
+
+function StartDateSelect({ onChange }: StartDateSelectProps) {
+  const dispatch = useDispatch();
   const isLeapYear = (year: number) => {
     return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
   };
@@ -28,13 +35,17 @@ function StartDateSelect() {
   );
 
   const startDate = useSelector(
-    (state: RootState) => state.DateSelectionInfo.past,
+    (state: RootState) => state.DateSelectionInfo.start,
   );
 
   const parseString = (dateStr: string) => {
     const [year, month, day] = dateStr.split("-");
     return [year, month, day];
   };
+
+  const [startYear, setStartYear] = useState(parseString(startDate)[0]);
+  const [startMonth, setStartMonth] = useState(parseString(startDate)[1]);
+  const [startDay, setStartDay] = useState(parseString(startDate)[2]);
 
   const parseDate = (dateStr: string) => {
     const [year, month, day] = dateStr.split("-").map(Number);
@@ -114,6 +125,21 @@ function StartDateSelect() {
     return { id: index, name: day };
   });
 
+  const handleStartYear = (item: ItemTypes) => {
+    setStartYear(item.name);
+  };
+  const handleStartMonth = (item: ItemTypes) => {
+    setStartMonth(item.name);
+  };
+  const handleStartDay = (item: ItemTypes) => {
+    setStartDay(item.name);
+  };
+
+  useEffect(() => {
+    const newStartDate: string = `${startYear}-${startMonth}-${startDay}`;
+    onChange(newStartDate);
+  }, [startYear, startMonth, startDay, dispatch, onChange]);
+
   return (
     <StartDateSelectContainer>
       <DropDown
@@ -122,6 +148,7 @@ function StartDateSelect() {
         height="3rem"
         placeholder=""
         initialValue={parseString(startDate)[0]}
+        onChange={handleStartYear}
       />
       년
       <DropDown
@@ -130,6 +157,7 @@ function StartDateSelect() {
         height="3rem"
         placeholder=""
         initialValue={parseString(startDate)[1]}
+        onChange={handleStartMonth}
       />
       월
       <DropDown
@@ -138,6 +166,7 @@ function StartDateSelect() {
         height="3rem"
         placeholder=""
         initialValue={parseString(startDate)[2]}
+        onChange={handleStartDay}
       />
       일
     </StartDateSelectContainer>

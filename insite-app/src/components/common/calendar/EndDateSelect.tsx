@@ -1,8 +1,13 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@reducer";
 import { ItemTypes } from "@customtypes/dataTypes";
 import DropDown from "../dropdown/DropDown";
+
+interface EndDateSelectProps {
+  onChange: (item: string) => void;
+}
 
 const EndDateSelectContainer = styled.div`
   display: flex;
@@ -13,7 +18,9 @@ const EndDateSelectContainer = styled.div`
   height: 100%;
   font-size: 1.2rem;
 `;
-function EndDateSelect() {
+function EndDateSelect({ onChange }: EndDateSelectProps) {
+  const dispatch = useDispatch();
+
   const startDate = useSelector(
     (state: RootState) => state.DateSelectionInfo.start,
   );
@@ -35,6 +42,10 @@ function EndDateSelect() {
     const [year, month, day] = dateStr.split("-");
     return [year, month, day];
   };
+
+  const [endYear, setEndYear] = useState(parseString(endDate)[0]);
+  const [endMonth, setEndMonth] = useState(parseString(endDate)[1]);
+  const [endDay, setEndDay] = useState(parseString(endDate)[2]);
 
   const parseDate = (dateStr: string) => {
     const [year, month, day] = dateStr.split("-").map(Number);
@@ -112,6 +123,21 @@ function EndDateSelect() {
     return { id: index, name: day };
   });
 
+  const handleEndYear = (item: ItemTypes) => {
+    setEndYear(item.name);
+  };
+  const handleEndMonth = (item: ItemTypes) => {
+    setEndMonth(item.name);
+  };
+  const handleEndDay = (item: ItemTypes) => {
+    setEndDay(item.name);
+  };
+
+  useEffect(() => {
+    const newEndDate: string = `${endYear}-${endMonth}-${endDay}`;
+    onChange(newEndDate);
+  }, [endYear, endMonth, endDay, dispatch, onChange]);
+
   return (
     <EndDateSelectContainer>
       <DropDown
@@ -120,6 +146,7 @@ function EndDateSelect() {
         height="3rem"
         placeholder=""
         initialValue={parseString(endDate)[0]}
+        onChange={handleEndYear}
       />
       년
       <DropDown
@@ -128,6 +155,7 @@ function EndDateSelect() {
         height="3rem"
         placeholder=""
         initialValue={parseString(endDate)[1]}
+        onChange={handleEndMonth}
       />
       월
       <DropDown
@@ -136,6 +164,7 @@ function EndDateSelect() {
         height="3rem"
         placeholder=""
         initialValue={parseString(endDate)[2]}
+        onChange={handleEndDay}
       />
       일
     </EndDateSelectContainer>

@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { setOpenDropdown } from "@reducer/HeaderModalStateInfo";
 import { RootState } from "@reducer";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedSite } from "@reducer/SelectedSiteInfo";
+import { setSelectedSite } from "@reducer/SelectedItemInfo";
 import { dropdownArrow } from "@assets/icons";
 import { ItemTypes } from "@customtypes/dataTypes";
 import siteLogos from "../header/SiteLogo";
@@ -20,6 +20,7 @@ interface DropDownProps extends ComponentProps, ButtonProps {
   items: ItemTypes[];
   placeholder: string;
   initialValue: string;
+  onChange: (selectedItem: ItemTypes) => void;
 }
 
 const Component = styled.div<ComponentProps>`
@@ -136,6 +137,7 @@ function DropDown({
   height,
   placeholder,
   initialValue,
+  onChange,
 }: DropDownProps) {
   const dispatch = useDispatch();
   const openProfile = useSelector(
@@ -177,6 +179,7 @@ function DropDown({
     if (selectedThemeObj) {
       setSelectedItem(selectedThemeObj.name);
       setSelectedSite(selectedThemeObj.name);
+      onChange(selectedThemeObj);
     }
     setIsDropdown(false);
     dispatch(setOpenDropdown(false));
