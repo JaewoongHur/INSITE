@@ -192,7 +192,7 @@ function Header() {
 
   const handleToggleProfile = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setOpenProfile(false);
+    setOpenSite(false);
     setOpenDate(false);
     setOpenProfile((p) => !p);
   };
@@ -237,6 +237,8 @@ function Header() {
             <CalendarWrapper
               onClick={(e: React.MouseEvent) => {
                 e.stopPropagation();
+                setOpenProfile(false);
+                setOpenSite(false);
                 setOpenDate((p) => !p);
               }}
             >
@@ -253,8 +255,8 @@ function Header() {
           <Modal
             width="24rem"
             height="22rem"
-            $posX="75%"
-            $posY="-30%"
+            $posX="25rem"
+            $posY="-12rem"
             $position="absolute"
             close={() => setOpenDate(false)}
           >
