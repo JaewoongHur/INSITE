@@ -1,4 +1,4 @@
-import UrlFlowStatstics from "@components/accumulation";
+import UrlFlowStatstics from "@components/tracking";
 import { DefaultBox } from "@components/common";
 import TextBox from "@components/common/TextBox";
 import TitleBox from "@components/common/TitleBox";

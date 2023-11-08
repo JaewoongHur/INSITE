@@ -29,4 +29,18 @@ const getExitData = async () => {
   return null;
 };
 
-export { getRefData, getExitData };
+const getButtonCountData = async () => {
+  try {
+    const response = await accumulAPI.post("/flow/exits", {
+      token: "a951dd18-d5b5-4c15-a3ba-062198c45807",
+    });
+    return response.data;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error); // 에러 처리
+  }
+
+  return null;
+};
+
+export { getRefData, getExitData, getButtonCountData };

@@ -1,4 +1,4 @@
-import RealTimeUserDonutChart from "@components/chart/RealTimeUserDonutChart";
+import RealTimeUserDonutChart from "@components/realtime/RealTimeUserDonutChart";
 import styled from "styled-components";
 import { DefaultBox } from "@components/common";
 import TextBox from "@components/common/TextBox";
