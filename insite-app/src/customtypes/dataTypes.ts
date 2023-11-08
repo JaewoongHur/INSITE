@@ -59,6 +59,8 @@ type UserRefDtoType = {
 type ButtonType = {
   id: number;
   name: string;
+  counts: number;
+  date: string;
 };
 
 type ButtonCountDtoType = {

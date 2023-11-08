@@ -2,13 +2,14 @@ import ClickCount from "@components/button";
 import { DefaultBox } from "@components/common";
 import TextBox from "@components/common/TextBox";
 import TitleBox from "@components/common/TitleBox";
-import { ButtonType } from "@customtypes/dataTypes";
+import { ButtonType, ItemType } from "@customtypes/dataTypes";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import getButtonList from "@api/memberApi";
 import DropDown from "@components/common/dropdown/DropDown";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@reducer";
+import { setSelectedButton } from "@reducer/SelectedItemInfo";
 
 const FirstCol = styled.div`
   display: flex;
@@ -23,6 +24,7 @@ const ContentDiv = styled.div`
   flex-direction: column;
   font-size: 20px;
   align-items: center;
+  justify-content: center;
   width: 100%;
   height: 90%;
 `;
@@ -36,11 +38,12 @@ const SecondCol = styled.div`
 `;
 
 function ButtonManagementPage() {
+  const dispatch = useDispatch();
   const [buttonList, setButtonList] = useState<ButtonType[]>([]);
-  const selectedButton = useSelector((state: RootState) => {
-    state.SelectedItemInfo.selectedButton;
-  });
-  console.log(selectedButton);
+
+  const selectedButton = useSelector(
+    (state: RootState) => state.SelectedItemInfo.selectedButton,
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,6 +59,10 @@ function ButtonManagementPage() {
     fetchData();
   }, []);
 
+  const handleSelectedButton = (item: ItemType) => {
+    dispatch(setSelectedButton(item.name));
+  };
+
   return (
     <>
       <FirstCol>
@@ -69,6 +76,7 @@ function ButtonManagementPage() {
             height="2rem"
             placeholder="버튼선택"
             initialValue={selectedButton}
+            onChange={handleSelectedButton}
           />
           <ContentDiv>
             <ClickCount />
