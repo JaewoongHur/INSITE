@@ -40,6 +40,7 @@ const HeaderWrapper = styled.div`
   justify-content: flex-end;
   font-weight: 500;
   color: white;
+  position: relative;
 `;
 const ProfileWrapper = styled.div`
   display: flex;
@@ -134,6 +135,14 @@ function Header() {
   const [openProfile, setOpenProfile] = useState<boolean>(false);
   const [openDate, setOpenDate] = useState<boolean>(false);
 
+  const [openDropStartYear, setOpenDropStartYear] = useState<boolean>(false);
+  const [openDropStartMonth, setOpenDropStartMonth] = useState<boolean>(false);
+  const [openDropStartDay, setOpenDropStartDay] = useState<boolean>(false);
+
+  const [openDropEndYear, setOpenDropEndYear] = useState<boolean>(false);
+  const [openDropEndMonth, setOpenDropEndMonth] = useState<boolean>(false);
+  const [openDropEndDay, setOpenDropEndDay] = useState<boolean>(false);
+
   const startDate = useSelector(
     (state: RootState) => state.DateSelectionInfo.start,
   );
@@ -157,20 +166,84 @@ function Header() {
   const [newStartDate, setNewStartDate] = useState<string>(startDate);
   const [newEndDate, setNewEndDate] = useState<string>(endDate);
 
+  const closeDateDropdown = () => {
+    setOpenDropStartYear(false);
+    setOpenDropStartMonth(false);
+    setOpenDropStartDay(false);
+    setOpenDropEndYear(false);
+    setOpenDropEndMonth(false);
+    setOpenDropEndDay(false);
+  };
+
   useEffect(() => {
     if (openSite) {
       setOpenProfile(false);
       setOpenDate(false);
+      closeDateDropdown();
     }
     if (openProfile) {
       setOpenSite(false);
       setOpenDate(false);
+      closeDateDropdown();
     }
     if (openDate) {
       setOpenProfile(false);
       setOpenSite(false);
+      closeDateDropdown();
     }
   }, [openSite, openProfile, openDate]);
+
+  useEffect(() => {
+    if (openDropStartYear) {
+      setOpenDropStartMonth(false);
+      setOpenDropStartDay(false);
+      setOpenDropEndYear(false);
+      setOpenDropEndMonth(false);
+      setOpenDropEndDay(false);
+    }
+    if (openDropStartMonth) {
+      setOpenDropStartYear(false);
+      setOpenDropStartDay(false);
+      setOpenDropEndYear(false);
+      setOpenDropEndMonth(false);
+      setOpenDropEndDay(false);
+    }
+    if (openDropStartDay) {
+      setOpenDropStartYear(false);
+      setOpenDropStartMonth(false);
+      setOpenDropEndYear(false);
+      setOpenDropEndMonth(false);
+      setOpenDropEndDay(false);
+    }
+    if (openDropEndYear) {
+      setOpenDropStartYear(false);
+      setOpenDropStartMonth(false);
+      setOpenDropStartDay(false);
+      setOpenDropEndMonth(false);
+      setOpenDropEndDay(false);
+    }
+    if (openDropEndMonth) {
+      setOpenDropStartYear(false);
+      setOpenDropStartMonth(false);
+      setOpenDropStartDay(false);
+      setOpenDropEndYear(false);
+      setOpenDropEndDay(false);
+    }
+    if (openDropEndDay) {
+      setOpenDropStartYear(false);
+      setOpenDropStartMonth(false);
+      setOpenDropStartDay(false);
+      setOpenDropEndYear(false);
+      setOpenDropEndMonth(false);
+    }
+  }, [
+    openDropStartYear,
+    openDropStartMonth,
+    openDropStartDay,
+    openDropEndYear,
+    openDropEndMonth,
+    openDropEndDay,
+  ]);
 
   useEffect(() => {
     if (location.pathname !== currentPathname) {
@@ -206,6 +279,55 @@ function Header() {
 
   const handlenewEndDate = (item: string) => {
     setNewEndDate(item);
+  };
+
+  const handleToggleStartYear = () => {
+    setOpenDropStartMonth(false);
+    setOpenDropStartDay(false);
+    setOpenDropEndYear(false);
+    setOpenDropEndMonth(false);
+    setOpenDropEndDay(false);
+    setOpenDropStartYear((p) => !p);
+  };
+  const handleToggleStartMonth = () => {
+    setOpenDropStartYear(false);
+    setOpenDropStartDay(false);
+    setOpenDropEndYear(false);
+    setOpenDropEndMonth(false);
+    setOpenDropEndDay(false);
+    setOpenDropStartMonth((p) => !p);
+  };
+  const handleToggleStartDay = () => {
+    setOpenDropStartYear(false);
+    setOpenDropStartMonth(false);
+    setOpenDropEndYear(false);
+    setOpenDropEndMonth(false);
+    setOpenDropEndDay(false);
+    setOpenDropStartDay((p) => !p);
+  };
+  const handleToggleEndYear = () => {
+    setOpenDropStartYear(false);
+    setOpenDropStartMonth(false);
+    setOpenDropStartDay(false);
+    setOpenDropEndMonth(false);
+    setOpenDropEndDay(false);
+    setOpenDropEndYear((p) => !p);
+  };
+  const handleToggleEndMonth = () => {
+    setOpenDropStartYear(false);
+    setOpenDropStartMonth(false);
+    setOpenDropStartDay(false);
+    setOpenDropEndYear(false);
+    setOpenDropEndDay(false);
+    setOpenDropEndMonth((p) => !p);
+  };
+  const handleToggleEndDay = () => {
+    setOpenDropStartYear(false);
+    setOpenDropStartMonth(false);
+    setOpenDropStartDay(false);
+    setOpenDropEndYear(false);
+    setOpenDropEndMonth(false);
+    setOpenDropEndDay((p) => !p);
   };
 
   const setDateRange = () => {
@@ -255,17 +377,39 @@ function Header() {
           <Modal
             width="24rem"
             height="22rem"
-            $posX="25rem"
-            $posY="-12rem"
+            $posX="35%"
+            $posY="60%"
             $position="absolute"
             close={() => setOpenDate(false)}
           >
             <DateSelectContainer>
               <DateHeader>기간 선택</DateHeader>
               <DateText>시작 날짜</DateText>
-              <StartDateSelect onChange={handlenewStartDate} />
+              <StartDateSelect
+                onChange={handlenewStartDate}
+                openDropStartYear={openDropStartYear}
+                closeDropStartYear={() => setOpenDropStartYear(false)}
+                toggleDropStartYear={handleToggleStartYear}
+                openDropStartMonth={openDropStartMonth}
+                closeDropStartMonth={() => setOpenDropStartMonth(false)}
+                toggleDropStartMonth={handleToggleStartMonth}
+                openDropStartDay={openDropStartDay}
+                closeDropStartDay={() => setOpenDropStartDay(false)}
+                toggleDropStartDay={handleToggleStartDay}
+              />
               <DateText>종료 날짜</DateText>
-              <EndDateSelect onChange={handlenewEndDate} />
+              <EndDateSelect
+                onChange={handlenewEndDate}
+                openDropEndYear={openDropEndYear}
+                closeDropEndYear={() => setOpenDropEndYear(false)}
+                toggleDropEndYear={handleToggleEndYear}
+                openDropEndMonth={openDropEndMonth}
+                closeDropEndMonth={() => setOpenDropEndMonth(false)}
+                toggleDropEndMonth={handleToggleEndMonth}
+                openDropEndDay={openDropEndDay}
+                closeDropEndDay={() => setOpenDropEndDay(false)}
+                toggleDropEndDay={handleToggleEndDay}
+              />
               <SettingDate onClick={setDateRange}>설정</SettingDate>
             </DateSelectContainer>
           </Modal>

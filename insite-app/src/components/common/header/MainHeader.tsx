@@ -1,8 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { RootState } from "@reducer";
-import { useDispatch, useSelector } from "react-redux";
-import { setOpenProfile } from "@reducer/HeaderModalStateInfo";
 import { myprofile } from "@assets/icons";
 import styled from "styled-components";
 import { homeLogo } from "@assets/images";
@@ -75,26 +72,13 @@ const LogoImgWrapper = styled.div`
 
 function MainHeader() {
   const navi = useNavigate();
-  const dispatch = useDispatch();
+  const [openProfile, setOpenProfile] = useState<boolean>(false);
 
-  const openSite = useSelector(
-    (state: RootState) => state.HeaderModalStateInfo.openSite,
-  );
-  const [isProfile, setIsProfile] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (openSite) {
-      setIsProfile(false);
-      dispatch(setOpenProfile(false));
-    }
-  }, [openSite, dispatch, setIsProfile]);
-
-  const handleOpenProfile = (e: React.MouseEvent) => {
+  const handleToggleProfile = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const newIsProfile = !isProfile;
-    setIsProfile(newIsProfile);
-    dispatch(setOpenProfile(newIsProfile));
+    setOpenProfile((p) => !p);
   };
+
   return (
     <HeaderContainer>
       <HeaderWrapper>
@@ -113,15 +97,15 @@ function MainHeader() {
           <ProfileImg
             src={myprofile}
             alt="my profile"
-            onClick={handleOpenProfile}
+            onClick={handleToggleProfile}
           />
-          {isProfile && (
+          {openProfile && (
             <Modal
               width="15rem"
               height="6.5rem"
               $posX="-50%"
               $posY="80%"
-              close={() => setIsProfile(false)}
+              close={() => setOpenProfile(false)}
               $position="absolute"
             >
               {/* <Option

@@ -146,6 +146,7 @@ function DropDown({
   const selectedSiteLogo = siteLogos[selectedItem || ""];
 
   const dropdownRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     const handleModal = (event: MouseEvent) => {
       if (
@@ -168,6 +169,7 @@ function DropDown({
       setSelectedItem(selectedThemeObj.name);
       onChange(selectedThemeObj);
     }
+    e.stopPropagation();
     close();
   };
 

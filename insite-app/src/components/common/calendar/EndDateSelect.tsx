@@ -7,6 +7,15 @@ import DropDown from "../dropdown/DropDown";
 
 interface EndDateSelectProps {
   onChange: (item: string) => void;
+  openDropEndYear: boolean;
+  closeDropEndYear: () => void;
+  toggleDropEndYear: () => void;
+  openDropEndMonth: boolean;
+  closeDropEndMonth: () => void;
+  toggleDropEndMonth: () => void;
+  openDropEndDay: boolean;
+  closeDropEndDay: () => void;
+  toggleDropEndDay: () => void;
 }
 
 const EndDateSelectContainer = styled.div`
@@ -18,7 +27,18 @@ const EndDateSelectContainer = styled.div`
   height: 100%;
   font-size: 1.2rem;
 `;
-function EndDateSelect({ onChange }: EndDateSelectProps) {
+function EndDateSelect({
+  onChange,
+  openDropEndYear,
+  openDropEndMonth,
+  openDropEndDay,
+  closeDropEndYear,
+  closeDropEndMonth,
+  closeDropEndDay,
+  toggleDropEndYear,
+  toggleDropEndMonth,
+  toggleDropEndDay,
+}: EndDateSelectProps) {
   const dispatch = useDispatch();
 
   const startDate = useSelector(
@@ -146,6 +166,9 @@ function EndDateSelect({ onChange }: EndDateSelectProps) {
         height="3rem"
         initialValue={parseString(endDate)[0]}
         onChange={handleEndYear}
+        openDropdown={openDropEndYear}
+        close={closeDropEndYear}
+        toggle={toggleDropEndYear}
       />
       년
       <DropDown
@@ -154,6 +177,9 @@ function EndDateSelect({ onChange }: EndDateSelectProps) {
         height="3rem"
         initialValue={parseString(endDate)[1]}
         onChange={handleEndMonth}
+        openDropdown={openDropEndMonth}
+        close={closeDropEndMonth}
+        toggle={toggleDropEndMonth}
       />
       월
       <DropDown
@@ -162,6 +188,9 @@ function EndDateSelect({ onChange }: EndDateSelectProps) {
         height="3rem"
         initialValue={parseString(endDate)[2]}
         onChange={handleEndDay}
+        openDropdown={openDropEndDay}
+        close={closeDropEndDay}
+        toggle={toggleDropEndDay}
       />
       일
     </EndDateSelectContainer>

@@ -17,9 +17,29 @@ const StartDateSelectContainer = styled.div`
 
 interface StartDateSelectProps {
   onChange: (item: string) => void;
+  openDropStartYear: boolean;
+  closeDropStartYear: () => void;
+  toggleDropStartYear: () => void;
+  openDropStartMonth: boolean;
+  closeDropStartMonth: () => void;
+  toggleDropStartMonth: () => void;
+  openDropStartDay: boolean;
+  closeDropStartDay: () => void;
+  toggleDropStartDay: () => void;
 }
 
-function StartDateSelect({ onChange }: StartDateSelectProps) {
+function StartDateSelect({
+  onChange,
+  openDropStartYear,
+  closeDropStartYear,
+  toggleDropStartYear,
+  openDropStartMonth,
+  closeDropStartMonth,
+  toggleDropStartMonth,
+  openDropStartDay,
+  closeDropStartDay,
+  toggleDropStartDay,
+}: StartDateSelectProps) {
   const dispatch = useDispatch();
   const isLeapYear = (year: number) => {
     return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
@@ -148,6 +168,9 @@ function StartDateSelect({ onChange }: StartDateSelectProps) {
         height="3rem"
         initialValue={parseString(startDate)[0]}
         onChange={handleStartYear}
+        openDropdown={openDropStartYear}
+        close={closeDropStartYear}
+        toggle={toggleDropStartYear}
       />
       년
       <DropDown
@@ -156,6 +179,9 @@ function StartDateSelect({ onChange }: StartDateSelectProps) {
         height="3rem"
         initialValue={parseString(startDate)[1]}
         onChange={handleStartMonth}
+        openDropdown={openDropStartMonth}
+        close={closeDropStartMonth}
+        toggle={toggleDropStartMonth}
       />
       월
       <DropDown
@@ -164,6 +190,9 @@ function StartDateSelect({ onChange }: StartDateSelectProps) {
         height="3rem"
         initialValue={parseString(startDate)[2]}
         onChange={handleStartDay}
+        openDropdown={openDropStartDay}
+        close={closeDropStartDay}
+        toggle={toggleDropStartDay}
       />
       일
     </StartDateSelectContainer>
