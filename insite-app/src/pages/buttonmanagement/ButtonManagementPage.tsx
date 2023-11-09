@@ -1,7 +1,5 @@
 import ClickCount from "@components/button";
-import { DefaultBox } from "@components/common";
-import TextBox from "@components/common/TextBox";
-import TitleBox from "@components/common/TitleBox";
+import { DefaultBox, TextBox, TitleBox } from "@components/common";
 import { ButtonType, ItemType } from "@customtypes/dataTypes";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
@@ -68,13 +66,13 @@ function ButtonManagementPage() {
     <>
       <FirstCol>
         <DefaultBox width="30rem" height="25rem">
-          <TitleBox width="" height="10%" fontSize="30px">
+          <TitleBox width="" height="10%">
             버튼 통계
           </TitleBox>
           <ContentDiv>{/* <ClickCount /> */}</ContentDiv>
         </DefaultBox>
         <DefaultBox width="62rem" height="25rem">
-          <TitleBox width="" height="10%" fontSize="30px">
+          <TitleBox width="" height="10%">
             버튼 클릭 로그
           </TitleBox>
           <TextBox width="90%" height="80%">
@@ -84,7 +82,7 @@ function ButtonManagementPage() {
       </FirstCol>
       <SecondCol>
         <DefaultBox width="102rem" height="25rem">
-          <TitleBox width="" height="10%" fontSize="30px">
+          <TitleBox width="" height="10%">
             버튼 누른 횟수
           </TitleBox>
           <DropDown

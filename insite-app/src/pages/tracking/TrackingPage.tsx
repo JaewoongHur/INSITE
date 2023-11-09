@@ -1,7 +1,5 @@
 import { ExitPage, UrlFlowStatstics } from "@components/tracking";
-import { DefaultBox } from "@components/common";
-import TextBox from "@components/common/TextBox";
-import TitleBox from "@components/common/TitleBox";
+import { DefaultBox, TextBox, TitleBox } from "@components/common";
 import styled from "styled-components";
 
 const FirstCol = styled.div`
@@ -50,7 +48,7 @@ function TrackingPage() {
     <>
       <FirstCol>
         <DefaultBox width="30rem" height="25rem">
-          <TitleBox width="" height="10%" fontSize="30px">
+          <TitleBox width="" height="10%">
             유입 경로 통계
           </TitleBox>
           <ContentDiv>
@@ -60,7 +58,7 @@ function TrackingPage() {
           </ContentDiv>
         </DefaultBox>
         <DefaultBox width="30rem" height="25rem">
-          <TitleBox width="" height="10%" fontSize="30px">
+          <TitleBox width="" height="10%">
             페이지 종료율
           </TitleBox>
           <ContentDiv>
@@ -70,7 +68,7 @@ function TrackingPage() {
           </ContentDiv>
         </DefaultBox>
         <DefaultBox width="30rem" height="25rem">
-          <TitleBox width="" height="10%" fontSize="30px">
+          <TitleBox width="" height="10%">
             바운스 횟수
           </TitleBox>
           <ContentDiv>
@@ -83,7 +81,7 @@ function TrackingPage() {
       <SecondCol>
         <InvisiableDiv />
         <DefaultBox width="30rem" height="25rem">
-          <TitleBox width="" height="10%" fontSize="30px">
+          <TitleBox width="" height="10%">
             입구 페이지
           </TitleBox>
           <ContentDiv>
@@ -93,7 +91,7 @@ function TrackingPage() {
           </ContentDiv>
         </DefaultBox>
         <DefaultBox width="30rem" height="25rem">
-          <TitleBox width="" height="10%" fontSize="30px">
+          <TitleBox width="" height="10%">
             출구 페이지
           </TitleBox>
           <ContentDiv>
@@ -105,7 +103,7 @@ function TrackingPage() {
       </SecondCol>
       <ThirdCol>
         <DefaultBox width="102rem" height="25rem">
-          <TitleBox width="" height="10%" fontSize="30px">
+          <TitleBox width="" height="10%">
             페이지 이동 통계
           </TitleBox>
           <ContentDiv>안녕</ContentDiv>

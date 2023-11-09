@@ -1,8 +1,6 @@
 import RealTimeUserDonutChart from "@components/realtime/RealTimeUserDonutChart";
 import styled from "styled-components";
-import { DefaultBox } from "@components/common";
-import TextBox from "@components/common/TextBox";
-import TitleBox from "@components/common/TitleBox";
+import { DefaultBox, TextBox, TitleBox } from "@components/common";
 import {
   ButtonStatistics,
   PageUsageStatistics,
@@ -40,7 +38,7 @@ function RealTimePage() {
     <>
       <FirstCol>
         <DefaultBox width="30rem" height="25rem">
-          <TitleBox width="" height="10%" fontSize="30px">
+          <TitleBox width="" height="10%">
             실시간 이용자
           </TitleBox>
           <ContentDiv>
@@ -48,7 +46,7 @@ function RealTimePage() {
           </ContentDiv>
         </DefaultBox>
         <DefaultBox width="62rem" height="25rem">
-          <TitleBox width="" height="10%" fontSize="30px">
+          <TitleBox width="" height="10%">
             페이지 이용 통계
           </TitleBox>
           <TextBox width="90%" height="80%">
@@ -58,7 +56,7 @@ function RealTimePage() {
       </FirstCol>
       <SecondCol>
         <DefaultBox width="30rem" height="25rem">
-          <TitleBox width="" height="10%" fontSize="30px">
+          <TitleBox width="" height="10%">
             유입 경로 통계
           </TitleBox>
           <TextBox width="90%" height="80%">
@@ -66,7 +64,7 @@ function RealTimePage() {
           </TextBox>
         </DefaultBox>
         <DefaultBox width="30rem" height="25rem">
-          <TitleBox width="" height="10%" fontSize="30px">
+          <TitleBox width="" height="10%">
             버튼 통계
           </TitleBox>
           <TextBox width="90%" height="80%">
@@ -74,7 +72,7 @@ function RealTimePage() {
           </TextBox>
         </DefaultBox>
         <DefaultBox width="30rem" height="25rem">
-          <TitleBox width="" height="10%" fontSize="30px">
+          <TitleBox width="" height="10%">
             트래픽 공격 감지
           </TitleBox>
           <ContentDiv>

@@ -1,6 +1,4 @@
-import { DefaultBox } from "@components/common";
-import TextBox from "@components/common/TextBox";
-import TitleBox from "@components/common/TitleBox";
+import { DefaultBox, TextBox, TitleBox } from "@components/common";
 import styled from "styled-components";
 
 const FirstCol = styled.div`
@@ -49,7 +47,7 @@ function ActiveUserPage() {
     <>
       <FirstCol>
         <DefaultBox width="30rem" height="25rem">
-          <TitleBox width="" height="10%" fontSize="30px">
+          <TitleBox width="" height="10%">
             활동 사용자 수 조회
           </TitleBox>
           <ContentDiv>
@@ -59,7 +57,7 @@ function ActiveUserPage() {
           </ContentDiv>
         </DefaultBox>
         <DefaultBox width="30rem" height="25rem">
-          <TitleBox width="" height="10%" fontSize="25px">
+          <TitleBox width="" height="10%">
             활동 사용자 평균 체류 시간
           </TitleBox>
           <ContentDiv>
@@ -69,7 +67,7 @@ function ActiveUserPage() {
           </ContentDiv>
         </DefaultBox>
         <DefaultBox width="30rem" height="25rem">
-          <TitleBox width="" height="10%" fontSize="25px">
+          <TitleBox width="" height="10%">
             활동 사용자 수 / 사용자 수
           </TitleBox>
           <ContentDiv>
@@ -82,7 +80,7 @@ function ActiveUserPage() {
       <SecondCol>
         <InvisiableDiv />
         <DefaultBox width="30rem" height="25rem">
-          <TitleBox width="" height="10%" fontSize="30px">
+          <TitleBox width="" height="10%">
             OS별 활동 사용자 수
           </TitleBox>
           <ContentDiv>
@@ -92,7 +90,7 @@ function ActiveUserPage() {
           </ContentDiv>
         </DefaultBox>
         <DefaultBox width="30rem" height="25rem">
-          <TitleBox width="" height="10%" fontSize="25px">
+          <TitleBox width="" height="10%">
             페이지 조회 / 활동 사용자 수
           </TitleBox>
           <ContentDiv>
@@ -104,7 +102,7 @@ function ActiveUserPage() {
       </SecondCol>
       <ThirdCol>
         <DefaultBox width="102rem" height="25rem">
-          <TitleBox width="" height="10%" fontSize="30px">
+          <TitleBox width="" height="10%">
             시간 별 활동 사용자 수
           </TitleBox>
           <ContentDiv>표 + 아이콘</ContentDiv>
