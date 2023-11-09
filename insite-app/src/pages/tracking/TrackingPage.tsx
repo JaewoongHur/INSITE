@@ -1,4 +1,4 @@
-import { PageExit, UrlFlowStatstics } from "@components/tracking";
+import { ExitPage, UrlFlowStatstics } from "@components/tracking";
 import { DefaultBox } from "@components/common";
 import TextBox from "@components/common/TextBox";
 import TitleBox from "@components/common/TitleBox";
@@ -65,7 +65,7 @@ function TrackingPage() {
           </TitleBox>
           <ContentDiv>
             <TextBox width="90%" height="90%">
-              <PageExit />
+              <ExitPage />
             </TextBox>
           </ContentDiv>
         </DefaultBox>

@@ -1,3 +1,4 @@
+// -------------- CommonType
 type SideBarMenuType = {
   id: number;
   image: string;
@@ -25,16 +26,17 @@ type DateSelectionType = {
   latest: string;
 };
 
+type StyleType = {
+  fontSize: string;
+};
+
+// -------------- DtoType
 type UserCountDtoType = {
   id: number;
   count: number;
   percentage: number;
   currentPage: string;
   responseTime: string;
-};
-
-type StyleType = {
-  fontSize: string;
 };
 
 type ChartDtoType = {
@@ -56,18 +58,18 @@ type UserRefDtoType = {
   percentage: number;
 };
 
-type ButtonType = {
-  id: number;
-  name: string;
-  counts: number;
-  date: string;
-};
-
 type ButtonCountDtoType = {
   id: number;
   name: string;
   count: number;
   countPerUser: number;
+};
+
+type PageExitType = {
+  id: number;
+  currentUrl: string;
+  exitCount: number;
+  ratio: number;
 };
 
 type AbnormalType = {
@@ -77,6 +79,14 @@ type AbnormalType = {
   currentUrl: string;
   language: string;
   osId: string;
+};
+
+// -------------- Data Type
+type ButtonType = {
+  id: number;
+  name: string;
+  counts: number;
+  date: string;
 };
 
 export type {
@@ -92,4 +102,5 @@ export type {
   ButtonCountDtoType,
   AbnormalType,
   ButtonType,
+  PageExitType,
 };

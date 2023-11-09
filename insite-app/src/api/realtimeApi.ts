@@ -1,9 +1,11 @@
 import { realTimeAPI } from "./Api";
 
+const token = "295c293c-f903-49c8-986d-92d2efe6ccdb";
+
 const getUserCount = async () => {
   try {
     const response = await realTimeAPI.post("/realtime-data/user-counts", {
-      token: "295c293c-f903-49c8-986d-92d2efe6ccdb",
+      token,
     });
     return response.data;
   } catch (error) {
@@ -17,7 +19,7 @@ const getUserCount = async () => {
 const getAbnormality = async () => {
   try {
     const response = await realTimeAPI.post("/realtime-data/abnormality", {
-      token: "295c293c-f903-49c8-986d-92d2efe6ccdb",
+      token,
     });
     return response.data;
   } catch (error) {
@@ -31,7 +33,7 @@ const getAbnormality = async () => {
 const getRefData = async () => {
   try {
     const response = await realTimeAPI.post("/realtime-data/referrer", {
-      token: "295c293c-f903-49c8-986d-92d2efe6ccdb",
+      token,
     });
     return response.data;
   } catch (error) {
@@ -47,7 +49,7 @@ const getButtonCount = async () => {
     const response = await realTimeAPI.post(
       "/realtime-buttons/click-counts-per-user",
       {
-        token: "295c293c-f903-49c8-986d-92d2efe6ccdb",
+        token,
       },
     );
     return response.data;

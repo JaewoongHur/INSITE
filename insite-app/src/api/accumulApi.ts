@@ -19,7 +19,7 @@ const getRefData = async () => {
 
 const getExitData = async () => {
   try {
-    const response = await accumulAPI.post("/flow/exits", {
+    const response = await accumulAPI.post("/flow/exit", {
       applicationToken: token,
     });
     return response.data;
@@ -28,7 +28,7 @@ const getExitData = async () => {
     console.error(error); // 에러 처리
   }
 
-  return null;
+  return [];
 };
 
 const getButtonDetail = async (name: string) => {
@@ -43,7 +43,7 @@ const getButtonDetail = async (name: string) => {
     console.error(error); // 에러 처리
   }
 
-  return null;
+  return [];
 };
 
 export { getRefData, getExitData, getButtonDetail };
