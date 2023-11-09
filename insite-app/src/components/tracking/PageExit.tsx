@@ -118,10 +118,12 @@ function PageExit() {
     <Border>
       <StyledTable>
         <TableHeader>
-          <th>순위</th>
-          <th>Url</th>
-          <th>나간 횟수</th>
-          <th>비율</th>
+          <tr>
+            <th>순위</th>
+            <th>Url</th>
+            <th>나간 횟수</th>
+            <th>비율</th>
+          </tr>
         </TableHeader>
         <TableBody>
           {data.map((item, index) => (

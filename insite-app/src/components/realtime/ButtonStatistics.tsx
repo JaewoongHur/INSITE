@@ -68,9 +68,11 @@ function ButtonStatistics() {
     <Border>
       <StyledTable>
         <TableHeader>
-          <th>버튼</th>
-          <th>누른 횟수</th>
-          <th>차지 비율</th>
+          <tr>
+            <th>버튼</th>
+            <th>누른 횟수</th>
+            <th>차지 비율</th>
+          </tr>
         </TableHeader>
         <TableBody>
           {data.map((item) => (

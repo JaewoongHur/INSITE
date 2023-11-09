@@ -120,9 +120,11 @@ function UrlFlowStatstics() {
     <Border>
       <StyledTable>
         <TableHeader>
-          <th>순위</th>
-          <th>URL</th>
-          <th>명</th>
+          <tr>
+            <th>순위</th>
+            <th>URL</th>
+            <th>명</th>
+          </tr>
         </TableHeader>
         <TableBody>
           {data.map((item, index) => (
