@@ -40,6 +40,7 @@ const SecondCol = styled.div`
 function ButtonManagementPage() {
   const dispatch = useDispatch();
   const [buttonList, setButtonList] = useState<ButtonType[]>([]);
+  const [isDropdown, setIsDropdown] = useState<boolean>(false);
 
   const selectedButton = useSelector(
     (state: RootState) => state.SelectedItemInfo.selectedButton,
@@ -90,9 +91,11 @@ function ButtonManagementPage() {
             items={buttonList}
             width="15rem"
             height="2rem"
-            placeholder="버튼선택"
             initialValue={selectedButton}
             onChange={handleSelectedButton}
+            openDropdown={isDropdown}
+            close={() => setIsDropdown(false)}
+            toggle={() => setIsDropdown(!isDropdown)}
           />
           <ContentDiv>
             <ClickCount />
