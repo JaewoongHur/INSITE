@@ -17,7 +17,7 @@ import backgroundImg2 from "../../assets/images/메인페이지_설명5.jpg";
 import secondPageImg from "../../assets/images/MainVertical.jpg";
 import thirdPageImg from "../../assets/images/메인페이지_두번째2.jpg";
 import thirdPageGif from "../../assets/images/MainBackground7.gif";
-import FooterLogoImg from "../../assets/images/FooterLogo2.png";
+import FooterLogoImg from "../../assets/images/InSiteLogo3.svg";
 import MainHeader2 from "@components/common/header/MainHeader2";
 import { Link, Element } from "react-scroll"; // This is the react-scroll library
 
@@ -119,6 +119,23 @@ const StyledText4 = styled.text`
   top: 49%;
   left: 10%;
   font-size:30px;
+
+  &:hover {
+    color: white;
+    transform: scale(1.06);
+    transition: transform 0.1s ease;
+  }
+`;
+const StyledText5 = styled.text`
+  text-align: center;
+  transition: 0.5s;
+  color: white;
+  display: block;
+  position: absolute;
+  top: -15%;
+  left: 50%;
+  font-size:50px;
+  font-weight:bold;
 
   &:hover {
     color: white;
@@ -305,10 +322,10 @@ function MainPage() {
   });
 
   const secondPageAnimation = useSpring({
-    opacity: scrollY.to([0, vhInPixels * 0.5, vhInPixels], [0, 0, 1]),
+    // opacity: scrollY.to([0, vhInPixels * 0.5, vhInPixels], [0, 0, 1]),
     transform: scrollY.to(
       [0, vhInPixels * 0.5, vhInPixels],
-      ["scale(0.8)", "scale(0.9)", "scale(0.8)"],
+      ["scale(0.8)", "scale(0.82)", "scale(0.8)"],
     ),
     config: { tension: 250, friction: 10 },
   });
@@ -386,9 +403,9 @@ function MainPage() {
         <StyledText3>고성능 웹 애널리틱스 통합 솔루션.</StyledText3>
         <StyledText4>전 세계 어디서든 발생하는 사이트 이용을 추적하세요.</StyledText4>
           <StyledButton>서비스 이용하기</StyledButton>
-        </DynamicBackground>,
+        </DynamicBackground>
       )}
-      {renderSection(2, <SecondPage style={secondPageAnimation} />)}
+      {renderSection(2, <SecondPage style={secondPageAnimation}><StyledText5>단순한 애널리틱스를 넘은 정밀 분석의 시작</StyledText5></SecondPage>)}
       {renderSection(3, <ThirdPage />)}
       {/* Repeat for as many sections as you need, putting your content inside */}
       {/* Your ScrollDownIndicator and Footer will likely stay outside of these sections */}

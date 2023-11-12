@@ -16,6 +16,7 @@ import SiteList from "../dropdown/SiteList";
 import ImageButton from "../button/ImageButton";
 import { homeLogo } from "@assets/images";
 import { animated, useSpring, SpringValue } from "@react-spring/web";
+import InSiteLogo from "@assets/images/InSiteLogo3.svg"
 
 interface MainHeaderProps {
   scrollY: SpringValue<number>;
@@ -115,9 +116,9 @@ function MainHeader({ scrollY }: MainHeaderProps) {
         <LogoContainer>
           <LogoImgWrapper>
             <ImageButton
-              width="100%"
+              width="25%"
               height="100%"
-              src={homeLogo}
+              src={InSiteLogo}
               alt="insite Home Logo"
               onClick={() => navi("/main")}
             />
