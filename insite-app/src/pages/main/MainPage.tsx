@@ -12,7 +12,7 @@ import React, { useState, useEffect } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import styled, { css } from "styled-components";
 import backgroundImg from "../../assets/images/애니메이션배경.gif";
-import backgroundImg2 from "../../assets/images/메인페이지_설명4.jpg";
+import backgroundImg2 from "../../assets/images/메인페이지_설명5.jpg";
 // import backgroundImg3 from "../../assets/images/MainVertical.jpg";
 import secondPageImg from "../../assets/images/MainVertical.jpg";
 import thirdPageImg from "../../assets/images/메인페이지_두번째2.jpg";
@@ -35,7 +35,7 @@ const StyledButton = styled.button`
   display: block;
   position: absolute;
   top: 57%;
-  left: 8%;
+  left: 9.6%;
   cursor: pointer;
 
   &:hover {
@@ -54,6 +54,76 @@ const StyledButton = styled.button`
   &:focus {
     background-color: white;
     /* Ensuring the button remains clickable and visible */
+  }
+`;
+
+const StyledText1 = styled.text`
+  text-align: center;
+  transition: 0.5s;
+  color: white;
+  display: block;
+  position: absolute;
+  top: 30%;
+  left: 10%;
+  font-size:50px;
+  font-weight:bold;
+
+  &:hover {
+    color: white;
+    transform: scale(1.06);
+    transition: transform 0.1s ease;
+  }
+`;
+
+const StyledText2 = styled.text`
+  text-align: center;
+  transition: 0.5s;
+  color: white;
+  display: block;
+  position: absolute;
+  top: 36%;
+  left: 10%;
+  font-size:50px;
+  font-weight:bold;
+
+  &:hover {
+    color: white;
+    transform: scale(1.06);
+    transition: transform 0.1s ease;
+  }
+`;
+
+const StyledText3 = styled.text`
+  text-align: center;
+  transition: 0.5s;
+  color: white;
+  display: block;
+  position: absolute;
+  top: 45%;
+  left: 10%;
+  font-size:30px;
+
+  &:hover {
+    color: white;
+    transform: scale(1.06);
+    transition: transform 0.1s ease;
+  }
+`;
+
+const StyledText4 = styled.text`
+  text-align: center;
+  transition: 0.5s;
+  color: white;
+  display: block;
+  position: absolute;
+  top: 49%;
+  left: 10%;
+  font-size:30px;
+
+  &:hover {
+    color: white;
+    transform: scale(1.06);
+    transition: transform 0.1s ease;
   }
 `;
 
@@ -148,7 +218,7 @@ const ThirdPage = styled(animated.div)`
   top: 0;
   left: 0;
   background-image: url(${backgroundImg2}),
-    radial-gradient(circle at center, transparent 0%, #252531 50%),
+    radial-gradient(circle at center, transparent 0%, #252531 43%),
     url(${thirdPageGif}), url(${backgroundImg2});
 
   /* radial-gradient(circle at center, transparent 0%, #252531 80%),
@@ -159,7 +229,7 @@ const ThirdPage = styled(animated.div)`
     center center,
     right;
   background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
-  background-size: 33%, 34%, 33%, 33%; /* Set this to the correct size of your images */
+  background-size: 38%, 24%, 24%, 38%; /* Set this to the correct size of your images */
   z-index: 1;
 
   /* Add a pseudo-element to create the blur effect on the left edge of the right image */
@@ -238,7 +308,7 @@ function MainPage() {
     opacity: scrollY.to([0, vhInPixels * 0.5, vhInPixels], [0, 0, 1]),
     transform: scrollY.to(
       [0, vhInPixels * 0.5, vhInPixels],
-      ["scale(1.0)", "scale(1.1)", "scale(1.0)"],
+      ["scale(0.8)", "scale(0.9)", "scale(0.8)"],
     ),
     config: { tension: 250, friction: 10 },
   });
@@ -311,6 +381,10 @@ function MainPage() {
             opacity: imageOpacity, // Apply the dynamic opacity
           }}
         >
+        <StyledText1>새로워진 Insite Tech를</StyledText1>
+        <StyledText2>소개합니다.</StyledText2>
+        <StyledText3>고성능 웹 애널리틱스 통합 솔루션.</StyledText3>
+        <StyledText4>전 세계 어디서든 발생하는 사이트 이용을 추적하세요.</StyledText4>
           <StyledButton>서비스 이용하기</StyledButton>
         </DynamicBackground>,
       )}
