@@ -1,24 +1,11 @@
 import { insiteText, insitePanda, kakaoLoginButton } from "@assets/images";
+import BackgroundDiv from "@components/common/BackgroundDiv";
 import DefaultBox from "@components/common/DefaultBox";
 import { ImageButton } from "@components/common/button";
 import axios from "axios";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import backgroundImg from "../../assets/images/LoginBackground.jpg";
-
-const PageBackground = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh; /* or '100%' depending on your layout */
-  width: 100%;
-  background-image: url(${backgroundImg});
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-`;
 
 const Container = styled.div`
   display: flex;
@@ -86,7 +73,7 @@ function LoginPage() {
   };
 
   return (
-    <PageBackground>
+    <BackgroundDiv>
       <DefaultBox width="500px" height="500px">
         <Container>
           <TitleContainer>
@@ -102,7 +89,7 @@ function LoginPage() {
           />
         </Container>
       </DefaultBox>
-    </PageBackground>
+    </BackgroundDiv>
   );
 }
 

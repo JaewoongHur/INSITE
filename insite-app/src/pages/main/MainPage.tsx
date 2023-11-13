@@ -19,7 +19,7 @@ import thirdPageImg from "../../assets/images/메인페이지_두번째2.jpg";
 import thirdPageGif from "../../assets/images/MainBackground7.gif";
 import FooterLogoImg from "../../assets/images/InSiteLogo3.svg";
 import MainHeader2 from "@components/common/header/MainHeader2";
-import { Link, Element } from "react-scroll"; // This is the react-scroll library
+import { Link, Element } from "react-scroll";
 
 const StyledButton = styled.button`
   background-image: linear-gradient(to right, #4776e6 0%, #8e54e9 51%, #4776e6);
@@ -35,25 +35,24 @@ const StyledButton = styled.button`
   display: block;
   position: absolute;
   top: 57%;
-  left: 9.6%;
+  left: 9.3%;
   cursor: pointer;
 
   &:hover {
     background-color: white;
-    color: white; /* Changed the text color to black for visibility */
+    color: white;
     text-decoration: none;
-    transform: scale(1.1); /* Makes the button bigger */
-    transition: transform 0.3s ease; /* Smooth transition for scaling */
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
   }
 
   &:active {
-    transform: scale(0.96); /* Scales down the button when clicked */
-    transition: transform 0.1s; /* Faster transition for click effect */
+    transform: scale(0.96);
+    transition: transform 0.1s;
   }
 
   &:focus {
     background-color: white;
-    /* Ensuring the button remains clickable and visible */
   }
 `;
 
@@ -63,10 +62,10 @@ const StyledText1 = styled.text`
   color: white;
   display: block;
   position: absolute;
-  top: 30%;
+  top: 28%;
   left: 10%;
-  font-size:50px;
-  font-weight:bold;
+  font-size: 40px;
+  font-weight: bold;
 
   &:hover {
     color: white;
@@ -81,10 +80,10 @@ const StyledText2 = styled.text`
   color: white;
   display: block;
   position: absolute;
-  top: 36%;
+  top: 35%;
   left: 10%;
-  font-size:50px;
-  font-weight:bold;
+  font-size: 40px;
+  font-weight: bold;
 
   &:hover {
     color: white;
@@ -101,7 +100,7 @@ const StyledText3 = styled.text`
   position: absolute;
   top: 45%;
   left: 10%;
-  font-size:30px;
+  font-size: 24px;
 
   &:hover {
     color: white;
@@ -116,9 +115,9 @@ const StyledText4 = styled.text`
   color: white;
   display: block;
   position: absolute;
-  top: 49%;
+  top: 50%;
   left: 10%;
-  font-size:30px;
+  font-size: 24px;
 
   &:hover {
     color: white;
@@ -134,8 +133,8 @@ const StyledText5 = styled.text`
   position: absolute;
   top: -15%;
   left: 50%;
-  font-size:50px;
-  font-weight:bold;
+  font-size: 45px;
+  font-weight: bold;
 
   &:hover {
     color: white;
@@ -161,11 +160,10 @@ const Footer = styled(animated.footer)`
   bottom: 0;
   width: 100%;
   text-align: center;
-  padding: 50px;
+  padding: 70px;
   background-color: #252531;
-  color: white; /* text color */
+  color: white;
   font-size: 16px;
-  /* border-top: 1px solid black; */
 `;
 
 const Container = styled.div`
@@ -325,7 +323,7 @@ function MainPage() {
     // opacity: scrollY.to([0, vhInPixels * 0.5, vhInPixels], [0, 0, 1]),
     transform: scrollY.to(
       [0, vhInPixels * 0.5, vhInPixels],
-      ["scale(0.8)", "scale(0.82)", "scale(0.8)"],
+      ["scale(0.8)", "scale(0.8)", "scale(0.8)"],
     ),
     config: { tension: 250, friction: 10 },
   });
@@ -398,14 +396,21 @@ function MainPage() {
             opacity: imageOpacity, // Apply the dynamic opacity
           }}
         >
-        <StyledText1>새로워진 Insite Tech를</StyledText1>
-        <StyledText2>소개합니다.</StyledText2>
-        <StyledText3>고성능 웹 애널리틱스 통합 솔루션.</StyledText3>
-        <StyledText4>전 세계 어디서든 발생하는 사이트 이용을 추적하세요.</StyledText4>
+          <StyledText1>새로워진 Insite Tech를</StyledText1>
+          <StyledText2>소개합니다.</StyledText2>
+          <StyledText3>고성능 웹 애널리틱스 통합 솔루션.</StyledText3>
+          <StyledText4>
+            전 세계 어디서든 발생하는 사이트 이용을 추적하세요.
+          </StyledText4>
           <StyledButton>서비스 이용하기</StyledButton>
-        </DynamicBackground>
+        </DynamicBackground>,
       )}
-      {renderSection(2, <SecondPage style={secondPageAnimation}><StyledText5>단순한 애널리틱스를 넘은 정밀 분석의 시작</StyledText5></SecondPage>)}
+      {renderSection(
+        2,
+        <SecondPage style={secondPageAnimation}>
+          <StyledText5>단순 애널리틱스를 넘은 정밀 분석의 시작</StyledText5>
+        </SecondPage>,
+      )}
       {renderSection(3, <ThirdPage />)}
       {/* Repeat for as many sections as you need, putting your content inside */}
       {/* Your ScrollDownIndicator and Footer will likely stay outside of these sections */}
