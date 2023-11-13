@@ -242,10 +242,15 @@ function MainPage() {
   // Initialize vhInPixels state to a default value
   const [vhInPixels, setVhInPixels] = useState(0);
   const navigate = useNavigate();
-  const token = sessionStorage.getItem("Authorization");
+  const [token, setToken] = useState<string | null | undefined>(null);
+
+  useEffect(() => {
+    const getToken = sessionStorage.getItem("Authorization");
+    setToken(getToken);
+  }, []);
 
   const handleButtonClick = () => {
-    if (token === null) {
+    if (!token) {
       navigate("/login");
     } else {
       navigate("/mysite");

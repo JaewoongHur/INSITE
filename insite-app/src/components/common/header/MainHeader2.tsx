@@ -3,8 +3,8 @@
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable import/order */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { IconUser } from "@assets/icons";
 import styled from "styled-components";
 import Modal from "../modal/Modal";
@@ -110,8 +110,14 @@ const LogoImgWrapper = styled.div`
 
 function MainHeader({ scrollY }: MainHeaderProps) {
   const navi = useNavigate();
-  const token = sessionStorage.getItem("Authoriztion");
+  const location = useLocation();
   const [isProfile, setIsProfile] = useState<boolean>(false);
+
+  const [token, setToken] = useState<string | null>(null);
+  useEffect(() => {
+    const getToken = sessionStorage.getItem("Authorization");
+    setToken(getToken);
+  }, []);
 
   const handleOpenProfile = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -155,31 +161,34 @@ function MainHeader({ scrollY }: MainHeaderProps) {
               <Option
                 onClick={(e) => {
                   e.stopPropagation();
-                  if (token === null) {
+                  if (!token) {
                     navi("/login");
                     setIsProfile(false);
                   } else {
                     setIsProfile(false);
                     sessionStorage.clear();
+                    setToken(null);
                   }
                 }}
               >
-                {token === null ? "로그인" : "로그아웃"}
+                {!token ? "로그인" : "로그아웃"}
               </Option>
-              <Option
-                onClick={(e) => {
-                  e.stopPropagation();
-                  if (token === null) {
-                    navi("/login");
-                    setIsProfile(false);
-                  } else {
-                    navi("/mysite");
-                    setIsProfile(false);
-                  }
-                }}
-              >
-                사이트 선택하러 가기
-              </Option>
+              {location.pathname !== "/mysite" && (
+                <Option
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (token === null) {
+                      navi("/login");
+                      setIsProfile(false);
+                    } else {
+                      navi("/mysite");
+                      setIsProfile(false);
+                    }
+                  }}
+                >
+                  사이트 선택하러가기
+                </Option>
+              )}
             </Modal>
           )}
         </ProfileWrapper>
