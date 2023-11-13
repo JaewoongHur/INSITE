@@ -79,7 +79,7 @@ function UserStatistics() {
     chart: {
       type: "line",
       backgroundColor: "transparent",
-      width: 450, // 차트의 너비 설정
+      width: 300, // 차트의 너비 설정
       height: 300, // 차트의 높이 설정
     },
     title: {

@@ -173,6 +173,37 @@ const getButtonLogs = async (
   return [];
 };
 
+// 사용자 - 페이지 조회 수
+const getViewCount = async (startDateTime: Date, endDateTime: Date) => {
+  try {
+    const response = await accumulAPI.post("/users/view-counts", {
+      applicationToken,
+      startDateTime,
+      endDateTime,
+    });
+    return response.data;
+  } catch (error) {
+    // console.error(error); // 에러 처리
+  }
+
+  return [];
+};
+
+const getAbnormalUserData = async (startDateTime: Date, endDateTime: Date) => {
+  try {
+    const response = await accumulAPI.post("/users/abnormality", {
+      applicationToken,
+      startDateTime,
+      endDateTime,
+    });
+    return response.data;
+  } catch (error) {
+    // console.error(error); // 에러 처리
+  }
+
+  return [];
+};
+
 export {
   getRefData,
   getExitData,
@@ -184,4 +215,6 @@ export {
   getButtonDistData,
   getAllUrl,
   getButtonLogs,
+  getViewCount,
+  getAbnormalUserData,
 };
