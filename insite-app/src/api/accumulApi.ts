@@ -189,6 +189,21 @@ const getViewCount = async (startDateTime: Date, endDateTime: Date) => {
   return [];
 };
 
+const getUserCount = async (startDateTime: Date, endDateTime: Date) => {
+  try {
+    const response = await accumulAPI.post("/users/user-counts", {
+      applicationToken,
+      startDateTime,
+      endDateTime,
+    });
+    return response.data;
+  } catch (error) {
+    // console.error(error); // 에러 처리
+  }
+
+  return [];
+};
+
 const getAbnormalUserData = async (startDateTime: Date, endDateTime: Date) => {
   try {
     const response = await accumulAPI.post("/users/abnormality", {
@@ -217,4 +232,5 @@ export {
   getButtonLogs,
   getViewCount,
   getAbnormalUserData,
+  getUserCount,
 };
