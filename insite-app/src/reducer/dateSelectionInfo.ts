@@ -13,6 +13,7 @@ const initialState: DateSelectionType = {
   latest: today,
 };
 
+
 const dateSelectionInfoSlice = createSlice({
   name: "dateSelectionInfo",
   initialState,
