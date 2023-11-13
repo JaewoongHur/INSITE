@@ -10,7 +10,7 @@ import {
 import { ActiveUserCountDtoType } from "@customtypes/dataTypes";
 import { useSelector } from "react-redux";
 import { RootState } from "@reducer";
-import { getAbnormalUserData } from "@api/accumulApi";
+import { getActiveUser } from "@api/accumulApi";
 
 // 활동 사용자 수 조회
 function ActiveUserStatistics() {
@@ -27,12 +27,12 @@ function ActiveUserStatistics() {
     const parseEndDateTime = new Date(endDateTime);
     const fetchData = async () => {
       try {
-        const response = await getAbnormalUserData(
+        const response = await getActiveUser(
           parseStartDateTime,
           parseEndDateTime,
         );
-        if (!response.ActiveUserCountResDto) setData([]);
-        else setData(response.ActiveUserCountResDto);
+        if (!response.activeUserDtoList) setData([]);
+        else setData(response.activeUserDtoList);
       } catch (error) {
         // console.error(error); // 에러 처리
       }

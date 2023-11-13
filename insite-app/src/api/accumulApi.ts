@@ -234,7 +234,7 @@ const getViewCountsPerUser = async (startDateTime: Date, endDateTime: Date) => {
   return [];
 };
 
-const getActiveUserPerUrl = async (startDateTime: Date, endDateTime: Date) => {
+const getActiveUser = async (startDateTime: Date, endDateTime: Date) => {
   try {
     const response = await accumulAPI.post(
       "/active-users/active-users-per-currenturl",
@@ -285,6 +285,46 @@ const getOsActiveUser = async (startDateTime: Date, endDateTime: Date) => {
   return [];
 };
 
+// URL별 활동 사용자 평균 체류 시간
+const getAverageActiveTime = async (startDateTime: Date, endDateTime: Date) => {
+  try {
+    const response = await accumulAPI.post(
+      "/active-users/average-active-time-per-active-user",
+      {
+        applicationToken,
+        startDateTime,
+        endDateTime,
+      },
+    );
+    return response.data;
+  } catch (error) {
+    // console.error(error); // 에러 처리
+  }
+
+  return [];
+};
+
+const getViewCountsPerActiveUser = async (
+  startDateTime: Date,
+  endDateTime: Date,
+) => {
+  try {
+    const response = await accumulAPI.post(
+      "/active-users/view-counts-per-active-user",
+      {
+        applicationToken,
+        startDateTime,
+        endDateTime,
+      },
+    );
+    return response.data;
+  } catch (error) {
+    // console.error(error); // 에러 처리
+  }
+
+  return [];
+};
+
 export {
   getRefData,
   getExitData,
@@ -300,7 +340,9 @@ export {
   getAbnormalUserData,
   getUserCount,
   getViewCountsPerUser,
-  getActiveUserPerUrl,
+  getActiveUser,
   getActiveUserCounts,
   getOsActiveUser,
+  getAverageActiveTime,
+  getViewCountsPerActiveUser,
 };

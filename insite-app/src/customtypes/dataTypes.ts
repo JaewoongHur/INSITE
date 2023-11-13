@@ -124,7 +124,7 @@ type ActiveUserCountDtoType = {
 type ViewCountsPerActiveUserDtoType = {
   id: number;
   currentUrl: string;
-  pageView: number;
+  count: number;
   ratio: number;
 };
 

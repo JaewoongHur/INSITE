@@ -56,7 +56,7 @@ function PageUsagePerUser() {
             <TableRow key={item.id}>
               <TableCell>{item.id}</TableCell>
               <TableCell>{item.currentUrl}</TableCell>
-              <TableCell>{item.pageView}</TableCell>
+              <TableCell>{item.count}</TableCell>
             </TableRow>
           ))}
         </TableBody>
