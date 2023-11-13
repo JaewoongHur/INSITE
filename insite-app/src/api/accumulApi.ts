@@ -219,6 +219,72 @@ const getAbnormalUserData = async (startDateTime: Date, endDateTime: Date) => {
   return [];
 };
 
+const getViewCountsPerUser = async (startDateTime: Date, endDateTime: Date) => {
+  try {
+    const response = await accumulAPI.post("/users/view-counts-per-user", {
+      applicationToken,
+      startDateTime,
+      endDateTime,
+    });
+    return response.data;
+  } catch (error) {
+    // console.error(error); // 에러 처리
+  }
+
+  return [];
+};
+
+const getActiveUserPerUrl = async (startDateTime: Date, endDateTime: Date) => {
+  try {
+    const response = await accumulAPI.post(
+      "/active-users/active-users-per-currenturl",
+      {
+        applicationToken,
+        startDateTime,
+        endDateTime,
+      },
+    );
+    return response.data;
+  } catch (error) {
+    // console.error(error); // 에러 처리
+  }
+
+  return [];
+};
+
+const getActiveUserCounts = async (startDateTime: Date, endDateTime: Date) => {
+  try {
+    const response = await accumulAPI.post(
+      "/active-users/active-users-counts",
+      {
+        applicationToken,
+        startDateTime,
+        endDateTime,
+      },
+    );
+    return response.data;
+  } catch (error) {
+    // console.error(error); // 에러 처리
+  }
+
+  return [];
+};
+
+const getOsActiveUser = async (startDateTime: Date, endDateTime: Date) => {
+  try {
+    const response = await accumulAPI.post("/active-users/active-user-per-os", {
+      applicationToken,
+      startDateTime,
+      endDateTime,
+    });
+    return response.data;
+  } catch (error) {
+    // console.error(error); // 에러 처리
+  }
+
+  return [];
+};
+
 export {
   getRefData,
   getExitData,
@@ -233,4 +299,8 @@ export {
   getViewCount,
   getAbnormalUserData,
   getUserCount,
+  getViewCountsPerUser,
+  getActiveUserPerUrl,
+  getActiveUserCounts,
+  getOsActiveUser,
 };
