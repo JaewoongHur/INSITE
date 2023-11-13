@@ -495,12 +495,13 @@ function Header() {
                   setOpenProfile(false);
                 }}
               >
-                로그인 / 로그아웃
+                로그아웃
               </Option>
               <Option
                 onClick={() => {
                   navi("/mysite");
                   setOpenProfile(false);
+                  sessionStorage.clear();
                 }}
               >
                 사이트 선택하러 가기
