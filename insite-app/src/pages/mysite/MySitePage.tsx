@@ -193,15 +193,15 @@ function MySitePage() {
     setServiceUrl("");
   };
 
-  const seletSite = (item: ApplicationDtoType) => {
+  const selectSite = (item: ApplicationDtoType) => {
     const myApp: ApplicationDtoType = {
       applicationId: item.applicationId,
       name: item.name,
       applicationUrl: item.applicationUrl,
-      applicationToken: item.applicationUrl,
+      applicationToken: item.applicationToken,
     };
     sessionStorage.setItem("myApp", JSON.stringify(myApp));
-    navi("/");
+    navi("/board");
   };
 
   return (
@@ -220,7 +220,7 @@ function MySitePage() {
                     backgroundColor: "transparent",
                     cursor: "pointer",
                   }}
-                  onClick={() => seletSite(item)}
+                  onClick={() => selectSite(item)}
                 >
                   <TextBox width="100%" height="100%">
                     <img
