@@ -13,11 +13,11 @@ import {
   setEndDate,
   setLatestDate,
   setStartDate,
-} from "@reducer/dateSelectionInfo";
+} from "@reducer/DateSelectionInfo";
 import ParsingDate from "@components/ParsingDate";
 import DropDown from "@components/common/dropdown/DropDown";
 import { ItemType } from "@customtypes/dataTypes";
-import { setSelectedSite } from "@reducer/selectedItemInfo";
+import { setSelectedSite } from "@reducer/SelectedItemInfo";
 import { Modal } from "@components/common/modal";
 import { getSiteList } from "@api/memberApi";
 
@@ -46,20 +46,35 @@ const ProfileWrapper = styled.div`
   display: flex;
   align-items: center;
   position: relative;
+  padding-right: 2rem;
+  margin-left: 3rem;
 `;
 
 const ProfileButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 3rem;
-  height: 3rem;
-  background-color: #6646ef;
+  width: 2.8rem;
+  height: 2.8rem;
+  background-image: linear-gradient(
+    to right,
+    #4776e6 0%,
+    #8e54e9 100%,
+    #4776e6
+  );
   border-radius: 15px;
-  margin-top: 2px;
-  margin-right: 35px;
-  margin-left: 15px;
   cursor: pointer;
+
+  &:hover {
+    text-decoration: none;
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+  }
+
+  &:active {
+    transform: scale(0.96);
+    transition: transform 0.1s;
+  }
 `;
 const ProfileImg = styled.img`
   display: flex;
@@ -172,20 +187,20 @@ function Header() {
   }, []);
 
   const startDate = useSelector(
-    (state: RootState) => state.dateSelectionInfo.start,
+    (state: RootState) => state.DateSelectionInfo.start,
   );
   const endDate = useSelector(
-    (state: RootState) => state.dateSelectionInfo.end,
+    (state: RootState) => state.DateSelectionInfo.end,
   );
   const pastDate = useSelector(
-    (state: RootState) => state.dateSelectionInfo.past,
+    (state: RootState) => state.DateSelectionInfo.past,
   );
   const latestDate = useSelector(
-    (state: RootState) => state.dateSelectionInfo.latest,
+    (state: RootState) => state.DateSelectionInfo.latest,
   );
 
   const selectedSite = useSelector(
-    (state: RootState) => state.selectedItemInfo.selectedSite,
+    (state: RootState) => state.SelectedItemInfo.selectedSite,
   );
 
   const [currentPathname, setCurrentPathname] = useState<string>(
