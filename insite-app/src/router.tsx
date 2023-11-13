@@ -21,7 +21,7 @@ const routePath: RouteObject[] = [
   },
   {
     id: "main-page",
-    path: "/main",
+    path: "",
     element: <MainPage />,
   },
   {
@@ -31,7 +31,7 @@ const routePath: RouteObject[] = [
   },
   {
     id: "app",
-    path: "",
+    path: "/board",
     element: <App />,
     children: [
       {

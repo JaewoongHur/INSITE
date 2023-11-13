@@ -391,10 +391,10 @@ function Header() {
   return (
     <HeaderContainer>
       <HeaderWrapper>
-        {(currentPathname === "/track" ||
-          currentPathname === "/user" ||
-          currentPathname === "/active" ||
-          currentPathname === "/button") && (
+        {(currentPathname === "/board/track" ||
+          currentPathname === "/board/user" ||
+          currentPathname === "/board/active" ||
+          currentPathname === "/board/button") && (
           <CalendarContainer>
             <CalendarWrapper
               onClick={(e: React.MouseEvent) => {
