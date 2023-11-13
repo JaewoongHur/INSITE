@@ -121,16 +121,8 @@ function ServiceManagementPage() {
   const myApp =
     sessionStorage.getItem("myApp") ||
     `{"applicationId":0,"name":"사이트를 선택해주세요.","applicationUrl":"사이트를 선택해주세요", "applicationToken":"사이트를 선택해주세요"}`;
+
   const data: ApplicationDtoType = JSON.parse(myApp);
-
-  // const data = {
-  //   applicationToken: "your_application_token",
-  //   applicationUrl: "your_application_url",
-  //   name: "your_name",
-  //   applicationId: "your_application_id",
-  //   createTime: "your_create_time",
-  // };
-
   const [buttonList, setButtonList] = useState<ButtonType[]>([]);
   const [buttonName, setButtonName] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
