@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { RootState } from "@reducer";
 import { useDispatch, useSelector } from "react-redux";
-import { setOpenProfile } from "@reducer/HeaderModalStateInfo";
 import { IconUser, myprofile } from "@assets/icons";
 import styled from "styled-components";
 import Modal from "../modal/Modal";
@@ -123,18 +122,8 @@ function MainHeader({ scrollY }: MainHeaderProps) {
   const navi = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
-  const openDropdown = useSelector(
-    (state: RootState) => state.HeaderModalStateInfo.openDropdown,
-  );
   const [isProfile, setIsProfile] = useState<boolean>(false);
   const [currentPathname, setCurrentPathname] = useState<string>("");
-
-  useEffect(() => {
-    if (openDropdown) {
-      setIsProfile(false);
-      dispatch(setOpenProfile(false));
-    }
-  }, [openDropdown, dispatch, setIsProfile]);
 
   useEffect(() => {
     setCurrentPathname(location.pathname);
@@ -144,7 +133,6 @@ function MainHeader({ scrollY }: MainHeaderProps) {
     e.stopPropagation();
     const newIsProfile = !isProfile;
     setIsProfile(newIsProfile);
-    dispatch(setOpenProfile(newIsProfile));
   };
 
   // Use the scrollY value to interpolate the scale and opacity
@@ -178,7 +166,7 @@ function MainHeader({ scrollY }: MainHeaderProps) {
               $posX="-50%"
               $posY="80%"
               close={() => setIsProfile(false)}
-              position="absolute"
+              $position="absolute"
             >
               <Option
                 onClick={(e) => {

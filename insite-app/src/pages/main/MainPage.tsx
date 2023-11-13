@@ -20,6 +20,7 @@ import thirdPageGif from "../../assets/images/MainBackground7.gif";
 import FooterLogoImg from "../../assets/images/InSiteLogo3.svg";
 import MainHeader2 from "@components/common/header/MainHeader2";
 import { Link, Element } from "react-scroll";
+import { useNavigate } from "react-router-dom";
 
 const StyledButton = styled.button`
   background-image: linear-gradient(to right, #4776e6 0%, #8e54e9 51%, #4776e6);
@@ -292,6 +293,11 @@ const AnimatedImage = styled(animated.img)`
 function MainPage() {
   // Initialize vhInPixels state to a default value
   const [vhInPixels, setVhInPixels] = useState(0);
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    navigate("/mysite"); // Navigate to "/mysite" when the button is clicked
+  };
 
   // Update vhInPixels whenever the window resizes
   useEffect(() => {
@@ -402,7 +408,9 @@ function MainPage() {
           <StyledText4>
             전 세계 어디서든 발생하는 사이트 이용을 추적하세요.
           </StyledText4>
-          <StyledButton>서비스 이용하기</StyledButton>
+          <StyledButton onClick={handleButtonClick}>
+            서비스 이용하기
+          </StyledButton>
         </DynamicBackground>,
       )}
       {renderSection(

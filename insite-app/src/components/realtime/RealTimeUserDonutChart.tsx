@@ -14,7 +14,7 @@ function RealTimeUserDonutChart() {
         const userCountDto = response.userCountDtoList;
         const seriesData = userCountDto.map((item: UserCountDtoType) => ({
           name: item.currentPage,
-          y: Math.round(item.percentage * 100),
+          y: Math.round(item.percentage * 100).toFixed(2),
           dataLabels: {
             enabled: true,
             format: `{point.name}:<br> 횟수: ${item.count}`,
@@ -24,11 +24,10 @@ function RealTimeUserDonutChart() {
             },
           },
         }));
-
-        setData(seriesData);
+        if (!userCountDto) setData([]);
+        else setData(seriesData);
       } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error(error); // 에러 처리
+        // console.error(error); // 에러 처리
       }
     };
 
@@ -47,8 +46,8 @@ function RealTimeUserDonutChart() {
     chart: {
       type: "pie",
       backgroundColor: "transparent",
-      width: 480, // 차트의 너비 설정
-      height: 350, // 차트의 높이 설정
+      width: 350, // 차트의 너비 설정
+      height: 300, // 차트의 높이 설정
     },
     title: {
       text: null,

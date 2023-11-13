@@ -1,21 +1,25 @@
 import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import storageSession from "redux-persist/lib/storage/session";
-import HeaderModalStateInfoReducer from "@reducer/HeaderModalStateInfo";
-import SelectedSiteInfoReducer from "@reducer/SelectedSiteInfo";
-import DateSelectionInfoReducer from "@reducer/DateSelectionInfo";
+import selectedItemInfoReducer from "@reducer/SelectedItemInfo";
+import selectedSidebarMenuInfoReducer from "@reducer/SelectedSidebarMenuInfo";
+import dateSelectionInfoReducer from "@reducer/DateSelectionInfo";
 
 const persistConfig = {
   key: "root",
   storage: storageSession,
-  whitelist: [],
+  whitelist: [
+    "dateSelectionInfo",
+    "selectedSiteInfo",
+    "selectedSidebarMenuInfo",
+  ],
   blacklist: [],
 };
 
 const rootReducer = combineReducers({
-  HeaderModalStateInfo: HeaderModalStateInfoReducer,
-  SelectedSiteInfo: SelectedSiteInfoReducer,
-  DateSelectionInfo: DateSelectionInfoReducer,
+  selectedItemInfo: selectedItemInfoReducer,
+  dateSelectionInfo: dateSelectionInfoReducer,
+  selectedSidebarMenuInfo: selectedSidebarMenuInfoReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
